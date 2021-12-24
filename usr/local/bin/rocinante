@@ -71,7 +71,7 @@ rocinante_root_check
 #bastille_perms_check
 
 ## version
-ROCINATE_VERSION="0.1.20211223"
+ROCINATE_VERSION="0.1.20211225"
 
 usage() {
     cat << EOF
@@ -85,7 +85,7 @@ Available Commands:
   cmd         Execute arbitrary command(s).
   cp          Copy files from source to destination. See cp(8).
   help        Display this usage information.
-  limits      Apply resources limits(s). See rctl(8).
+  limits      Apply resource limits. See rctl(8).
   list        List bootstrapped templates.
   pkg         Manipulate binary packages. See pkg(8).
   service     Manage services. See service(8).
