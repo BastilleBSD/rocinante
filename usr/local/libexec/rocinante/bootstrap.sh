@@ -32,7 +32,7 @@
 . /usr/local/etc/rocinante.conf
 
 fetch_usage() {
-    error_exit "Usage: rocinante fetch URL"
+    error_exit "Usage: rocinante bootstrap URL"
 }
 
 # Handle special-case commands first.
