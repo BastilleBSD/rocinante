@@ -1,0 +1,147 @@
+#!/bin/sh
+#
+# Copyright (c) 2021, Christer Edwards <christer.edwards@gmail.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#
+# * Redistributions of source code must retain the above copyright notice, this
+#   list of conditions and the following disclaimer.
+#
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+#
+# * Neither the name of the copyright holder nor the names of its
+#   contributors may be used to endorse or promote products derived from
+#   this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+PATH=${PATH}:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+
+. /usr/local/libexec/rocinante/common.sh
+. /usr/local/etc/rocinante.conf
+
+## root check first.
+rocinante_root_check() {
+    if [ "$(id -u)" -ne 0 ]; then
+        ## permission denied
+        error_notify "rocinante: Permission Denied"
+        error_exit "root / sudo / doas required"
+    fi
+}
+
+rocinante_root_check
+
+## check for config existance
+#rocinante_conf_check() {
+#    if [ ! -r "/usr/local/etc/rocinante/rocinante.conf" ]; then
+#        error_exit "Missing Configuration"
+#    fi
+#}
+
+#rocinante_conf_check
+
+## we only load the config if conf_check passes
+#. /usr/local/etc/bastille/bastille.conf
+
+## bastille_prefix should be 0750
+## this restricts file system access to privileged users
+#bastille_perms_check() {
+#    if [ -d "${bastille_prefix}" ]; then
+#        BASTILLE_PREFIX_PERMS=$(stat -f "%Op" "${bastille_prefix}")
+#        if [ "${BASTILLE_PREFIX_PERMS}" != 40750 ]; then
+#            error_notify "Insecure permissions on ${bastille_prefix}"
+#            error_exit "Try: chmod 0750 ${bastille_prefix}"
+#        fi
+#    fi
+#}
+
+#bastille_perms_check
+
+## version
+ROCINATE_VERSION="0.1.20211223"
+
+usage() {
+    cat << EOF
+Rocinate is lightweight configuration management software for FreeBSD.
+
+Usage:
+  rocinante command [args]
+
+Available Commands:
+  bootstrap   Bootstrap an automation template from an http(s) endpoint.
+  cmd         Execute arbitrary command(s).
+  cp          Copy files from source to destination. See cp(8).
+  help        Display this usage information.
+  limits      Apply resources limits(s). See rctl(8).
+  list        List bootstrapped templates.
+  pkg         Manipulate binary packages. See pkg(8).
+  service     Manage services. See service(8).
+  sysctl      Manage sysctl values. See sysctl(8).
+  sysrc       Safely edit rc files. See syscrc(8).
+  template    Apply templates.
+  update      Update release to latest -pX. See freebsd-update(8).
+  upgrade     Upgrade release to X.Y-RELEASE. See freebsd-update(8).
+  verify      Compare release against a "known good" index.
+  zfs         Manage (get|set) ZFS attributes on targeted container(s).
+
+Use "rocinante -v|--version" for version information.
+Use "rocinante command -h|--help" for more information about a command.
+
+EOF
+    exit 1
+}
+
+[ $# -lt 1 ] && usage
+
+CMD=$1
+shift
+
+# Handle special-case commands first.
+case "${CMD}" in
+version|-v|--version)
+    info "rocinante version: ${ROCINATE_VERSION}"
+    exit 0
+    ;;
+help|-h|--help)
+    usage
+    ;;
+bootstrap|cmd|cp|limits|list|update|upgrade|verify)
+    # Filter for valid commands
+    ;;
+pkg|service|sysctl|sysrc|template|zfs)
+    # Filter for valid commands
+    ;;
+*)
+    # Filter out invalid commands
+    usage
+    ;;
+esac
+
+SCRIPTPATH="${rocinante_libdir}/${CMD}.sh"
+if [ -f "${SCRIPTPATH}" ]; then
+    : "${UMASK:=022}"
+    umask "${UMASK}"
+
+    : "${SH:=sh}"
+
+    if [ -n "${PARAMS}" ]; then
+        exec "${SH}" "${SCRIPTPATH}" "${PARAMS}"
+    else
+        exec "${SH}" "${SCRIPTPATH}" "$@"
+    fi
+else
+    error_exit "${SCRIPTPATH} not found."
+fi
