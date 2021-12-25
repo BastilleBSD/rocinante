@@ -78,31 +78,33 @@ fetch_template() {
 
     ## support for non-git
     if ! which -s git; then
-        if echo ${_url} | grep 'gitlab.com' 1>/dev/null; then
-            mkdir -p ${_template_user}
-            for _branch in ${rocinante_branches}; do
-                fetch -q "${_url}/-/archive/${_branch}/${_repo}-${_branch}.tar.gz" -o ${_template_user}/${_repo}.tar.gz 2>/dev/null
-                tar -C ${_template_user} -xf "${_template_user}/${_repo}.tar.gz" 2>/dev/null
-                mv ${_template_user}/${_repo}-${_branch} ${_template_user}/${_repo} 2>/dev/null
-            done
-            rocinante verify "${_user}/${_repo}"
-        elif echo "${_url}" | grep 'github' 1>/dev/null; then
-            mkdir -p "${_template_user}"
-            for _branch in ${rocinante_branches}; do
-                fetch -q "${_url}/archive/refs/heads/${_branch}.tar.gz" -o ${_template_user}/${_repo}.tar.gz 2>/dev/null
-                tar -C ${_template_user} -xf "${_template_user}/${_repo}.tar.gz" 2>/dev/null
-                mv ${_template_user}/${_repo}-${_branch} ${_template_user}/${_repo} 2>/dev/null
-            done
-            rocinante verify "${_user}/${_repo}"
-        fi
+        error_notify "Git not found."
+        error_exit "Not yet implemented."
+        #if echo ${_url} | grep 'gitlab.com' 1>/dev/null; then
+        #    mkdir -p ${_template_user}
+        #    for _branch in ${rocinante_branches}; do
+        #        fetch -q "${_url}/-/archive/${_branch}/${_repo}-${_branch}.tar.gz" -o ${_template_user}/${_repo}.tar.gz 2>/dev/null
+        #        tar -C ${_template_user} -xf "${_template_user}/${_repo}.tar.gz" 2>/dev/null
+        #        mv ${_template_user}/${_repo}-${_branch} ${_template_user}/${_repo} 2>/dev/null
+        #    done
+        #    rocinante verify "${_user}/${_repo}"
+        #elif echo "${_url}" | grep 'github' 1>/dev/null; then
+        #    mkdir -p "${_template_user}"
+        #    for _branch in ${rocinante_branches}; do
+        #        fetch -q "${_url}/archive/refs/heads/${_branch}.tar.gz" -o ${_template_user}/${_repo}.tar.gz 2>/dev/null
+        #        tar -C ${_template_user} -xf "${_template_user}/${_repo}.tar.gz" 2>/dev/null
+        #        mv ${_template_user}/${_repo}-${_branch} ${_template_user}/${_repo} 2>/dev/null
+        #    done
+        #    rocinante verify "${_user}/${_repo}"
+        #fi
     else
-        if [ ! -d "${_template}/.git" ]; then
-            git clone "${_url}" "${_template}" || error_notify "Clone unsuccessful."
-        elif [ -d "${_template}/.git" ]; then
-            git -C "${_template}" pull ||\
+        if [ ! -d "${rocinante_templatesdir}/.git" ]; then
+            git clone "${_url}" "${rocinante_templatesdir}" || error_notify "Clone unsuccessful."
+        elif [ -d "${rocinante_templatesdir}/.git" ]; then
+            git -C "${rocinante_templatesdir}" pull ||\
             error_notify "Template update unsuccessful."
         fi
-        rocinante verify "${_user}/${_repo}"
+        #rocinante verify "${_user}/${_repo}"
     fi
 }
 
