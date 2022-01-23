@@ -268,7 +268,7 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
                 # Escape single-quotes in the command being executed. -- cwells
                 _args=$(echo "${_args}" | sed "s/'/'\\\\''/g")
                 # Allow redirection within the jail. -- cwells
-                _args="sh -c '${_args}'"
+                _args="'${_args}'"
                 ;;
             cp|copy)
                 _cmd='cp'
