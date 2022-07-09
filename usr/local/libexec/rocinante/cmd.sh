@@ -32,13 +32,19 @@
 . /usr/local/etc/rocinante.conf
 
 cmd_usage() {
-    error_exit "Usage: rocinante cmd command"
+    error_exit "Usage: rocinante cmd [OPTION] command"
 }
+
+OPTION="-xc"
 
 # Handle special-case commands first.
 case "$1" in
 help|-h|--help)
     cmd_usage
+    ;;
+-q|--quiet)
+    OPTION="-c"
+    shift
     ;;
 esac
 
@@ -47,7 +53,8 @@ if [ $# -eq 0 ]; then
 fi
 
 ## execute CMD
-sh -c "$@"
+info "[CMD]:"
+sh "${OPTION}" "$@"
 ERROR_CODE="$?"
 info "${ERROR_CODE}"
 
