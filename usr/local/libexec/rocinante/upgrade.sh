@@ -56,5 +56,5 @@ fi
 
 ## execute UPGRADE
 info "[UPGRADE]:"
-env PAGER="/bin/cat" freebsd-update upgrade -r $@
+PAGER="/bin/cat" freebsd-update upgrade -r $@
 echo -e "${COLOR_RESET}"
