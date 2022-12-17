@@ -55,5 +55,5 @@ if freebsd-version | grep -qi HBSD; then
 fi
 
 info "[UPDATE]:"
-env PAGER="/bin/cat" freebsd-update fetch install
+PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron
 echo -e "${COLOR_RESET}"
