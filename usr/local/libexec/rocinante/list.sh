@@ -48,6 +48,6 @@ if [ $# -gt 0 ]; then
 fi
 
 if [ $# -eq 0 ]; then
-    cd ${rocinante_templatesdir}
+    cd ${rocinante_templatesdir} || error_exit
     find . -type d -maxdepth 2
 fi
