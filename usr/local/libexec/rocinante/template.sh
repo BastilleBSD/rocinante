@@ -175,14 +175,20 @@ fi
 case ${TEMPLATE} in
     http?://*/*/*)
         TEMPLATE_DIR=$(echo "${TEMPLATE}" | awk -F / '{ print $4 "/" $5 }')
-        if [ ! -d "${rocinante_templatesdir}/${TEMPLATE_DIR}" ]; then
+        LOCAL_REPO="${rocinante_templatesdir}/${TEMPLATE_DIR}"
+        if [ ! -d "${LOCAL_REPO}" ]; then
             info "Bootstrapping ${TEMPLATE}..."
             if ! rocinante bootstrap "${TEMPLATE}"; then
                 error_exit "Failed to bootstrap template: ${TEMPLATE}"
             fi
+        else
+            git -C ${LOCAL_REPO} remote update || error_exit "Directory '${LOCAL_REPO}' exists but could not be updated from '${TEMPLATE}'."
+            if [ `git -C ${LOCAL_REPO} rev-list HEAD...origin/master --count` = '0' ]; then
+                rocinante bootstrap "${TEMPLATE}"  || error_exit "Failed to pull template: ${TEMPLATE}"
+            fi
         fi
         TEMPLATE="${TEMPLATE_DIR}"
-        rocinante_template=${rocinante_templatesdir}/${TEMPLATE}
+        rocinante_template=${LOCAL_REPO}
         ;;
     */*)
         if [ ! -d "${rocinante_templatesdir}/${TEMPLATE}" ]; then
