@@ -32,7 +32,7 @@
 . /usr/local/etc/rocinante.conf
 
 sysctl_usage() {
-    error_exit "Usage: rocinante sysctl key=value"
+    error_exit "Usage: rocinante sysctl key=value [args]"
 }
 
 # Handle special-case commands first.

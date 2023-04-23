@@ -32,7 +32,7 @@
 . /usr/local/etc/rocinante.conf
 
 upgrade_usage() {
-    error_exit "Usage: rocinante upgrade release"
+    error_exit "Usage: rocinante upgrade release [args]"
 }
 
 # Handle special-case commands first.
@@ -41,10 +41,6 @@ help|-h|--help)
     upgrade_usage
     ;;
 esac
-
-if [ $# -gt 1 ]; then
-    upgrade_usage
-fi
 
 if [ -f "/bin/midnightbsd-version" ]; then
     error_exit "Not yet supported on MidnightBSD."
@@ -56,5 +52,5 @@ fi
 
 ## execute UPGRADE
 info "[UPGRADE]:"
-PAGER="/bin/cat" freebsd-update upgrade -r $@
+PAGER="/bin/cat" freebsd-update upgrade -r "$@"
 echo -e "${COLOR_RESET}"

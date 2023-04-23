@@ -32,7 +32,7 @@
 . /usr/local/etc/rocinante.conf
 
 update_usage() {
-    error_exit "Usage: rocinante update"
+    error_exit "Usage: rocinante update [args]"
 }
 
 # Handle special-case commands first.
@@ -41,10 +41,6 @@ help|-h|--help)
     update_usage
     ;;
 esac
-
-if [ $# -gt 1 ]; then
-    update_usage
-fi
 
 if [ -f "/bin/midnightbsd-version" ]; then
     error_exit "Not yet supported on MidnightBSD."
@@ -55,5 +51,5 @@ if freebsd-version | grep -qi HBSD; then
 fi
 
 info "[UPDATE]:"
-PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron
+PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron "$@"
 echo -e "${COLOR_RESET}"
