@@ -32,7 +32,7 @@
 . /usr/local/etc/rocinante.conf
 
 template_usage() {
-    error_exit "Usage: rocinante template template/path"
+    error_exit "Usage: rocinante template template/path [branch]"
 }
 
 post_command_hook() {
@@ -118,6 +118,9 @@ fi
 
 ## global variables
 TEMPLATE="${1}"
+shift
+BRANCH="${1:-$rocinante_default_branch}"
+
 rocinante_template=${rocinante_templatesdir}/${TEMPLATE}
 if [ -z "${HOOKS}" ]; then
     HOOKS='LIMITS INCLUDE PRE FSTAB PF PKG OVERLAY CONFIG SYSRC SERVICE CMD RENDER'
@@ -175,14 +178,20 @@ fi
 case ${TEMPLATE} in
     http?://*/*/*)
         TEMPLATE_DIR=$(echo "${TEMPLATE}" | awk -F / '{ print $4 "/" $5 }')
-        if [ ! -d "${rocinante_templatesdir}/${TEMPLATE_DIR}" ]; then
+        LOCAL_REPO="${rocinante_templatesdir}/${TEMPLATE_DIR}"
+        if [ ! -d "${LOCAL_REPO}" ]; then
             info "Bootstrapping ${TEMPLATE}..."
-            if ! rocinante bootstrap "${TEMPLATE}"; then
+            if ! rocinante bootstrap "${TEMPLATE} ${BRANCH}"; then
                 error_exit "Failed to bootstrap template: ${TEMPLATE}"
+            fi
+        else
+            git -C ${LOCAL_REPO} -b ${BRANCH} remote update || error_exit "Directory '${LOCAL_REPO}' exists but could not be updated from '${TEMPLATE}' using branch '${BRANCH}'."
+            if [ `git -C ${LOCAL_REPO} rev-list --branches=${BRANCH} HEAD...origin/master --count` = '0' ]; then
+                rocinante bootstrap "${TEMPLATE}" "${BRANCH}" || error_exit "Failed to pull template: ${TEMPLATE}"
             fi
         fi
         TEMPLATE="${TEMPLATE_DIR}"
-        rocinante_template=${rocinante_templatesdir}/${TEMPLATE}
+        rocinante_template=${LOCAL_REPO}
         ;;
     */*)
         if [ ! -d "${rocinante_templatesdir}/${TEMPLATE}" ]; then

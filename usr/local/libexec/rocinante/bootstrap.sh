@@ -73,6 +73,7 @@ fetch_template() {
     _url=${ROCINANTE_TEMPLATE_URL}
     _user=${ROCINANTE_TEMPLATE_USER}
     _repo=${ROCINANTE_TEMPLATE_REPO}
+    _branch=${ROCINANTE_TEMPLATE_BRANCH}
     _template=${rocinante_templatesdir}/${_user}/${_repo}
     _template_user=${rocinante_templatesdir}/${_user}
 
@@ -98,21 +99,30 @@ fetch_template() {
         #    rocinante verify "${_user}/${_repo}"
         #fi
     else
-        if [ ! -d "${rocinante_templatesdir}/.git" ]; then
-            git clone "${_url}" "${rocinante_templatesdir}" || error_notify "Clone unsuccessful."
-        elif [ -d "${rocinante_templatesdir}/.git" ]; then
-            git -C "${rocinante_templatesdir}" pull ||\
+        if [ ! -d "${_template}/.git" ]; then
+            mkdir -p "${_template}/"
+            git clone --branch ${_branch} --single-branch "${_url}" "${_template}" || error_notify "Clone unsuccessful."
+        elif [ -d "${_template}/.git" ]; then
+            git -C "${_template}" pull ||\
             error_notify "Template update unsuccessful."
         fi
         #rocinante verify "${_user}/${_repo}"
     fi
 }
 
-case "${1}" in
-http?://*/*/*)
-    ROCINANTE_TEMPLATE_URL=${1}
-    ROCINANTE_TEMPLATE_USER=$(echo "${1}" | awk -F / '{ print $4 }')
-    ROCINANTE_TEMPLATE_REPO=$(echo "${1}" | awk -F / '{ print $5 }')
-    fetch_template
-    ;;
+if [ $# -lt 1 ]
+  error_exit "Usage: rocinante bootstrap <template_url> [branch]"
+fi
+
+ROCINANTE_TEMPLATE_URL=${1}
+shift
+ROCINANTE_TEMPLATE_BRANCH="${1:-$rocinance_default_branch}"
+
+
+case "${ROCINANTE_TEMPLATE_URL}" in
+    http?://*/*/*)
+        ROCINANTE_TEMPLATE_USER=$(echo "${1}" | awk -F / '{ print $4 }')
+        ROCINANTE_TEMPLATE_REPO=$(echo "${1}" | awk -F / '{ print $5 }')
+        fetch_template
+        ;;
 esac
