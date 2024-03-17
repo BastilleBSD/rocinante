@@ -98,10 +98,10 @@ fetch_template() {
         #    rocinante verify "${_user}/${_repo}"
         #fi
     else
-        if [ ! -d "${rocinante_templatesdir}/.git" ]; then
-            git clone "${_url}" "${rocinante_templatesdir}" || error_notify "Clone unsuccessful."
-        elif [ -d "${rocinante_templatesdir}/.git" ]; then
-            git -C "${rocinante_templatesdir}" pull ||\
+        if [ ! -d "${_template}/.git" ]; then
+            git clone "${_url}" "${_template}" || error_notify "Clone unsuccessful."
+        elif [ -d "${_template}/.git" ]; then
+            git -C "${_template}" pull ||\
             error_notify "Template update unsuccessful."
         fi
         #rocinante verify "${_user}/${_repo}"
