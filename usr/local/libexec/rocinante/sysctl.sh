@@ -29,24 +29,35 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 sysctl_usage() {
-    error_exit "Usage: rocinante sysctl key=value"
+    error_exit "Usage: rocinante sysctl KEY=VALUE"
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    sysctl_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            sysctl_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -lt 1 ]; then
+    esac
+done
+
+if [ "$#" -lt 1 ]; then
     sysctl_usage
 fi
 
-## execute SYSRC
+# Execute SYSRC
+
 info "[SYSCTL]:"
+
 /sbin/sysctl "$@"
-echo -e "${COLOR_RESET}"
+
+echo

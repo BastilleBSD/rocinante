@@ -29,24 +29,35 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 service_usage() {
-    error_exit "Usage: rocinante service service_name action"
+    error_exit "Usage: rocinante service SERVICE_NAME ACTION"
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    service_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            service_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -lt 1 -o $# -gt 2 ]; then
+    esac
+done
+
+if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
     service_usage
 fi
 
-## execute SERVICE
+# Execute SERVICE
+
 info "[SERVICE]:"
+
 /usr/sbin/service "$@"
-echo -e "${COLOR_RESET}"
+
+echo

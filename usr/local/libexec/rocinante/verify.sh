@@ -29,7 +29,6 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 verify_usage() {
     error_exit "Usage: rocinante verify TEMPLATE"
@@ -39,19 +38,20 @@ handle_template_include() {
     case ${TEMPLATE_INCLUDE} in
         http?://*/*/*)
             rocinante fetch "${TEMPLATE_INCLUDE}"
-        ;;
+            ;;
         */*)
             ROCINANTE_TEMPLATE_USER=$(echo "${TEMPLATE_INCLUDE}" | awk -F / '{ print $1 }')
             ROCINANTE_TEMPLATE_REPO=$(echo "${TEMPLATE_INCLUDE}" | awk -F / '{ print $2 }')
             rocinante verify "${ROCINANTE_TEMPLATE_USER}/${ROCINANTE_TEMPLATE_REPO}"
-        ;;
+            ;;
         *)
             error_exit "Template INCLUDE content not recognized."
-    ;;
+            ;;
     esac
 }
 
 verify_template() {
+
     _template_path=${rocinante_templatesdir}/${ROCINANTE_TEMPLATE}
     _hook_validate=0
 
@@ -59,20 +59,18 @@ verify_template() {
         _path=${_template_path}/${_hook}
         if [ -s "${_path}" ]; then
             _hook_validate=$((_hook_validate+1))
-            info "Detected ${_hook} hook."
+            info "\nDetected ${_hook} hook."
 
             ## line count must match newline count
             if [ $(wc -l "${_path}" | awk '{print $1}') -ne $(grep -c $'\n' "${_path}") ]; then
-                info "[${_hook}]:"
-                error_notify "${ROCINANTE_TEMPLATE}:${_hook} [failed]."
+                info "\n[${_hook}]:"
+                error_notify "[ERROR]: ${ROCINANTE_TEMPLATE}:${_hook} [failed]."
                 error_notify "Line numbers don't match line breaks."
-                echo
                 error_exit "Template validation failed."
             ## if INCLUDE; recursive verify
             elif [ "${_hook}" = 'INCLUDE' ]; then
-                info "[${_hook}]:"
+                info "\n[${_hook}]:"
                 cat "${_path}"
-                echo
                 while read _include; do
                     info "[${_hook}]:[${_include}]:"
                     TEMPLATE_INCLUDE="${_include}"
@@ -81,9 +79,8 @@ verify_template() {
 
             ## if tree; tree -a rocinante_template/_dir
             elif [ "${_hook}" = 'OVERLAY' ]; then
-                info "[${_hook}]:"
+                info "\n[${_hook}]:"
                 cat "${_path}"
-                echo
                 while read _dir; do
                     info "[${_hook}]:[${_dir}]:"
                         if [ -x "/usr/local/bin/tree" ]; then
@@ -91,10 +88,9 @@ verify_template() {
                         else
                            find "${_template_path}/${_dir}" -print | sed -e 's;[^/]*/;|___;g;s;___|; |;g'
                         fi
-                    echo
                 done < "${_path}"
             elif [ "${_hook}" = 'Bastillefile' ]; then
-                info "[${_hook}]:"
+                info "\n[${_hook}]:"
                 cat "${_path}"
                 while read _line; do
                     _cmd=$(echo "${_line}" | awk '{print tolower($1);}')
@@ -104,49 +100,54 @@ verify_template() {
                         handle_template_include
                     fi
                 done < "${_path}"
-                echo
             else
-                info "[${_hook}]:"
+                info "\n[${_hook}]:"
                 cat "${_path}"
-                echo
             fi
         fi
     done
 
     ## remove bad templates
     if [ "${_hook_validate}" -lt 1 ]; then
-        error_notify "No valid template hooks found."
-        error_notify "Template discarded."
-        rm -rf "${rocinante_template}"
-        exit 1
+        rm -rf "${_template_path}"
+        error_notify "[ERROR]: No valid template hooks found."
+        error_exit "Template discarded."
     fi
 
     ## if validated; ready to use
     if [ "${_hook_validate}" -gt 0 ]; then
-        info "Template ready to use."
+        info "\nTemplate ready to use.\n"
     fi
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    verify_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            usage
+            ;;
+        -*) 
+            error_exit "[ERROR]: Unknown Option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
 
-if [ $# -gt 1 ] || [ $# -lt 1 ]; then
+if [ "$#" -ne 1 ]; then
     verify_usage
 fi
 
-case "$1" in
-http?*)
-    verify_usage
-    ;;
-*/*)
-    ROCINANTE_TEMPLATE=$1
-    verify_template
-    ;;
-*)
-    verify_usage
-    ;;
+case "${1}" in
+    http?*)
+        verify_usage
+        ;;
+    */*)
+        ROCINANTE_TEMPLATE=$1
+        verify_template
+        ;;
+    *)
+        verify_usage
+        ;;
 esac

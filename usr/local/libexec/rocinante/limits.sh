@@ -29,11 +29,9 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 limits_usage() {
-    error_notify "Usage: rocinante limits command [args]"
-    exit 1
+    error_exit "Usage: rocinante limits LIMITS [ARGS]"
 }
 
 RACCT_ENABLE=$(sysctl -n kern.racct.enable)
@@ -41,18 +39,30 @@ if [ "${RACCT_ENABLE}" != '1' ]; then
     echo "Racct not enabled. Append 'kern.racct.enable=1' to /boot/loader.conf and reboot"
 fi
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    limits_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            limits_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -lt 1 ]; then
+    esac
+done
+
+if [ "$#" -lt 1 ]; then
     limits_usage
 fi
 
-## execute RCTL
+# Execute RCTL
+
 info "[LIMITS]:"
+
 /usr/bin/rctl "$@"
-echo -e "${COLOR_RESET}"
+
+echo

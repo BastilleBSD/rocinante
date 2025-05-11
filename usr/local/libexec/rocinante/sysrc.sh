@@ -29,24 +29,35 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 sysrc_usage() {
-    error_exit "Usage: rocinante sysrc args"
+    error_exit "Usage: rocinante sysrc ARGS"
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    sysrc_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            sysrc_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -lt 1 ]; then
+    esac
+done
+
+if [ "$#" -lt 1 ]; then
     sysrc_usage
 fi
 
-## execute SYSRC
+# Execute SYSRC
+
 info "[SYSRC]:"
+
 /usr/sbin/sysrc "$@"
-echo -e "${COLOR_RESET}"
+
+echo

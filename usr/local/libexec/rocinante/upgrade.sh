@@ -29,32 +29,43 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 upgrade_usage() {
     error_exit "Usage: rocinante upgrade release"
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    upgrade_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            upgrade_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -gt 1 ]; then
+    esac
+done
+
+if [ "$#" -gt 1 ]; then
     upgrade_usage
 fi
 
 if [ -f "/bin/midnightbsd-version" ]; then
-    error_exit "Not yet supported on MidnightBSD."
+    error_exit "[ERROR]: Not yet supported on MidnightBSD."
 fi
 
 if freebsd-version | grep -qi HBSD; then
-    error_exit "Not yet supported on HardenedBSD."
+    error_exit "[ERROR]: Not yet supported on HardenedBSD."
 fi
 
-## execute UPGRADE
+# Execute UPGRADE
+
 info "[UPGRADE]:"
-PAGER="/bin/cat" freebsd-update upgrade -r $@
-echo -e "${COLOR_RESET}"
+
+PAGER="/bin/cat" freebsd-update upgrade -r "$@"
+
+echo
