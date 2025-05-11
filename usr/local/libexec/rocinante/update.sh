@@ -31,7 +31,7 @@
 . /usr/local/libexec/rocinante/common.sh
 
 update_usage() {
-    error_exit "Usage: rocinante update"
+    error_exit "Usage: rocinante update [ARGS]"
 }
 
 # Handle options.
@@ -50,10 +50,6 @@ while [ "$#" -gt 0 ]; do
     esac
 done
 
-if [ "$#" -gt 1 ]; then
-    update_usage
-fi
-
 if [ -f "/bin/midnightbsd-version" ]; then
     error_exit "[ERROR]: Not yet supported on MidnightBSD."
 fi
@@ -66,6 +62,6 @@ fi
 
 info "[UPDATE]:"
 
-PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron
+PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron "$@"
 
 echo
