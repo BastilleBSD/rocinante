@@ -29,42 +29,47 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 cp_usage() {
-    error_exit "Usage: rocinante cp [OPTION] HOST_PATH CONTAINER_PATH"
+    error_exit "Usage: rocinante cp [option(s)] TEMPLATE_PATH HOST_PATH"
 }
 
-CPSOURCE="${1}"
-CPDEST="${2}"
+# Handle options.
+OPTION="-av"
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            cp_usage
+            ;;
+        -q|--quiet)
+            OPTION="-a"
+            shift
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    cp_usage
-    ;;
--q|--quiet)
-    OPTION="${1}"
-    CPSOURCE="${2}"
-    CPDEST="${3}"
-    ;;
-esac
+    esac
+done
 
-if [ $# -ne 2 ]; then
+if [ "$#" -ne 2 ]; then
     cp_usage
 fi
 
-case "${OPTION}" in
-    -q|--quiet)
-        OPTION="-a"
-        ;;
-    *)
-        OPTION="-av"
-        ;;
-esac
+CP_SOURCE="${1}"
+CP_DEST="${2}"
+
+# Execute CP
 
 info "[CP]:"
-cp "${OPTION}" "${CPSOURCE}" "${CPDEST}"
+
+cp "${OPTION}" "${CP_SOURCE}" "${CP_DEST}"
+
 RETURN="$?"
-echo -e "${COLOR_RESET}"
+
 return "${RETURN}"
+
+echo

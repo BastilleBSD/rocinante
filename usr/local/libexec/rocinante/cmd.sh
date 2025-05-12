@@ -29,34 +29,46 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 cmd_usage() {
-    error_exit "Usage: rocinante cmd [OPTION] command"
+    error_exit "Usage: rocinante cmd [option(s)] ARGS"
 }
 
+# Handle options.
 OPTION="-xc"
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            cmd_usage
+            ;;
+        -q|--quiet)
+            OPTION="-c"
+            shift
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    cmd_usage
-    ;;
--q|--quiet)
-    OPTION="-c"
-    shift
-    ;;
-esac
+    esac
+done
 
-if [ $# -eq 0 ]; then
+if [ "$#" -eq 0 ]; then
     cmd_usage
 fi
 
-## execute CMD
+# Execute CMD
+
 info "[CMD]:"
+
 sh "${OPTION}" "$@"
+
 ERROR_CODE="$?"
+
 info "${ERROR_CODE}"
 
-echo -e "${COLOR_RESET}"
 return "${ERROR_CODE}"
+
+echo

@@ -28,7 +28,9 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-## reset colors
+. /usr/local/etc/rocinante.conf
+
+# Reset colors
 COLOR_GREEN=
 COLOR_RED=
 COLOR_RESET=
@@ -53,7 +55,8 @@ error_notify() {
 
 # Notify message on error and exit
 error_exit() {
-    error_notify $@
+    error_notify "$@"
+    echo
     exit 1
 }
 

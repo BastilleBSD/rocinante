@@ -29,24 +29,35 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 zpool_usage() {
-    error_notify "Usage: rocinante zpool command [args]" 
+    error_notify "Usage: rocinante zpool ARGS" 
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    zpool_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            zpool_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -lt 1 ]; then
+    esac
+done
+
+if [ "$#" -lt 1 ]; then
     zpool_usage
 fi
 
-## execute ZPOOL
+# Execute ZPOOL
+
 info "[ZPOOL]"
+
 /sbin/zpool "$@"
-echo -e "${COLOR_RESET}"
+
+echo

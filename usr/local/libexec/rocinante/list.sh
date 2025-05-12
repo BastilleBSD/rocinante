@@ -29,25 +29,28 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 list_usage() {
     error_exit "Usage: rocinante list"
 }
 
-# Handle special-case commands first.
-if [ $# -gt 0 ]; then
-    case "$1" in
-    help|-h|--help)
-        list_usage
-        ;;
-    *)
-        usage
-        ;;
-    esac
-fi
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            list_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -eq 0 ]; then
-    cd ${rocinante_templatesdir} || error_exit
-    find . -type d -maxdepth 2
+    esac
+done
+
+# List templates
+if [ "$#" -eq 0 ]; then
+    find "${rocinante_templatesdir}" -type d -maxdepth 2 | sed "s#${rocinante_templatesdir}/##g"
 fi

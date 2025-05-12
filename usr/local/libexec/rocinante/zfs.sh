@@ -29,24 +29,35 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 zfs_usage() {
     error_notify "Usage: rocinante zfs command [args]" 
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    zfs_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            zfs_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -lt 1 ]; then
+    esac
+done
+
+if [ "$#" -lt 1 ]; then
     zfs_usage
 fi
 
-## execute ZFS
-info "[ZFS]"
+# Execute ZFS
+
+info "[ZFS]:"
+
 /sbin/zfs "$@"
-echo -e "${COLOR_RESET}"
+
+echo

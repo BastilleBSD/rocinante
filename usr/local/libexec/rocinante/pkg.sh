@@ -29,24 +29,35 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
-rocinante_usage() {
-    error_exit "Usage: rocinante pkg command [args]"
+pkg_usage() {
+    error_exit "Usage: rocinante pkg ARGS"
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    rocinante_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            pkg_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -lt 1 ]; then
-    rocinante_usage
+    esac
+done
+
+if [ "$#" -lt 1 ]; then
+    pkg_usage
 fi
 
-## execute PKG
+# Execute PKG
+
 info "[PKG]:"
+
 /usr/sbin/pkg "$@"
-echo -e "${COLOR_RESET}"
+
+echo

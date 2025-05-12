@@ -29,13 +29,13 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
 template_usage() {
-    error_exit "Usage: rocinante template template/path"
+    error_exit "Usage: rocinante template [--convert] PROJECT/TEMPLATE"
 }
 
 post_command_hook() {
+
     _jail=$1
     _cmd=$2
     _args=$3
@@ -52,10 +52,11 @@ get_arg_name() {
 
 parse_arg_value() {
     # Parses the value after = and then escapes back/forward slashes and single quotes in it. -- cwells
-    echo "${1}" | sed -E 's/[^=]+=?//' | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/'\''/'\''\\'\'\''/g'
+    echo "${1}" | sed -E 's/[^=]+=?//' | sed -e 's/\\/\\\\/g' -e 's/\//\\\//g' -e 's/'\''/'\''\\'\'\''/g' -e 's/&/\\&/g' -e 's/"//g'
 }
 
 get_arg_value() {
+
     _name_value_pair="${1}"
     shift
     _arg_name="$(get_arg_name "${_name_value_pair}")"
@@ -101,22 +102,42 @@ render() {
         echo "Rendering File: ${_file_path}"
         eval "sed -i '' ${ARG_REPLACEMENTS} '${_file_path}'"
     else
-        warn "Path not found for render: ${2}"
+        warn "[WARNING]: Path not found for render: ${2}"
     fi
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    template_usage
-    ;;
-esac
+line_in_file() {
 
-if [ $# -lt 1 ]; then
+    _filepath="$(echo ${1} | awk '{print $1}')"
+    _line="$(echo ${2} | awk '{print $1}')"
+    if [ -f "${_jailpath}/${_filepath}" ]; then
+        if ! grep -qxF "${_line}" "${_jailpath}/${_filepath}"; then
+            echo "${_line}" >> "${_jailpath}/${_filepath}"
+	fi
+    else
+        warn "[WARNING]: Path not found for line_in_file: ${_filepath}"
+    fi
+}
+
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            usage
+            ;;
+        -*) 
+            error_exit "[ERROR]: Unknown Option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+if [ "$#" -lt 1 ]; then
     template_usage
 fi
 
-## global variables
 TEMPLATE="${1}"
 rocinante_template=${rocinante_templatesdir}/${TEMPLATE}
 if [ -z "${HOOKS}" ]; then
@@ -126,9 +147,9 @@ fi
 # Special case conversion of hook-style template files into a Bastillefile. -- cwells
 if [ "${TARGET}" = '--convert' ]; then
     if [ -d "${TEMPLATE}" ]; then # A relative path was provided. -- cwells
-        cd "${TEMPLATE}"
+        cd "${TEMPLATE}" || error_exit "[ERROR]: Failed to change to directory: ${TEMPLATE}"
     elif [ -d "${rocinante_template}" ]; then
-        cd "${rocinante_template}"
+        cd "${bastille_template}" || error_exit "[ERROR]: Failed to change to directory: ${TEMPLATE}"
     else
         error_exit "Template not found: ${TEMPLATE}"
     fi
@@ -178,7 +199,7 @@ case ${TEMPLATE} in
         if [ ! -d "${rocinante_templatesdir}/${TEMPLATE_DIR}" ]; then
             info "Bootstrapping ${TEMPLATE}..."
             if ! rocinante bootstrap "${TEMPLATE}"; then
-                error_exit "Failed to bootstrap template: ${TEMPLATE}"
+                error_exit "[ERROR]: Failed to bootstrap template: ${TEMPLATE}"
             fi
         fi
         TEMPLATE="${TEMPLATE_DIR}"
@@ -187,7 +208,7 @@ case ${TEMPLATE} in
     */*)
         if [ ! -d "${rocinante_templatesdir}/${TEMPLATE}" ]; then
             if [ ! -d ${TEMPLATE} ]; then
-                error_exit "${TEMPLATE} not found."
+                error_exit "[ERROR]: ${TEMPLATE} not found."
             else
                 rocinante_template=${TEMPLATE}
             fi
@@ -214,12 +235,11 @@ for _script_arg in "$@"; do
 done
 
 if [ -n "${ARG_FILE}" ] && [ ! -f "${ARG_FILE}" ]; then
-    error_exit "File not found: ${ARG_FILE}"
+    error_exit "[ERROR]: File not found: ${ARG_FILE}"
 fi
 
-info "[TEMPLATE]:"
-info "Applying template: ${TEMPLATE}..."
-echo
+info "\n[TEMPLATE]:"
+echo "Applying template: ${TEMPLATE}..."
 
 # Build a list of sed commands like this: -e 's/${username}/root/g' -e 's/${domain}/example.com/g'
 # Values provided by default (without being defined by the user) are listed here. -- cwells
@@ -233,7 +253,7 @@ if [ -s "${rocinante_template}/ARG" ]; then
         _arg_name=$(get_arg_name "${_line}")
         _arg_value=$(get_arg_value "${_line}" "$@")
         if [ -z "${_arg_value}" ]; then
-            warn "No value provided for arg: ${_arg_name}"
+            warn "[WARNING]: No value provided for arg: ${_arg_name}"
         fi
         ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${_arg_name}}/${_arg_value}/g'"
     done < "${rocinante_template}/ARG"
@@ -250,7 +270,7 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
         # First word converted to lowercase is the Bastille command. -- cwells
         _cmd=$(echo "${_line}" | awk '{print tolower($1);}')
         # Rest of the line with "arg" variables replaced will be the arguments. -- cwells
-        _args=$(echo "${_line}" | awk '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
+        _args=$(echo "${_line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
 
         # Apply overrides for commands/aliases and arguments. -- cwells
         case $_cmd in
@@ -258,7 +278,7 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
                 _arg_name=$(get_arg_name "${_args}")
                 _arg_value=$(get_arg_value "${_args}" "$@")
                 if [ -z "${_arg_value}" ]; then
-                    warn "No value provided for arg: ${_arg_name}"
+                    warn "[WARNING]: No value provided for arg: ${_arg_name}"
                 fi
                 # Build a list of sed commands like this: -e 's/${username}/root/g' -e 's/${domain}/example.com/g'
                 ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${_arg_name}}/${_arg_value}/g'"
@@ -289,6 +309,10 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
                 _args="install -y ${_args}" ;;
             render) # This is a path to one or more files needing arguments replaced by values. -- cwells
                 render "${rocinante_jail_path}" "${_args}"
+                continue
+                ;;
+            lif|lineinfile|line_in_file)
+                line_in_file "${_args}"
                 continue
                 ;;
         esac
@@ -353,9 +377,7 @@ for _hook in ${HOOKS}; do
             done < "${rocinante_template}/${_hook}"
         fi
         info "[${_jail}]:${_hook} -- END"
-        echo
     fi
 done
 
-info "Template applied: ${TEMPLATE}"
-echo -e "${COLOR_RESET}"
+info "\nTemplate applied: ${TEMPLATE}\n"

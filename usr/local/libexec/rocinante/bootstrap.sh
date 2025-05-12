@@ -29,24 +29,35 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 . /usr/local/libexec/rocinante/common.sh
-. /usr/local/etc/rocinante.conf
 
-fetch_usage() {
+bootstrap_usage() {
     error_exit "Usage: rocinante bootstrap URL"
 }
 
-# Handle special-case commands first.
-case "$1" in
-help|-h|--help)
-    fetch_usage
-    ;;
-esac
+# Handle options.
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            cmd_usage
+            ;;
+        -*)
+            error_exit "[ERROR]: Unknown option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
 
-if [ $# -eq 0 ]; then
-    fetch_usage
+    esac
+done
+
+if [ "$#" -eq 0 ]; then
+    bootstrap_usage
 fi
 
 fetch_template() {
+
+    # Ensure required directories are in place
+
     ## ${rocinate_prefix}
     if [ ! -d "${rocinante_prefix}" ]; then
         if [ "${rocinante_zfs_enable}" = "YES" ]; then
@@ -55,6 +66,13 @@ fetch_template() {
             fi
         else
             mkdir -p "${rocinante_prefix}"
+        fi
+    # Make sure the dataset is mounted in the proper place
+    elif [ -d "${rocinante_prefix}" ]; then
+        if ! zfs list "${rocinante_zfs_zpool}/rocinante" >/dev/null; then
+            zfs create ${rocinante_zfs_options} -o mountpoint="${rocinante_prefix}" "${rocinante_zfs_zpool}/rocinante"
+        elif [ "$(zfs get -H -o value mountpoint ${rocinante_zfs_zpool}/rocinante)" != "${rocinante_prefix}" ]; then
+            zfs set mountpoint="${rocinante_prefix}" "${rocinante_zfs_zpool}/rocinante"
         fi
     fi
 
@@ -73,46 +91,60 @@ fetch_template() {
     _url=${ROCINANTE_TEMPLATE_URL}
     _user=${ROCINANTE_TEMPLATE_USER}
     _repo=${ROCINANTE_TEMPLATE_REPO}
-    _template=${rocinante_templatesdir}/${_user}/${_repo}
-    _template_user=${rocinante_templatesdir}/${_user}
+    _raw_template_dir=${rocinante_templatesdir}/${_user}/${_repo}
 
     ## support for non-git
     if ! which -s git; then
-        error_notify "Git not found."
+        error_notify "[ERROR]: Git not found."
         error_exit "Not yet implemented."
-        #if echo ${_url} | grep 'gitlab.com' 1>/dev/null; then
-        #    mkdir -p ${_template_user}
-        #    for _branch in ${rocinante_branches}; do
-        #        fetch -q "${_url}/-/archive/${_branch}/${_repo}-${_branch}.tar.gz" -o ${_template_user}/${_repo}.tar.gz 2>/dev/null
-        #        tar -C ${_template_user} -xf "${_template_user}/${_repo}.tar.gz" 2>/dev/null
-        #        mv ${_template_user}/${_repo}-${_branch} ${_template_user}/${_repo} 2>/dev/null
-        #    done
-        #    rocinante verify "${_user}/${_repo}"
-        #elif echo "${_url}" | grep 'github' 1>/dev/null; then
-        #    mkdir -p "${_template_user}"
-        #    for _branch in ${rocinante_branches}; do
-        #        fetch -q "${_url}/archive/refs/heads/${_branch}.tar.gz" -o ${_template_user}/${_repo}.tar.gz 2>/dev/null
-        #        tar -C ${_template_user} -xf "${_template_user}/${_repo}.tar.gz" 2>/dev/null
-        #        mv ${_template_user}/${_repo}-${_branch} ${_template_user}/${_repo} 2>/dev/null
-        #    done
-        #    rocinante verify "${_user}/${_repo}"
-        #fi
     else
         if [ ! -d "${rocinante_templatesdir}/.git" ]; then
-            git clone "${_url}" "${rocinante_templatesdir}" || error_notify "Clone unsuccessful."
+            if ! git clone "${_url}" "${_raw_template_dir}"; then
+                error_notify "Clone unsuccessful."
+            fi
         elif [ -d "${rocinante_templatesdir}/.git" ]; then
-            git -C "${rocinante_templatesdir}" pull ||\
-            error_notify "Template update unsuccessful."
+            if ! git -C "${_raw_template_dir}" pull; then
+                error_notify "Template update unsuccessful."
+            fi
         fi
-        #rocinante verify "${_user}/${_repo}"
+    fi
+
+    # Extract templates in project/template format
+    if [ ! -f ${_raw_template_dir}/Bastillefile ]; then
+        # Extract template in project/template format
+        find "${_raw_template_dir}" -type f -name Bastillefile | while read -r _file; do
+            _template_dir="$(dirname ${_file})"
+            _project_dir="$(dirname ${_template_dir})"
+            _template_name="$(basename ${_template_dir})"
+            _project_name="$(basename ${_project_dir})"
+            _complete_template="${_project_name}/${_template_name}"
+            cp -fR "${_project_dir}" "${rocinante_templatesdir}"
+            rocinante verify "${_complete_template}"
+        done
+        
+        # Remove the cloned repo
+        if [ -n "${_user}" ]; then
+            rm -r "${rocinante_templatesdir:?}/${_user:?}"
+        fi
+        
+    else
+        # Verify a single template
+        rocinante verify "${_user}/${_repo}"
     fi
 }
 
 case "${1}" in
-http?://*/*/*)
-    ROCINANTE_TEMPLATE_URL=${1}
-    ROCINANTE_TEMPLATE_USER=$(echo "${1}" | awk -F / '{ print $4 }')
-    ROCINANTE_TEMPLATE_REPO=$(echo "${1}" | awk -F / '{ print $5 }')
-    fetch_template
-    ;;
+    http?://*/*/*)
+        ROCINANTE_TEMPLATE_URL=${1}
+        ROCINANTE_TEMPLATE_USER=$(echo "${1}" | awk -F / '{ print $4 }')
+        ROCINANTE_TEMPLATE_REPO=$(echo "${1}" | awk -F / '{ print $5 }')
+        fetch_template
+        ;;
+    git@*:*/*)
+        ROCINANTE_TEMPLATE_URL=${1}
+        git_repository=$(echo "${1}" | awk -F : '{ print $2 }')
+        ROCINANTE_TEMPLATE_USER=$(echo "${git_repository}" | awk -F / '{ print $1 }')
+        ROCINANTE_TEMPLATE_REPO=$(echo "${git_repository}" | awk -F / '{ print $2 }')
+        fetch_template
+        ;;
 esac
