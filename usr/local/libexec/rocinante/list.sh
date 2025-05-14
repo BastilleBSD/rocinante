@@ -31,7 +31,7 @@
 . /usr/local/libexec/rocinante/common.sh
 
 list_usage() {
-    error_exit "Usage: rocinante list"
+    error_exit "Usage: rocinante list [option(s)]"
 }
 
 # Handle options.
@@ -39,6 +39,10 @@ while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
             list_usage
+            ;;
+        -x|--debug)
+            enable_debug
+            shift
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -49,6 +53,10 @@ while [ "$#" -gt 0 ]; do
 
     esac
 done
+
+if [ "$#" -ne 0 ]; then
+    list_usage
+fi
 
 # List templates
 if [ "$#" -eq 0 ]; then
