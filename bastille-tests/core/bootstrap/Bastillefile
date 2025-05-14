@@ -3,10 +3,10 @@ ARG TEMPLATE
 
 CMD bastille bootstrap ${RELEASE}
 
-INCLUDE cmd/destroy-release --arg OPTIONS="-f" --arg RELEASE=${RELEASE}
+INCLUDE core/destroy-release --arg OPTIONS="-f" --arg RELEASE=${RELEASE}
 
 CMD bastille bootstrap ${RELEASE} update
 
-INCLUDE cmd/destroy-release --arg RELEASE=${RELEASE}
+INCLUDE core/destroy-release --arg RELEASE=${RELEASE}
 
 CMD bastille bootstrap ${TEMPLATE}
