@@ -1,6 +1,6 @@
 ARG OPTIONS
 ARG JAIL
-ARG ARGS
+ARG TEMPLATE
 
-CMD bastille template ${OPTIONS} ${JAIL} ${ARGS}
+CMD bastille template ${OPTIONS} ${JAIL} ${TEMPLATE}
 
