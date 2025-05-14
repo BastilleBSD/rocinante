@@ -31,7 +31,7 @@
 . /usr/local/libexec/rocinante/common.sh
 
 bootstrap_usage() {
-    error_exit "Usage: rocinante bootstrap URL"
+    error_exit "Usage: rocinante bootstrap [option(s)] URL"
 }
 
 # Handle options.
@@ -39,6 +39,10 @@ while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
             cmd_usage
+            ;;
+        -x|--debug)
+            enable_debug
+            shift
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""

@@ -31,7 +31,7 @@
 . /usr/local/libexec/rocinante/common.sh
 
 verify_usage() {
-    error_exit "Usage: rocinante verify TEMPLATE"
+    error_exit "Usage: rocinante verify [option(s)] TEMPLATE"
 }
 
 handle_template_include() {
@@ -125,6 +125,10 @@ while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
             usage
+            ;;
+        -x|--debug)
+            enable_debug
+            shift
             ;;
         -*) 
             error_exit "[ERROR]: Unknown Option: \"${1}\""
