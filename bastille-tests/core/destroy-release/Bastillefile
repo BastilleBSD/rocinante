@@ -1,0 +1,4 @@
+ARG OPTIONS
+ARG RELEASE
+
+CMD bastille destroy ${OPTIONS} ${RELEASE}

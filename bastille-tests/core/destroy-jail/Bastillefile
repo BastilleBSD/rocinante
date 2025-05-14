@@ -1,0 +1,4 @@
+ARG OPTIONS="-y"
+ARG JAIL
+
+CMD bastille destroy ${OPTIONS} ${JAIL}
