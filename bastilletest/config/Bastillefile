@@ -1,0 +1,8 @@
+ARG JAIL
+ARG ARGS
+ARG PROPERTY
+ARG VALUE
+
+CMD bastille config ${JAIL} ${ARGS} ${PROPERTY} ${VALUE}
+
+

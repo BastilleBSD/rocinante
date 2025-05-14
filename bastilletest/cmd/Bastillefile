@@ -1,0 +1,7 @@
+ARG JAIL
+ARG COMMAND
+ARG OPTIONS
+
+CMD bastille cmd ${OPTIONS} ${JAIL} ${COMMAND}
+
+

@@ -1,0 +1,3 @@
+ARG TEMPLATE
+
+CMD bastille boostrap ${TEMPLATE}
