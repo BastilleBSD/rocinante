@@ -1,0 +1,5 @@
+ARG OPTIONS
+ARG RELEASE
+
+CMD bastille etcupdate ${OPTIONS} bootstrap ${RELEASE}
+

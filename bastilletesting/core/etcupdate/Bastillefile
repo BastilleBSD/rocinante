@@ -1,6 +1,0 @@
-ARG OPTIONS
-ARG ARG1
-ARG ARG2
-
-CMD bastille etcupdate ${OPTIONS} ${ARG1} ${ARG2}
-
