@@ -116,7 +116,7 @@ fetch_template() {
     # Extract templates in project/template format
     if [ ! -f ${_raw_template_dir}/Bastillefile ]; then
         # Extract template in project/template format
-        find "${_raw_template_dir}" -type f -name Bastillefile | while read -r _file; do
+        find "${_raw_template_dir}" -type f -name Bastillefile | sort | while read -r _file; do
             _template_dir="$(dirname ${_file})"
             _project_dir="$(dirname ${_template_dir})"
             _template_name="$(basename ${_template_dir})"
