@@ -1,8 +1,6 @@
 ARG OPTIONS
 ARG JAIL
-ARG COMMAND
 ARG ARGS
 
-
-CMD bastille pkg ${OPTIONS} ${JAIL} ${COMMAND} ${ARGS}
+CMD bastille pkg ${OPTIONS} ${JAIL} ${ARGS}
 
