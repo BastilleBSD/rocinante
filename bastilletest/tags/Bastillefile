@@ -1,0 +1,4 @@
+ARG ARGS
+ARG TAGS
+
+CMD bastille tags ${JAIL} ${ARGS} ${TAGS}
