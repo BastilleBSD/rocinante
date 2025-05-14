@@ -31,7 +31,7 @@
 . /usr/local/libexec/rocinante/common.sh
 
 template_usage() {
-    error_exit "Usage: rocinante template [--convert] PROJECT/TEMPLATE"
+    error_exit "Usage: rocinante template [option(s)] [--convert] PROJECT/TEMPLATE"
 }
 
 post_command_hook() {
@@ -124,6 +124,10 @@ while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
             usage
+            ;;
+        -x|--debug)
+            enable_debug
+            shift
             ;;
         -*) 
             error_exit "[ERROR]: Unknown Option: \"${1}\""

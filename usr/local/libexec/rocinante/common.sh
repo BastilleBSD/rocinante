@@ -48,6 +48,12 @@ if [ -z "${NO_COLOR}" ]; then
     enable_color
 fi
 
+enable_debug() {
+    # Enable debug mode.
+    warn "***DEBUG MODE***"
+    set -x
+}
+
 # Notify message on error, but do not exit
 error_notify() {
     echo -e "${COLOR_RED}$*${COLOR_RESET}" 1>&2
