@@ -1,7 +1,6 @@
 ARG OPTIONS
 ARG JAIL
 ARG SERVICE
-ARG ACTION
+ARG ARGS
 
-CMD bastille service ${OPTIONS} ${JAIL} ${SERVICE} ${ACTION}
-
+CMD bastille service ${OPTIONS} ${JAIL} ${SERVICE} ${ARGS}
