@@ -1,6 +1,6 @@
 ARG OPTIONS
 ARG JAIL
-ARG FILENAME
+ARG FILE
 
-CMD bastille edit ${OPTIONS} ${JAIL} ${FILENAME}
+CMD bastille edit ${OPTIONS} ${JAIL} ${FILE}
 
