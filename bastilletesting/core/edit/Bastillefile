@@ -1,0 +1,6 @@
+ARG OPTIONS
+ARG JAIL
+ARG FILE
+
+CMD bastille edit ${OPTIONS} ${JAIL} ${FILE}
+

@@ -1,0 +1,5 @@
+ARG OPTIONS
+ARG JAIL
+
+CMD bastille update ${OPTIONS} ${JAIL}
+

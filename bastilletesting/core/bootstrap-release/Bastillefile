@@ -1,0 +1,5 @@
+ARG RELEASE
+
+CMD bastille bootstrap ${RELEASE}
+
+

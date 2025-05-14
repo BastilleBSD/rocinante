@@ -1,0 +1,8 @@
+ARG OPTIONS
+ARG JAIL
+ARG NEW_NAME
+ARG IP
+
+CMD bastille clone ${OPTIONS} ${JAIL} ${NEW_NAME} ${IP}
+
+

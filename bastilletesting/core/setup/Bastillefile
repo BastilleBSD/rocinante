@@ -1,0 +1,4 @@
+ARG OPTIONS
+ARG ARGS
+
+CMD bastille setup ${OPTIONS} ${ARGS}
