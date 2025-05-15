@@ -5,6 +5,8 @@ ARG RELEASE
 ARG IP=10.1.1.2
 ARG INTERFACE=bastille0
 
+INCLUDE config/default
+
 INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
 INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
