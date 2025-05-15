@@ -19,6 +19,12 @@ Rocinante can be found in FreeBSD ports at `sysutils/rocinante`.
 ```
 pkg install rocinante
 ```
+or
+```
+git clone https://github.com/BastilleBSD/rocinante.git
+then cd rocinante
+make install
+```
 
 ### Examples
 
