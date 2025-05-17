@@ -5,7 +5,7 @@ ARG RELEASE
 ARG IP=10.1.1.2
 ARG INTERFACE=bastille0
 
-INCLUDE config/default
+INCLUDE core/setup --arg OPTIONS="-y"
 
 INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
 INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
@@ -21,8 +21,8 @@ INCLUDE core/start --arg OPTIONS="-d 5" --arg JAIL=${JAIL}
 INCLUDE core/restart --arg OPTIONS="-d 5" --arg JAIL=${JAIL}
 
 # Test basic cmd
-INCLUDE core/cmd --arg JAIL=${JAIL} --arg COMMAND="freebsd-version"
-INCLUDE core/cmd --arg JAIL=${JAIL} --arg COMMAND="echo Successfully tested core/cmd"
+INCLUDE core/cmd --arg JAIL=${JAIL} --arg ARGS="freebsd-version"
+INCLUDE core/cmd --arg JAIL=${JAIL} --arg ARGS="echo Successfully tested core/cmd"
 
 # Test destroy jail/release (--no-cache)
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
