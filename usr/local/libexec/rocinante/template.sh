@@ -193,7 +193,7 @@ if [ "${TARGET}" = '--convert' ]; then
         fi
     done
 
-    info "Template converted: ${TEMPLATE}"
+    info "\nTemplate converted: ${TEMPLATE}"
     exit 0
 fi
 
@@ -201,7 +201,7 @@ case ${TEMPLATE} in
     http?://*/*/*)
         TEMPLATE_DIR=$(echo "${TEMPLATE}" | awk -F / '{ print $4 "/" $5 }')
         if [ ! -d "${rocinante_templatesdir}/${TEMPLATE_DIR}" ]; then
-            info "Bootstrapping ${TEMPLATE}..."
+            info "\nBootstrapping ${TEMPLATE}..."
             if ! rocinante bootstrap "${TEMPLATE}"; then
                 error_exit "[ERROR]: Failed to bootstrap template: ${TEMPLATE}"
             fi
@@ -384,4 +384,4 @@ for _hook in ${HOOKS}; do
     fi
 done
 
-info "\nTemplate applied: ${TEMPLATE}\n"
+\nTemplate applied: ${TEMPLATE}\n"
