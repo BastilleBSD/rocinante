@@ -61,7 +61,7 @@ fi
 
 # Execute CMD
 
-info "[CMD]:"
+info "\n[CMD]:"
 
 sh "${OPTION}" "$@"
 
