@@ -384,4 +384,4 @@ for _hook in ${HOOKS}; do
     fi
 done
 
-\nTemplate applied: ${TEMPLATE}\n"
+info "\nTemplate applied: ${TEMPLATE}\n"
