@@ -108,6 +108,7 @@ setup pf
 setup shared
 setup vnet
 setup storage
+setup netgraph
 
 START AND STOP
 start and stop a vnet jail
