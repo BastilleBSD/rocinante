@@ -1,0 +1,7 @@
+ARG JAIL=standardJail
+ARG RELEASE
+ARG IP=10.1.1.2
+ARG INTERFACE=bastille0
+
+INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
