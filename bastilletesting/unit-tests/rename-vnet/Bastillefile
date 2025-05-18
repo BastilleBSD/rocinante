@@ -1,0 +1,17 @@
+# create start stop rename vnet jail
+#
+ARG RELEASE=14.2-RELEASE
+ARG JAIL=folsom
+ARG IP=10.0.0.6
+ARG INTERFACE=vtnet0
+
+
+INCLUDE core/setup --arg OPTIONS="-y"
+
+INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
+
+# create vnet jail
+
+INCLUDE core/create --arg OPTIONS="-V"
+
+ 
