@@ -7,6 +7,7 @@ INCLUDE core/setup --arg OPTIONS="-y"
 
 INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
 
-# Destroy release without cache (we don't need to download on every test)
-# Make sure to destroy the entire release at the end of the tests
-INCLUDE core/destroy-release --arg OPTIONS="--no-cache" --arg RELEASE=${RELEASE}
+# Destroy release without cache and re-bootstrap
+INCLUDE core/destroy-release --arg OPTIONS="--no-cache --force" --arg RELEASE=${RELEASE}
+
+INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}

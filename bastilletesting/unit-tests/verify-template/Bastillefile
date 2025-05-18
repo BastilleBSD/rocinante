@@ -1,0 +1,10 @@
+# unit-tests/verify-template
+
+ARG TEMPLATE_URL="https://gitlab.com/bastillebsd-templates/nginx"
+ARG TEMPLATE="bastillebsd-templated/nginx"
+
+INCLUDE core/setup --arg OPTIONS="-xy"
+
+INCLUDE core/bootstrap-template --arg TEMPLATE=${TEMPLATE_URL}
+
+INCLUDE core/verify-template --arg TEMPLATE="${TEMPLATE}"
