@@ -1,0 +1,16 @@
+# Bootstrap a release, create and destroy a standard NAT jail
+
+ARG OPTIONS="-V"
+ARG JAIL=bastille-test
+ARG RELEASE
+ARG IP=10.1.1.2
+ARG INTERFACE=bastille0
+
+INCLUDE ../core/bootstrap --arg RELEASE=${RELEASE}
+INCLUDE ../core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE-${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE ../core/destroy-jail --arg OPTIONS="y" --arg JAIL=${JAIL}
+INCLUDE ../core/destroy-release --arg RELEASE=${RELEASE}
+
+
+
+

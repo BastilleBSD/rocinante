@@ -1,0 +1,15 @@
+# unit-tests/bootstrap
+
+ARG OPTIONS
+ARG RELEASE
+
+INCLUDE core/setup --arg OPTIONS="-y"
+
+INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
+
+# Destroy release without cache and re-bootstrap
+INCLUDE core/destroy-release --arg OPTIONS="--no-cache --force" --arg RELEASE=${RELEASE}
+INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
+
+# Destroy release with cache and re-bootstrap
+INCLUDE core/destroy-release --arg RELEASE=${RELEASE}
