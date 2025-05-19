@@ -1,6 +1,5 @@
 # unit-tests/cp
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP
