@@ -1,11 +1,10 @@
-# Bootstrap a release, create and destroy an Empty jail
+# unit-tests/create-empty
 
-ARG OPTIONS="-E"
-ARG JAIL=EmptyJail
+ARG JAIL
 ARG RELEASE
-ARG IP=10.0.0.8
+ARG IP
 ARG INTERFACE
 
-INCLUDE ../core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE-${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-INCLUDE ../core/destroy-jail --arg OPTIONS="y" --arg JAIL=${JAIL}
+INCLUDE core/create --arg OPTIONS="-E" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
