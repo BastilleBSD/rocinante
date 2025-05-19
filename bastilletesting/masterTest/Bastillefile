@@ -4,12 +4,19 @@ ARG IP=10.0.0.10
 ARG INTERFACE=vtnet0
 ARG NEW_NAME=attica
 
+CMD pkg install git
+
+# clone rocinante repo
+CMD git clone https://github.com/BastilleBSD/rocinante.git
+CMD cd rocinante
+CMD make install
+
+CMD cd ../
 
 # clone bastille repo
-
-
-# install bastille
-
+CMD git clone https://github.com/BastilleBSD/bastille.git
+CMD cd bastille 
+CMD make install
 
 # run bastille setup with no options
 
@@ -92,55 +99,46 @@ INCLUDE unit-tests/create-cloned
 
 # ***** DUAL JAIL *****
 # create dual jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/create-dual
 
 # restart the jail
-INCLUDE unit-tests/
-
-p stop the jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/restart-dual
 
 # start the jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/start_stop-dual
 
 # install pkg to jail
-INCLUDE unit-tests/
-
-# install pkg to jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/pkg-dual
 
 # start service on jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/services-dual
 
 # apply template to jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/apply-templateDual
 
 # tag the jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/tags-dual
 
 # mount file into jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/mount-dual
 
 # mount directory into jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/mount-dual
 
 # add network interface
-INCLUDE unit-tests/
+INCLUDE unit-tests/network-dual
 
 # rename jail
-INCLUDE unit-tests/
-
-# rename jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/rename-dual
 
 # export and import jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/export_import-dual
 
 # clone jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/clone-dual
 
 # convert to thick
-INCLUDE unit-tests/
+INCLUDE unit-tests/convert-dual
 
 
 
