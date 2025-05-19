@@ -1,5 +1,5 @@
 # unit-test/create-standard
-ARG OPTIONS=""
+ARG OPTIONS="-v"
 ARG JAIL
 ARG RELEASE
 ARG IP
