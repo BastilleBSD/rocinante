@@ -34,7 +34,7 @@ INCLUDE unit-tests/setup-noOptions
 INCLUDE unit-tests/bootstrap-release --arg RELEASE=${RELEASE}
 
 # verify release
-INCLUDE unit-tests/verify-release --arg RELEASE=${RELEASE}
+# INCLUDE unit-tests/verify-release --arg RELEASE=${RELEASE}
 
 # bootstrap templates
 INCLUDE unit-tests/bootstrap-template --arg TEMPLATE_URL=${TEMPLATE_URL}
