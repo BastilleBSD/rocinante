@@ -1,9 +1,9 @@
 # Bootstrap a release, create and destroy a standard Thick jail
 
 ARG OPTIONS="-T"
-ARG JAIL=thickJail
+ARG JAIL
 ARG RELEASE
-ARG IP=10.0.0.6
+ARG IP
 ARG INTERFACE
 
 INCLUDE ../core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE-${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
