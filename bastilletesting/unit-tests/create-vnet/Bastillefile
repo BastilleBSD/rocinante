@@ -1,14 +1,10 @@
-# Bootstrap a release, create and destroy a standard vnet jail
+# unit-tests/create-vnet
 
-ARG OPTIONS="-V"
-ARG JAIL=bastille-test
+ARG JAIL
 ARG RELEASE
-ARG IP=0.0.0.0
+ARG IP
 ARG INTERFACE
 
-INCLUDE ../core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE-${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-INCLUDE ../core/destroy-jail --arg OPTIONS="y" --arg JAIL=${JAIL}
+INCLUDE core/create --arg OPTIONS="-V" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-
-
-
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

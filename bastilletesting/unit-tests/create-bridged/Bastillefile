@@ -1,11 +1,10 @@
-# Bootstrap a release, create and destroy a bridged jail
+# unit-tests/create-bridged
 
-ARG OPTIONS="-B"
-ARG JAIL=bridgedJail
+ARG JAIL
 ARG RELEASE
-ARG IP=DHCP
+ARG IP
 ARG INTERFACE
 
-INCLUDE ../core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE-${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-INCLUDE ../core/destroy-jail --arg OPTIONS="y" --arg JAIL=${JAIL}
+INCLUDE core/create --arg OPTIONS="-B" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
