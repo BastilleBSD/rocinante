@@ -15,11 +15,3 @@ INCLUDE core/service
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
 
-
-
-ARG OPTIONS
-ARG JAIL
-ARG SERVICE
-ARG ARGS
-
-CMD bastille service ${OPTIONS} ${JAIL} ${SERVICE} ${ARGS}
