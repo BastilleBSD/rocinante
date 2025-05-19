@@ -1,0 +1,57 @@
+ARG OPTIONS="-V"
+ARG JAIL=folsom
+ARG RELEASE-14.2-RELEASE
+ARG IP=DHCP
+ARG INTERFACE=vtnet0
+ARG HOST_PATH
+ARG JAIL_PATH
+
+
+
+
+
+# create vnet jail
+INCLUDE unit-tests/create-vnet
+
+# restart the jail
+INCLUDE unit-tests/restart-vnet
+
+# stop the jail
+INCLUDE unit-tests/start_stop-vnet
+
+
+# install pkg to jail
+INCLUDE unit-tests/pkg-vnet
+
+# start service on jail
+INCLUDE unit-tests/services-vnet
+
+# apply template to jail
+INCLUDE unit-tests/apply-templateVnet
+
+# tag the jail
+INCLUDE unit-tests/tags-vnet
+
+# mount file into jail
+INCLUDE unit-tests/mount-vnet
+
+# mount directory into jail
+INCLUDE unit-tests/mount-vnet
+
+# add network interface
+INCLUDE unit-tests/network-vnet
+
+# rename jail
+INCLUDE unit-tests/rename-vnet
+
+# clone jail
+INCLUDE unit-tests/clone-vnet
+
+# rename jail
+INCLUDE unit-tests/rename-vnet
+
+# export and import jail
+INCLUDE unit-tests/export_import-vnet
+
+# convert to thick
+INCLUDE unit-tests/convert-thickVnet

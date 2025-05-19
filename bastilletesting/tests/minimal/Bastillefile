@@ -1,7 +1,7 @@
 # Bootstrap, create, start, stop, restart, cmd, destroy
 
 ARG JAIL=bastille-test
-ARG RELEASE
+ARG RELEASE=14.2-RELEASE
 ARG IP=10.1.1.2
 ARG INTERFACE=bastille0
 

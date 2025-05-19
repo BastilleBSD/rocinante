@@ -1,0 +1,11 @@
+# clone a bridged jail
+
+ARG OPTIONS="-B"
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+
+INCLUDE core/create
+
+INCLUDE core/clone
