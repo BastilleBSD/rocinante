@@ -1,6 +1,5 @@
 # unit-tests/rcp
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP
