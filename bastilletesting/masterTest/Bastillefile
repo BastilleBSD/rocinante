@@ -5,6 +5,12 @@ ARG INTERFACE=vtnet0
 ARG NEW_NAME=attica
 
 
+# clone bastille repo
+
+
+# install bastille
+
+
 # run bastille setup with no options
 
 INCLUDE unit-tests/setup-noOptions
@@ -19,154 +25,327 @@ INCLUDE unit-tests/setup-noOptions
 INCLUDE unit-tests/bootstrap-release
 
 # verify release
+INCLUDE unit-tests/verify-release
 
 # bootstrap templates
+INCLUDE unit-tests/bootstrap-template
 
 # verify tempates
-
+INCLUDE unit-tests/verify-template
 
 # *****************************
 # ********  Jail tests ********
 # *****************************
 
 # ***** BRIDGED JAIL *****
+
 # create bridged jail
+INCLUDE unit-tests/create-bridged
+
 # restart the jail
-# stop the jail
-# start the jail
+INCLUDE unit-tests/restart-bridged
+
+# stop and start the jail
+INCLUDE unit-tests/start_stop-bridged
+
 # install pkg to jail
+INCLUDE unit-tests/pkg-bridged
+
 # start service on jail
-# remove pkg from jail
+INCLUDE unit-tests/services-bridged
+
 # apply template to jail
+INCLUDE unit-tests/apply-templetBridged
+
 # tag the jail
+INCLUDE unit-tests/tags-bridged
+
 # mount file into jail
+INCLUDE unit-tests/mount-bridged
+
 # mount directory into jail
+INCLUDE unit-tests/mount-bridged
+
 # add network interface
+INCLUDE unit-tests/network-bridged
+
 # rename jail
+INCLUDE unit-tests/rename-bridged
+
 # clone jail
+INCLUDE unit-tests/clone-bridged
+
 # export and import jail
+INCLUDE unit-tests/export_import-bridged
+
 # convert to thick
+INCLUDE unit-tests/convert-thickBridged
+
+
 
 # ***** CLONED JAIL *****
+
 # create cloned jail
-# restart the jail
-# stop the jail
-# start the jail
-# install pkg to jail
-# start service on jail
-# install pkg to jail
-# remove pkg from jail
-# apply template to jail
-# tag the jail
-# mount file into jail
-# mount directory into jail
-# add network interface
-# rename jail
-# clone jail
-# rename jail
-# export and import jail
-# convert to thick
+INCLUDE unit-tests/create-cloned
+
+
 
 # ***** DUAL JAIL *****
 # create dual jail
+INCLUDE unit-tests/
+
 # restart the jail
-# stop the jail
+INCLUDE unit-tests/
+
+p stop the jail
+INCLUDE unit-tests/
+
 # start the jail
+INCLUDE unit-tests/
+
 # install pkg to jail
+INCLUDE unit-tests/
+
 # install pkg to jail
+INCLUDE unit-tests/
+
 # start service on jail
-# remove pkg from jail
+INCLUDE unit-tests/
+
 # apply template to jail
+INCLUDE unit-tests/
+
 # tag the jail
+INCLUDE unit-tests/
+
 # mount file into jail
+INCLUDE unit-tests/
+
 # mount directory into jail
+INCLUDE unit-tests/
+
 # add network interface
+INCLUDE unit-tests/
+
 # rename jail
+INCLUDE unit-tests/
+
 # rename jail
+INCLUDE unit-tests/
+
 # export and import jail
+INCLUDE unit-tests/
+
 # clone jail
+INCLUDE unit-tests/
+
 # convert to thick
+INCLUDE unit-tests/
+
+
 
 # ***** EMPTY JAIL *****
+
 # create empty jail
-# restart the jail
+INCLUDE unit-tests/
+
 # rename jail
+INCLUDE unit-tests/rename-empty
+
+
+
+
 
 # ***** LINUX JAIL *****
+
 # create linux jail
+INCLUDE unit-tests/
+
 # restart the jail
+INCLUDE unit-tests/
+
 # rename jail
+INCLUDE unit-tests/
+
+
+
 
 # ***** STANDARD JAIL *****
+
 # create standard jail
+INCLUDE unit-tests/create-standard
+
 # restart the jail
+INCLUDE unit-tests/restart-standard
+
 # stop the jail
-# start the jail
+INCLUDE unit-tests/start_stop-standard
+
 # install pkg to jail
-# install pkg to jail
+INCLUDE unit-tests/pkg-standard
+
 # start service on jail
+INCLUDE unit-tests/services-standard
+
 # remove pkg from jail
+INCLUDE unit-tests/pkg-standard
+
 # apply template to jail
+INCLUDE unit-tests/apply-templateStandard
+
 # tag the jail
+INCLUDE unit-tests/tags-standard
+
 # mount file into jail
+INCLUDE unit-tests/mount-standard
+
 # mount directory into jail
+INCLUDE unit-tests/mount-standard
+
 # add network interface
+INCLUDE unit-tests/network-standard
+
 # rename jail
-# rename jail
+INCLUDE unit-tests/rename-standard
+
 # clone jail
+INCLUDE unit-tests/clone-standard
+
 # export and import jail
+INCLUDE unit-tests/export_import-standard
+
 # convert to thick
+INCLUDE unit-tests/convert-thickStandard
+
+# rdr jail
+INCLUDE unit-tests/rdr-standard
+
 
 # ***** THICK JAIL *****
+
 # create thick jail
+INCLUDE unit-tests/
+
 # restart the jail
+INCLUDE unit-tests/
+
 # stop the jail
+INCLUDE unit-tests/
+
 # start the jail
+INCLUDE unit-tests/
+
 # install pkg to jail
+INCLUDE unit-tests/
+
 # install pkg to jail
+INCLUDE unit-tests/
+
 # start service on jail
+INCLUDE unit-tests/
+
 # remove pkg from jail
+INCLUDE unit-tests/
+
 # apply template to jail
+INCLUDE unit-tests/
+
 # tag the jail
+INCLUDE unit-tests/
+
 # mount file into jail
+INCLUDE unit-tests/
+
 # mount directory into jail
+INCLUDE unit-tests/
+
 # add network interface
+INCLUDE unit-tests/
+
 # rename jail
+INCLUDE unit-tests/
+
 # clone jail
+INCLUDE unit-tests/
+
 # rename jail
+INCLUDE unit-tests/
+
 # export and import jail
-# convert to thick
+INCLUDE unit-tests/
+
+
 
 # ***** VNET JAIL *****
+
 # create vnet jail
+INCLUDE unit-tests/create-vnet
+
 # restart the jail
+INCLUDE unit-tests/restart-vnet
+
 # stop the jail
-# start the jail
+INCLUDE unit-tests/start_stop-vnet
+
+
 # install pkg to jail
+INCLUDE unit-tests/pkg-vnet
+
 # start service on jail
-# remove pkg from jail
+INCLUDE unit-tests/services-vnet
+
 # apply template to jail
+INCLUDE unit-tests/apply-templateVnet
+
 # tag the jail
+INCLUDE unit-tests/tags-vnet
+
 # mount file into jail
+INCLUDE unit-tests/mount-vnet
+
 # mount directory into jail
+INCLUDE unit-tests/mount-vnet
+
 # add network interface
+INCLUDE unit-tests/network-vnet
+
 # rename jail
+INCLUDE unit-tests/rename-vnet
+
 # clone jail
+INCLUDE unit-tests/clone-vnet
+
 # rename jail
+INCLUDE unit-tests/rename-vnet
+
 # export and import jail
+INCLUDE unit-tests/export_import-vnet
+
 # convert to thick
+INCLUDE unit-tests/convert-thickVnet
+
+
+
 
 # ***** BOOTOFF JAIL *****
 # create bootoff jail
-# destroy bootoff jail
+INCLUDE unit-tests/
+
+
 
 # ***** PRIORITY JAIL *****
-# create priority jail
-# destroy priority jail
+
+# /create priority jail
+INCLUDE unit-tests/
+
+
 
 # ***** STATIC MAC JAIL *****
+
 # create static mac jail
-# destroy static mac jail
+INCLUDE unit-tests/
+
+
 
 
 
@@ -176,31 +355,41 @@ INCLUDE unit-tests/bootstrap-release
 
 
 # rcp a file
+INCLUDE unit-tests/rcp
 
 # cp a file
+INCLUDE unit-tests/cp
 
 # jcp a file
-
+INCLUDE unit-tests/jcp
 
 # *********************************
 # ***** Setup operation tests *****
 # *********************************
 
 # setup bridged
+INCLUDE unit-tests/setup-bridge
 
 # setup filesystem
+INCLUDE unit-tests/setup-filesystem
 
 # setup loopback
+INCLUDE unit-tests/setup-loopback
 
 # setup netgraph
+INCLUDE unit-tests/setup-netgraph
 
 # setup pf
+INCLUDE unit-tests/setup-pf
 
 # setup shared
+INCLUDE unit-tests/setup-shared
 
 # setup storage
+INCLUDE unit-tests/setup-storage
 
 # setup vnet
+INCLUDE unit-tests/setup-vnet
 
 
 
