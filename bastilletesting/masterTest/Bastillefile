@@ -1,0 +1,221 @@
+ARG JAIL=folsom
+ARG RELEASE=14.2-RELEASE
+ARG IP=10.0.0.10
+ARG INTERFACE=vtnet0
+ARG NEW_NAME=attica
+
+
+# run bastille setup with no options
+
+INCLUDE unit-tests/setup-noOptions
+
+# ***************************
+# ***** BOOTSTRAP tests *****
+# ***************************
+
+
+# bootstrap release
+
+INCLUDE unit-tests/bootstrap-release
+
+# verify release
+
+# bootstrap templates
+
+# verify tempates
+
+
+# *****************************
+# ********  Jail tests ********
+# *****************************
+
+# ***** BRIDGED JAIL *****
+# create bridged jail
+# restart the jail
+# stop the jail
+# start the jail
+# install pkg to jail
+# start service on jail
+# remove pkg from jail
+# apply template to jail
+# tag the jail
+# mount file into jail
+# mount directory into jail
+# add network interface
+# rename jail
+# clone jail
+# export and import jail
+# convert to thick
+
+# ***** CLONED JAIL *****
+# create cloned jail
+# restart the jail
+# stop the jail
+# start the jail
+# install pkg to jail
+# start service on jail
+# install pkg to jail
+# remove pkg from jail
+# apply template to jail
+# tag the jail
+# mount file into jail
+# mount directory into jail
+# add network interface
+# rename jail
+# clone jail
+# rename jail
+# export and import jail
+# convert to thick
+
+# ***** DUAL JAIL *****
+# create dual jail
+# restart the jail
+# stop the jail
+# start the jail
+# install pkg to jail
+# install pkg to jail
+# start service on jail
+# remove pkg from jail
+# apply template to jail
+# tag the jail
+# mount file into jail
+# mount directory into jail
+# add network interface
+# rename jail
+# rename jail
+# export and import jail
+# clone jail
+# convert to thick
+
+# ***** EMPTY JAIL *****
+# create empty jail
+# restart the jail
+# rename jail
+
+# ***** LINUX JAIL *****
+# create linux jail
+# restart the jail
+# rename jail
+
+# ***** STANDARD JAIL *****
+# create standard jail
+# restart the jail
+# stop the jail
+# start the jail
+# install pkg to jail
+# install pkg to jail
+# start service on jail
+# remove pkg from jail
+# apply template to jail
+# tag the jail
+# mount file into jail
+# mount directory into jail
+# add network interface
+# rename jail
+# rename jail
+# clone jail
+# export and import jail
+# convert to thick
+
+# ***** THICK JAIL *****
+# create thick jail
+# restart the jail
+# stop the jail
+# start the jail
+# install pkg to jail
+# install pkg to jail
+# start service on jail
+# remove pkg from jail
+# apply template to jail
+# tag the jail
+# mount file into jail
+# mount directory into jail
+# add network interface
+# rename jail
+# clone jail
+# rename jail
+# export and import jail
+# convert to thick
+
+# ***** VNET JAIL *****
+# create vnet jail
+# restart the jail
+# stop the jail
+# start the jail
+# install pkg to jail
+# start service on jail
+# remove pkg from jail
+# apply template to jail
+# tag the jail
+# mount file into jail
+# mount directory into jail
+# add network interface
+# rename jail
+# clone jail
+# rename jail
+# export and import jail
+# convert to thick
+
+# ***** BOOTOFF JAIL *****
+# create bootoff jail
+# destroy bootoff jail
+
+# ***** PRIORITY JAIL *****
+# create priority jail
+# destroy priority jail
+
+# ***** STATIC MAC JAIL *****
+# create static mac jail
+# destroy static mac jail
+
+
+
+# *********************************
+# ***** Jail operations tests *****
+# *********************************
+
+
+# rcp a file
+
+# cp a file
+
+# jcp a file
+
+
+# *********************************
+# ***** Setup operation tests *****
+# *********************************
+
+# setup bridged
+
+# setup filesystem
+
+# setup loopback
+
+# setup netgraph
+
+# setup pf
+
+# setup shared
+
+# setup storage
+
+# setup vnet
+
+
+
+
+
+
+# ***************************
+# ***** Cleanup routine *****
+# ***************************
+
+# destroy all jails
+
+# destroy the release
+
+# delete bastille config
+
+# remove bastille files
+
