@@ -8,7 +8,7 @@ ARG IP
 ARG INTERFACE
 ARG TEMPLATE="www/nginx"
 
-CMD echo "starting apply-templateStandard"
+
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 

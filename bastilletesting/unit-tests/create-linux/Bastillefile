@@ -1,6 +1,6 @@
 # Bootstrap a release, create and destroy a Linux jail
 
-ARG OPTIONS="-L"
+ARG OPTIONS="-Lx"
 ARG JAIL=LinuxJail
 ARG RELEASE
 ARG IP

@@ -6,7 +6,6 @@ ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-CMD echo "starting clone-standard"
 
 INCLUDE core/create
 
