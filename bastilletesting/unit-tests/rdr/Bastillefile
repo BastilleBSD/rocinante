@@ -1,0 +1,17 @@
+# unit-tests/rdr
+
+ARG OPTIONS
+ARG JAIL
+ARG ACTION
+ARG HOST_PORT
+ARG JAIL_PORT
+ARG LOG
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+
+INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+INCLUDE core/rdr --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg ACTION=${ACTION} --arg HOST_PORT=${HOST_PORT} --arg JAIL_PORT=${JAIL_PORT} --arg LOG=${LOG}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

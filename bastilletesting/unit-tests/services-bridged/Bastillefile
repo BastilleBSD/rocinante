@@ -1,6 +1,6 @@
 # unit-tests/services-bridged
 
-ARG OPTIONS="-B"
+ARG OPTIONS="-Bx"
 ARG JAIL
 ARG RELEASE
 ARG IP
