@@ -1,4 +1,4 @@
-# unit-tests clone-standard
+# unit-tests network-standard
 
 ARG OPTIONS
 ARG JAIL
@@ -13,6 +13,6 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${
 
 INCLUDE core/network --arg OPTIONS="-Cax" --arg JAIL=${JAIL} --arg ACTION="add" --arg NEW_INTERFACE=${NEW_INTERFACE} --arg NEW_IP=${NEW_IP}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-xy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
 
 
