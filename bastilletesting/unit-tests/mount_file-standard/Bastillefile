@@ -7,7 +7,7 @@ ARG IP
 ARG INTERFACE
 ARG HOST_PATH="/etc/ddb.conf"
 ARG JAIL_PATH="/root/ddb.conf"
-ARG ARGS="nullfs ro 0 0"
+ARG ARGS="nullfs,ro,0,0"
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
