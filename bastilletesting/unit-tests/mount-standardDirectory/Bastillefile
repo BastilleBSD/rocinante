@@ -1,0 +1,17 @@
+# unit-tests mount-standard
+
+ARG OPTIONS
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG HOST_PATH="/root"
+ARG JAIL_PATH="/home/root"
+ARG ARGS="nullfs ro 0 0"
+
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+INCLUDE core/mount --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg HOST_PATH=${HOST_PATH} --arg JAIL_PATH=${JAIL_PATH} --arg ARGS=${ARGS}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
+
