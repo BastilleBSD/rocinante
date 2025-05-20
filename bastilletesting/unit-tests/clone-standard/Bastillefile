@@ -14,4 +14,4 @@ INCLUDE core/clone --arg OPTIONS="-ax" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_N
 
 INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg NEW_NAME=${NEW_NAME}
+INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL="ALL"
