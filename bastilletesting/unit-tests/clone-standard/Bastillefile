@@ -12,6 +12,6 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${
 
 INCLUDE core/clone --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
 
-INCLUDE core/destroy-jail --arg OPTIONS=${OPTIONS} --arg NEW_NAME=${NEW_NAME}
+INCLUDE core/destroy-jail --arg OPTIONS="-xy" --arg NEW_NAME=${NEW_NAME}
 
-
+INCLUDE core/destroy-jail --arg OPTIONS="-xy" --arg NAME=${NAME}
