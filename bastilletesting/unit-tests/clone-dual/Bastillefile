@@ -1,11 +1,18 @@
 # unit-tests clone-dual
 
+
 ARG OPTIONS="-Dx"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
+ARG NEW_NAME
+ARG NEW_IP
 
-INCLUDE core/create
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/clone
+INCLUDE core/clone --arg OPTIONS="-ax" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL="ALL"
