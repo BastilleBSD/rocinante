@@ -1,0 +1,20 @@
+# unit-tests export_import-standard
+
+ARG OPTIONS
+ARG JAIL
+ARG PATH=/tmp/exported.xz
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG FILE=/tmp/exported.xz
+ARG 
+
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+INCLUDE core/export --arg OPTIONS="--xz" --arg JAIL=${JAIL} --arg PATH=${PATH}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
+
+INCLUDE core/import --arg OPTIONS="-x" --arg FILE=${FILE}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL="ALL"
