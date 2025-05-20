@@ -1,6 +1,6 @@
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
-ARG IP=10.0.0.10
+ARG IP=192.168.69.233
 ARG INTERFACE=vtnet0
 ARG BRIDGE=bastillebridge
 ARG NEW_NAME=attica
@@ -47,10 +47,60 @@ INCLUDE unit-tests/verify-template
 # ********  Jail tests ********
 # *****************************
 
+
+# ***** STANDARD JAIL *****
+
+# create standard jail
+INCLUDE unit-tests/create-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# restart the jail
+INCLUDE unit-tests/restart-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# stop the jail
+INCLUDE unit-tests/start_stop-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# install pkg to jail
+INCLUDE unit-tests/pkg-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# start service on jail
+INCLUDE unit-tests/services-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# remove pkg from jail
+INCLUDE unit-tests/pkg-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# apply template to jail
+INCLUDE unit-tests/apply-templateStandard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# tag the jail
+INCLUDE unit-tests/tags-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# mount file into jail
+INCLUDE unit-tests/mount-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# mount directory into jail
+INCLUDE unit-tests/mount-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# add network interface
+INCLUDE unit-tests/network-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# rename jail
+INCLUDE unit-tests/rename-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# clone jail
+INCLUDE unit-tests/clone-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# export and import jail
+INCLUDE unit-tests/export_import-standard --arg OPTIONS=${OPTIONS} --arg INTERFACE}
+
+# rdr jail
+INCLUDE unit-tests/rdr-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+
+
+
 # ***** BRIDGED JAIL *****
 
 # setup bastille for a bridged setup
-
 INCLUDE unit-tests/setup-bridge --arg OPTIONS="-x" --arg ARGS="bridge" --arg ARGS=0 
 
 # create bridged jail
@@ -172,55 +222,6 @@ INCLUDE unit-tests/
 INCLUDE unit-tests/
 
 
-
-
-# ***** STANDARD JAIL *****
-
-# create standard jail
-INCLUDE unit-tests/create-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# restart the jail
-INCLUDE unit-tests/restart-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# stop the jail
-INCLUDE unit-tests/start_stop-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# install pkg to jail
-INCLUDE unit-tests/pkg-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# start service on jail
-INCLUDE unit-tests/services-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# remove pkg from jail
-INCLUDE unit-tests/pkg-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# apply template to jail
-INCLUDE unit-tests/apply-templateStandard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# tag the jail
-INCLUDE unit-tests/tags-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount file into jail
-INCLUDE unit-tests/mount-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount directory into jail
-INCLUDE unit-tests/mount-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# add network interface
-INCLUDE unit-tests/network-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# rename jail
-INCLUDE unit-tests/rename-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# clone jail
-INCLUDE unit-tests/clone-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# export and import jail
-INCLUDE unit-tests/export_import-standard --arg OPTIONS=${OPTIONS} --arg INTERFACE}
-
-
-# rdr jail
-INCLUDE unit-tests/rdr-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 
 # ***** THICK JAIL *****
