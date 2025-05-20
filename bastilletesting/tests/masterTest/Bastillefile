@@ -84,7 +84,7 @@ INCLUDE unit-tests/mount-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --
 INCLUDE unit-tests/network-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # rename jail
-INCLUDE unit-tests/rename-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
+INCLUDE unit-tests/rename-standard --arg OPTIONS="-ax" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
 
 # clone jail
 INCLUDE unit-tests/clone-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
