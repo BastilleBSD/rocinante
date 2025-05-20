@@ -90,7 +90,7 @@ INCLUDE unit-tests/network-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 INCLUDE unit-tests/rename-standard --arg OPTIONS="-ax" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
 
 # clone jail
-INCLUDE unit-tests/clone-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/clone-standard --arg OPTIONS="-ax" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_INTERFACE=${NEW_INTERFACE} --arg NEW_IP=${NEW_IP}
 
 # export and import jail
 INCLUDE unit-tests/export_import-standard --arg OPTIONS=${OPTIONS} --arg INTERFACE={INTERFACE}
