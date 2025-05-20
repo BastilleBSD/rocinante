@@ -1,8 +1,12 @@
-ARG OPTIONS=""
+# unit-tests clone-standard
+
+ARG OPTIONS="-x"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
+
+CMD echo "starting clone-standard"
 
 INCLUDE core/create
 

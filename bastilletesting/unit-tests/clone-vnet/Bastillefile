@@ -1,8 +1,12 @@
+# unit-tests clone-vnet
+
 ARG OPTIONS="-V"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
+
+CMD echo "starting clone-vnet"
 
 INCLUDE core/create
 
