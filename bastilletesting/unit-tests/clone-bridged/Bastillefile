@@ -6,6 +6,8 @@ ARG RELEASE
 ARG IP
 ARG INTERFACE
 
+CMD echo "starting clone-bridged"
+
 INCLUDE core/create
 
 INCLUDE core/clone
