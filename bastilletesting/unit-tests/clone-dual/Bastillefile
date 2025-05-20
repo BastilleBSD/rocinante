@@ -1,4 +1,6 @@
-ARG OPTIONS="-D"
+# unit-tests clone-dual
+
+ARG OPTIONS="-Dx"
 ARG JAIL
 ARG RELEASE
 ARG IP

@@ -1,6 +1,6 @@
 # unit-tests/create-clone
 
-ARG JAIL
+ARG JAIL=clone
 ARG RELEASE
 ARG IP
 ARG INTERFACE

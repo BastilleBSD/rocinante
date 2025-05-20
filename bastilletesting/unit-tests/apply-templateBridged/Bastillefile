@@ -1,11 +1,13 @@
 # unit-tests/apply-templateBridged
 
-ARG OPTIONS="-B"
+ARG OPTIONS="-Bx"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 ARG TEMPLATE="www/nginx"
+
+CMD echo "starting apply-templateBridged"
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 

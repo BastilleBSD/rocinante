@@ -1,0 +1,16 @@
+# unit-tests/apply-templateBridged
+
+ARG OPTIONS="-Dx"
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG TEMPLATE="www/nginx"
+
+CMD echo "starting apply-templateDual"
+
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+INCLUDE core/template --arg OPTIONS="" --arg JAIL=${JAIL} --arg TEMPLATE=${TEMPLATE}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
