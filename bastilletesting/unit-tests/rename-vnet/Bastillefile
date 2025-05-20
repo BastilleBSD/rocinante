@@ -1,17 +1,15 @@
-# create start stop rename vnet jail
-#
-ARG RELEASE=14.2-RELEASE
-ARG JAIL=folsom
-ARG IP=10.0.0.6
-ARG INTERFACE=vtnet0
+# unit-tests/rename-vnet
 
+ARG OPTIONS="-Vx"
+ARG JAIL=bridged
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG NEW_NAME
 
-INCLUDE core/setup --arg OPTIONS="-y"
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
+INCLUDE core/rename --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
 
-# create vnet jail
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL} 
 
-INCLUDE core/create --arg OPTIONS="-V"
-
- 

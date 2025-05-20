@@ -6,15 +6,11 @@ ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-CMD echo "starting services-bridged"
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 INCLUDE core/pkg OPTIONS=${OPTIONS} JAIL=${JAIL} ARGS="install nginx"
 
-INCLUDE core/service
-
+INCLUDE core/service --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg SERVICE="nginx" --arg ARGS="start"
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
-
-CMD echo "finished services-bridged"
