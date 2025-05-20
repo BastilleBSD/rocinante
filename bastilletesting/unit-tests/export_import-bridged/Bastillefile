@@ -1,4 +1,4 @@
-# unit-tests export_import-bridged
+# unit-tests/export_import-bridged
 
 ARG OPTIONS="-xB"
 ARG JAIL=attica
