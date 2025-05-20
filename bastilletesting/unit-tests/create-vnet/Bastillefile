@@ -1,5 +1,5 @@
 # unit-tests/create-vnet
-ARG OPTIONS="-V"
+ARG OPTIONS="-Vx"
 ARG JAIL
 ARG RELEASE
 ARG IP

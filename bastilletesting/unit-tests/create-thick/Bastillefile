@@ -1,6 +1,6 @@
 # Bootstrap a release, create and destroy a standard Thick jail
 
-ARG OPTIONS="-T"
+ARG OPTIONS="-Tx"
 ARG JAIL
 ARG RELEASE
 ARG IP
