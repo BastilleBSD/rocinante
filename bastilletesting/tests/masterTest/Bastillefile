@@ -78,10 +78,10 @@ INCLUDE unit-tests/apply-templateStandard --arg OPTIONS=${OPTIONS} --arg JAIL=${
 INCLUDE unit-tests/tags-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # mount file into jail
-INCLUDE unit-tests/mount-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/mount-standardFile --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # mount directory into jail
-INCLUDE unit-tests/mount-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/mount-standardDirectory --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # add network interface
 INCLUDE unit-tests/network-standard --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
