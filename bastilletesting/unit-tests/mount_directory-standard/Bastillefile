@@ -1,4 +1,4 @@
-# unit-tests mount-standard
+# unit-tests mount_directory-standard
 
 ARG OPTIONS
 ARG JAIL
