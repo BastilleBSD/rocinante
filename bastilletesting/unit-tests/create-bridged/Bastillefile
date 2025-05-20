@@ -1,7 +1,7 @@
 # unit-tests/create-bridged
 
-ARG OPTIONS="-B"
-ARG JAIL
+ARG OPTIONS="-Bx"
+ARG JAIL=bridged
 ARG RELEASE
 ARG IP
 ARG INTERFACE
