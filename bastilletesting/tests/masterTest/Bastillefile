@@ -4,7 +4,10 @@ ARG IP=192.168.69.233
 ARG INTERFACE=vtnet0
 ARG BRIDGE=bastillebridge
 ARG NEW_NAME=attica
+ARG NEW_IP=192.168.69.234
 ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
+ARG NEW_INTERFACE=bastille0
+
 
 CMD pkg install git
 
