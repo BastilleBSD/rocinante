@@ -1,10 +1,16 @@
 # unit-tests/create-clone
 
-ARG JAIL=clone
+ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
+ARG NEW_NAME=clone
+ARG NEW_IP=10.10.10.2
 
 INCLUDE core/create --arg OPTIONS="-Cx" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
+INCLUDE core/clone --arg OPTIONS="-ax" JAIL=${JAIL} NEW_NAME=${NEW_NAME} NEW_IP=${NEW_IP} 
+
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
+
+

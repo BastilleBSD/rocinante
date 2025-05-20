@@ -1,8 +1,8 @@
 ARG OPTIONS
 ARG JAIL
 ARG NEW_NAME
-ARG IP
+ARG NEW_IP
 
-CMD bastille clone ${OPTIONS} ${JAIL} ${NEW_NAME} ${IP}
+CMD bastille clone ${OPTIONS} ${JAIL} ${NEW_NAME} ${NEW_IP}
 
 
