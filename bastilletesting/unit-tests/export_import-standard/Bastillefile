@@ -1,13 +1,12 @@
 # unit-tests export_import-standard
 
 ARG OPTIONS="-x"
-ARG JAIL=attica
-ARG PATH=/tmp/exported.xz
+ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 ARG FILE=/tmp/exported.xz
-
+ARG PATH=/tmp/exported.xz
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
@@ -15,6 +14,6 @@ INCLUDE core/export --arg OPTIONS="--xz" --arg JAIL=${JAIL} --arg PATH=${PATH}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
 
-INCLUDE core/import --arg OPTIONS="-x" --arg FILE=${FILE}
+INCLUDE core/import --arg OPTIONS=${OPTIONS} --arg FILE=${FILE}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL="ALL"
