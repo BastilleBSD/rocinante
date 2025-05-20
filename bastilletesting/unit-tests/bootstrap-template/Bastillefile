@@ -3,4 +3,6 @@
 # Use official templates repo as our TEMPLATE
 ARG TEMPLATE="https://github.com/bastillebsd/templates"
 
+CMD echo "starting bootstrap-template"
+
 INCLUDE core/bootstrap-template --arg TEMPLATE=${TEMPLATE}

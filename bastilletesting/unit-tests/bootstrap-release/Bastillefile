@@ -3,7 +3,7 @@
 ARG OPTIONS
 ARG RELEASE
 
-echo "starting bootstrap-release"
+CMD ECHO "starting bootstrap-release"
 
 INCLUDE core/setup --arg OPTIONS="-y"
 
