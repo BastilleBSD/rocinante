@@ -1,9 +1,9 @@
 # unit-tests export_import-standard
 
 ARG OPTIONS
-ARG JAIL
-ARG RELEASE
-ARG IP
+ARG JAIL=attica
+ARG RELEASE=14.2-RELEASE
+ARG IP=192.168.69.233
 ARG INTERFACE
 ARG FILE=/tmp/exported.xz
 ARG PATH=/tmp/exported.xz
