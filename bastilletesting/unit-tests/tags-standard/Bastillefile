@@ -1,9 +1,12 @@
 # unit-tests tags-standard
 
-ARG OPTIONS
+ARG OPTIONS="-x"
 ARG JAIL
 ARG ACTION
 ARG TAGS="prod,web"
+ARG IP
+ARG RELEASE
+ARG INTERFACE
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
