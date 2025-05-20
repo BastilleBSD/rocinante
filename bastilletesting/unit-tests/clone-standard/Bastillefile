@@ -7,6 +7,10 @@ ARG IP
 ARG INTERFACE
 
 
-INCLUDE core/create
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/clone
+INCLUDE core/clone --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME} --arg IP=${IP}
+
+INCLUDE core/destroy-jail --arg OPTIONS=${OPTIONS} --arg NEW_NAME=${NEW_NAME}
+
+
