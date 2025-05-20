@@ -48,6 +48,10 @@ INCLUDE unit-tests/verify-template
 
 # ***** BRIDGED JAIL *****
 
+# setup bastille for a bridged setup
+
+INCLUDE unit-tests/setup-bridged --arg OPTIONS="-x" --arg ARGS="bridge" --arg ARGS=0 
+
 # create bridged jail
 INCLUDE unit-tests/create-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
