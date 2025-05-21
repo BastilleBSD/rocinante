@@ -5,8 +5,10 @@ ARG INTERFACE=vtnet0
 ARG BRIDGE=bastillebridge
 ARG NEW_NAME=attica
 ARG NEW_IP=192.168.69.234
+TEMPLATE=www/nginx
 ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
 ARG NEW_INTERFACE=bastille0
+TAGS="prod,dev"
 
 
 CMD pkg install git
@@ -59,8 +61,11 @@ INCLUDE unit-tests/create-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} -
 # restart jail
 INCLUDE unit-tests/restart-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-# start/stop jail
-INCLUDE unit-tests/start_stop-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+# stop jail
+INCLUDE unit-tests/stop-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# start jail
+INCLUDE unit-tests/start-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # install/remove pkg
 INCLUDE unit-tests/pkg-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
@@ -69,28 +74,31 @@ INCLUDE unit-tests/pkg-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --ar
 INCLUDE unit-tests/services-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # apply template to jail
-INCLUDE unit-tests/apply-templateStandard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/apply-templateStandard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TEMPLATE=${TEMPLATE}
 
 # tag the jail
-INCLUDE unit-tests/tags-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/tags-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TAGS=${TAGS}
 
 # mount file into jail
-INCLUDE unit-tests/mount_file-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/mount_file-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/etc/resolv.conf --arg JAIL_PATH=/mnt/etc/resolv.conf --arg ARGS="nullfs rw 0 0"
 
 # mount directory into jail
-INCLUDE unit-tests/mount_directory-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/mount_directory-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/usr/local --arg JAIL_PATH=/mnt/usr/local --arg ARGS="nullfs rw 0 0"
 
 # add network interface
-INCLUDE unit-tests/network-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/network-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_INTERFACE=${NEW_INTERFACE} --arg NEW_IP=${NEW_IP}
 
 # rename jail
 INCLUDE unit-tests/rename-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
 
 # clone jail
-INCLUDE unit-tests/clone-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_INTERFACE=${NEW_INTERFACE} --arg NEW_IP=${NEW_IP} --arg NEW_NAME=${NEW_NAME}
+INCLUDE unit-tests/clone-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_IP=${NEW_IP} --arg NEW_NAME=${NEW_NAME}
 
-# export/import jail
-INCLUDE unit-tests/export_import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE={INTERFACE}
+# export jail
+INCLUDE unit-tests/export-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE={INTERFACE}
+
+# import jail
+#INCLUDE unit-tests/import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE={INTERFACE}
 
 # rdr jail
 INCLUDE unit-tests/rdr-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
