@@ -5,10 +5,10 @@ ARG INTERFACE=vtnet0
 ARG BRIDGE=bastillebridge
 ARG NEW_NAME=attica
 ARG NEW_IP=192.168.69.234
-TEMPLATE=www/nginx
+ARG TEMPLATE=www/nginx
 ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
 ARG NEW_INTERFACE=bastille0
-TAGS="prod,dev"
+ARG TAGS="prod,dev"
 
 
 CMD pkg install git
