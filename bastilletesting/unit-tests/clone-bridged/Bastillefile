@@ -1,7 +1,6 @@
 # clone a bridged jail
 
-
-ARG OPTIONS
+ARG OPTIONS="-Bx"
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -11,8 +10,14 @@ ARG NEW_IP
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
+# -l
+INCLUDE core/clone --arg OPTIONS="-lx" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${NEW_NAME}
+
+# -a
 INCLUDE core/clone --arg OPTIONS="-ax" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL="ALL"
+INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${NEW_NAME}

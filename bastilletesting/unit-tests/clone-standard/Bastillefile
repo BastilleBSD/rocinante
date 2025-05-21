@@ -12,6 +12,7 @@ INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} -
 
 # -l
 INCLUDE core/clone --arg OPTIONS="-lx" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
+
 INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${NEW_NAME}
 
 # -a
