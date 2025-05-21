@@ -1,12 +1,12 @@
-# unit-tests export_import-standard
+# unit-tests/import-standard
 
-ARG OPTIONS="-xV"
-ARG JAIL=attica
-ARG RELEASE=14.2-RELEASE
-ARG IP=192.168.69.233
-ARG INTERFACE=vtnet0
-ARG FILE=/tmp/exported.xz
-ARG PATH=/tmp/exported.xz
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG FILE=/tmp/*.xz
+ARG PATH=/tmp
+
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 

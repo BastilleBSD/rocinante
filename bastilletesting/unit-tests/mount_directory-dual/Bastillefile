@@ -1,14 +1,16 @@
-# unit-tests/apply-templateStandard
+# unit-tests mount_directory-dual
 
-ARG OPTIONS="-x"
+ARG OPTIONS="-Dx"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG TEMPLATE
+ARG HOST_PATH
+ARG JAIL_PATH
+ARG ARGS
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/template --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg TEMPLATE=${TEMPLATE}
+INCLUDE core/mount --arg JAIL=${JAIL} --arg HOST_PATH=${HOST_PATH} --arg JAIL_PATH=${JAIL_PATH} --arg ARGS="${ARGS}"
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}

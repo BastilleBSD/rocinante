@@ -1,12 +1,13 @@
-# unit-tests/export_import-bridged
+# unit-tests/import-bridged
 
-ARG OPTIONS="-xB"
-ARG JAIL=attica
-ARG RELEASE=14.2-RELEASE
-ARG IP=192.168.69.233
-ARG INTERFACE=vtnet0
-ARG FILE=/tmp/exported.xz
-ARG PATH=/tmp/exported.xz
+ARG OPTIONS="-Bx"
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG FILE=/tmp/*.xz
+ARG PATH=/tmp
+
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
@@ -14,6 +15,6 @@ INCLUDE core/export --arg OPTIONS="--xz" --arg JAIL=${JAIL} --arg PATH=${PATH}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
 
-INCLUDE core/import --arg OPTIONS=${OPTIONS} --arg FILE=${FILE}
+INCLUDE core/import --arg OPTIONS="-x" --arg FILE=${FILE}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL="ALL"

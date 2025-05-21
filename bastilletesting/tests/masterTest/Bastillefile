@@ -1,3 +1,5 @@
+# tests   masterTest
+
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233
@@ -55,6 +57,8 @@ INCLUDE unit-tests/verify-template
 
 # ***** STANDARD JAIL *****
 
+# setup for standard jails
+
 # create standard jail
 INCLUDE unit-tests/create-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
@@ -103,7 +107,8 @@ INCLUDE unit-tests/import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} -
 # rdr jail
 INCLUDE unit-tests/rdr --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-
+# convert standard jail to thick
+INCLUDE unit-tests/convert-thickStandard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 
 # ***** BRIDGED JAIL *****

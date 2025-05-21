@@ -1,15 +1,14 @@
-# unit-tests/apply-templateDual
+# unit-tests export-dual
 
 ARG OPTIONS="-Dx"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG TEMPLATE
-
+ARG PATH=/tmp
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/template --arg OPTIONS="" --arg JAIL=${JAIL} --arg TEMPLATE=${TEMPLATE}
+INCLUDE core/export --arg OPTIONS="--xz" --arg JAIL=${JAIL} --arg PATH=${PATH}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
