@@ -18,3 +18,7 @@ INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL=${JAIL}
 INCLUDE core/import --arg OPTIONS="-x" --arg FILE=${FILE}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-axy" --arg JAIL="ALL"
+
+CMD rm -rf /tmp/*.xz
+
+CMD rm -rf /tmp/*.sha256
