@@ -1,5 +1,6 @@
 # tests bridged
 
+ARG OPTIONS="-B"
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233
@@ -33,6 +34,7 @@ INCLUDE unit-tests/start_stop-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL
 
 # install pkg to jail
 INCLUDE unit-tests/pkg-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg BRIDGE=${BRIDGE}
+--arg INTERFACE=${INTERFACE}
 
 # start service on jail
 INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg BRIDGE=${BRIDGE}

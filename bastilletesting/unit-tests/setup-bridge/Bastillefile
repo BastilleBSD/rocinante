@@ -1,3 +1,3 @@
 # setup bridged configuration
 
-INCLUDE core/setup --arg ARGS="bridge"
+INCLUDE core/setup --arg ARGS="bridge" --arg ARGS=0
