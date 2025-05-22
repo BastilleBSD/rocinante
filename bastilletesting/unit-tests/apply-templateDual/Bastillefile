@@ -1,6 +1,6 @@
 # unit-tests/apply-templateDual
 
-ARG OPTIONS="-Dx"
+ARG OPTIONS="-D"
 ARG JAIL
 ARG RELEASE
 ARG IP

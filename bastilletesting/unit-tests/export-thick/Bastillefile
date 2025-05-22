@@ -1,6 +1,6 @@
 # unit-tests export-thick
 
-ARG OPTIONS="-Tx"
+ARG OPTIONS="-T"
 ARG JAIL
 ARG RELEASE
 ARG IP

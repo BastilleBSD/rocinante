@@ -7,8 +7,8 @@ ARG INTERFACE
 
 INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/pkg --arg OPTIONS="-axy" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-ay" --arg JAIL=${JAIL} --arg ARGS="install nginx"
 
-INCLUDE core/service --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg SERVICE="nginx" --arg ARGS="start"
+INCLUDE core/service --arg JAIL=${JAIL} --arg SERVICE="nginx" --arg ARGS="start"
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

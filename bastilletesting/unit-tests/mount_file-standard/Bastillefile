@@ -12,5 +12,5 @@ INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} -
 
 INCLUDE core/mount --arg JAIL=${JAIL} --arg HOST_PATH=${HOST_PATH} --arg JAIL_PATH=${JAIL_PATH} --arg ARGS="${ARGS}"
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
 

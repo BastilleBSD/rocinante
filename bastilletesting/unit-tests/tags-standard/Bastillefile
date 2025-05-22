@@ -9,9 +9,9 @@ ARG INTERFACE
 
 INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/tags --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg ACTION=add --arg TAGS=${TAGS}
+INCLUDE core/tags --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg ACTION=add --arg TAGS=${TAGS}
 
-INCLUDE core/tags --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg ACTION=delete --arg TAGS=${TAGS}
+INCLUDE core/tags --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg ACTION=delete --arg TAGS=${TAGS}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
 

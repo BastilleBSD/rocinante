@@ -2,7 +2,7 @@
 
 ARG RELEASE
 
-INCLUDE core/setup --arg OPTIONS="-xy"
+INCLUDE core/setup --arg OPTIONS="-y"
 
 INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
 

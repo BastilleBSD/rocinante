@@ -1,6 +1,6 @@
 # unit-tests export-vnet
 
-ARG OPTIONS="-Vx"
+ARG OPTIONS="-V"
 ARG JAIL
 ARG RELEASE
 ARG IP

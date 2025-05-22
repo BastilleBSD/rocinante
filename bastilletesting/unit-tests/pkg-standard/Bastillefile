@@ -16,11 +16,11 @@ INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="install ngi
 INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
 
 # -aHxy
-INCLUDE core/pkg --arg OPTIONS="-aHxy" --arg JAIL=${JAIL} --arg ARGS="install nginx"
-INCLUDE core/pkg --arg OPTIONS="-aHxy" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
+INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
 
 # -axy
 INCLUDE core/pkg --arg OPTIONS="-y" --arg JAIL=${JAIL} --arg ARGS="install nginx"
 INCLUDE core/pkg --arg OPTIONS="-y" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

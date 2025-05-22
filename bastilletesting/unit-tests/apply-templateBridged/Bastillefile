@@ -1,6 +1,6 @@
 # unit-tests/apply-templateBridged
 
-ARG OPTIONS="-Bx"
+ARG OPTIONS="-B"
 ARG JAIL
 ARG RELEASE
 ARG IP

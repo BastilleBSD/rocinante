@@ -1,6 +1,6 @@
 # unit-tests mount_file-vnet
 
-ARG OPTIONS="-Vx"
+ARG OPTIONS="-V"
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -13,5 +13,5 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${
 
 INCLUDE core/mount --arg JAIL=${JAIL} --arg HOST_PATH=${HOST_PATH} --arg JAIL_PATH=${JAIL_PATH} --arg ARGS="${ARGS}"
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
 
