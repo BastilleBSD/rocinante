@@ -1,1 +1,3 @@
-CP bastille.conf /usr/local/etc/bastille/bastille.conf
+# setup bridged configuration
+
+INCLUDE core/setup --arg OPTIONS="-y" --arg ARGS="bridge"
