@@ -1,6 +1,5 @@
 # unit-tests mount_file-vnet
 
-ARG OPTIONS="-V"
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -9,7 +8,7 @@ ARG HOST_PATH
 ARG JAIL_PATH
 ARG ARGS
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS="-V" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 INCLUDE core/mount --arg JAIL=${JAIL} --arg HOST_PATH=${HOST_PATH} --arg JAIL_PATH=${JAIL_PATH} --arg ARGS="${ARGS}"
 
