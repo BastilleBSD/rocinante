@@ -1,12 +1,12 @@
 # unit-tests/pkg-vnet
 
 ARG OPTIONS="-V"
-ARG JAIL
+ARG JAIL="vnetfred"
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # -ay
 INCLUDE core/pkg --arg OPTIONS="-ay" --arg JAIL=${JAIL} --arg ARGS="install nginx"
