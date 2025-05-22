@@ -1,4 +1,4 @@
-# tests   masterTest
+# tests   vnet
 
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
@@ -14,6 +14,8 @@ ARG TAGS="prod,dev"
 
 
 CMD pkg install git
+
+CMD bastille destroy -ay ALL
 
 # clone rocinante repo
 # CMD cd /root
@@ -31,11 +33,6 @@ CMD pkg install git
 # run bastille setup with no options
 
 INCLUDE unit-tests/setup-noOptions
-
-# cleanup routine
-
-CMD bastille destroy -ay ALL
-
 
 
 # ***************************
