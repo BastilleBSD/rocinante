@@ -1,5 +1,5 @@
 # unit-tests/create-dual
-ARG OPTIONS="-Dx"
+ARG OPTIONS="-D"
 ARG JAIL=Dual
 ARG RELEASE
 ARG IP

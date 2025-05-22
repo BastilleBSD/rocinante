@@ -1,6 +1,6 @@
 # unit-tests/services-dual
 
-ARG OPTIONS="-Dx"
+ARG OPTIONS="-D"
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -11,6 +11,6 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${
 
 INCLUDE core/pkg OPTIONS=${OPTIONS} JAIL=${JAIL} ARGS="install nginx"
 
-INCLUDE core/service --arg OPTIONS="-x" --arg JAIL=${JAIL} --arg SERVICE="nginx" --arg ARGS="start"
+INCLUDE core/service --arg JAIL=${JAIL} --arg SERVICE="nginx" --arg ARGS="start"
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

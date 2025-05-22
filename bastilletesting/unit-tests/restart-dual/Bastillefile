@@ -1,6 +1,6 @@
 # unit-tests/restart-dual
 
-ARG OPTIONS="-Dx"
+ARG OPTIONS="-D"
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -8,6 +8,6 @@ ARG INTERFACE
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/restart --arg OPTIONS="-x" --arg JAIL=${JAIL}
+INCLUDE core/restart --arg  --arg JAIL=${JAIL}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afyx" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

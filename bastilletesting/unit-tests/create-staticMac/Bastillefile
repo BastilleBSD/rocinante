@@ -1,6 +1,6 @@
 # unit-test/create-staticMac
 
-ARG OPTIONS="-Mx"
+ARG OPTIONS="-M"
 ARG JAIL
 ARG RELEASE
 ARG IP

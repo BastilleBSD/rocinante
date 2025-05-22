@@ -21,7 +21,7 @@ INCLUDE core/start --arg OPTIONS="-v" --arg JAIL=${JAIL}
 
 # all
 INCLUDE core/stop --arg JAIL=${JAIL}
-INCLUDE core/start --arg OPTIONS="-bvx -d 5" --arg JAIL=${JAIL}
+INCLUDE core/start --arg OPTIONS="-bv -d 5" --arg JAIL=${JAIL}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
 

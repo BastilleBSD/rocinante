@@ -1,15 +1,27 @@
 # unit-tests/pkg-vnet
 
-ARG OPTIONS="-Vx"
-ARG JAIL=bridged
+ARG OPTIONS="-V"
+ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/pkg --arg OPTIONS="-yxa" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+# -ay
+INCLUDE core/pkg --arg OPTIONS="-ay" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-ay" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
 
-INCLUDE core/pkg --arg OPTIONS="-yxa" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
+# -aHy
+INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
+
+# -aHxy
+INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-aHy" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
+
+# -axy
+INCLUDE core/pkg --arg OPTIONS="-y" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-y" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

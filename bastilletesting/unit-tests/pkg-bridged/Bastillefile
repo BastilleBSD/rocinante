@@ -1,6 +1,6 @@
 # unit-tests/pkg-bridged
 
-ARG OPTIONS="-Bx"
+ARG OPTIONS="-B"
 ARG JAIL=bridged
 ARG RELEASE
 ARG IP
@@ -8,8 +8,8 @@ ARG INTERFACE
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/pkg --arg OPTIONS="-yxa" --arg JAIL=${JAIL} --arg ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-ya" --arg JAIL=${JAIL} --arg ARGS="install nginx"
 
-INCLUDE core/pkg --arg OPTIONS="-yxa" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
+INCLUDE core/pkg --arg OPTIONS="-ya" --arg JAIL=${JAIL} --arg ARGS="remove nginx"
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

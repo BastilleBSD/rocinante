@@ -14,4 +14,4 @@ INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} -
 
 INCLUDE core/rdr --arg JAIL=${JAIL} --arg ACTION=${ACTION} --arg PROTOCOL=${PROTOCOL} --arg HOST_PORT=${HOST_PORT} --arg JAIL_PORT=${JAIL_PORT} --arg LOG=${LOG}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

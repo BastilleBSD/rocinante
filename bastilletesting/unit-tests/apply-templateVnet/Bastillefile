@@ -1,6 +1,6 @@
 # unit-tests/apply-templateVnet
 
-ARG OPTIONS="-Vx"
+ARG OPTIONS="-V"
 ARG JAIL
 ARG RELEASE
 ARG IP

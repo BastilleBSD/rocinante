@@ -17,6 +17,6 @@ INCLUDE core/restart --arg OPTIONS="-d 5" --arg JAIL=${JAIL}
 INCLUDE core/restart --arg OPTIONS="-v" --arg JAIL=${JAIL}
 
 # all together
-INCLUDE core/restart --arg OPTIONS="-bvx -d 5" --arg JAIL=${JAIL}
+INCLUDE core/restart --arg OPTIONS="-bv -d 5" --arg JAIL=${JAIL}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
