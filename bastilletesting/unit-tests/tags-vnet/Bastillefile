@@ -2,13 +2,13 @@
 
 ARG OPTIONS="-V"
 ARG JAIL
-ARG ACTION
-ARG TAGS="prod,web"
+ARG INTERFACE
+ARG RELEASE
+ARG IP
+ARG TAGS
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/tags --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg ACTION=add --arg TAGS=${TAGS}
-
-INCLUDE core/tags --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg ACTION=delete --arg TAGS=${TAGS}
+INCLUDE core/tags --arg JAIL=${JAIL} --arg ACTION=add --arg TAGS=${TAGS}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
