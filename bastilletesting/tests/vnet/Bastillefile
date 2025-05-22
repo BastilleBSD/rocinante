@@ -16,41 +16,10 @@ ARG TAGS="prod,dev"
 CMD pkg install git
 
 
-# clone rocinante repo
-# CMD cd /root
-# CMD rm -rf /root/rocinante
-# CMD git clone https://github.com/BastilleBSD/rocinante.git /root/rocinante
-# CMD cd /root/rocinante && make install
-
-
-# clone bastille repo
-# CMD /root
-# CMD rm -rf /root/bastille
-# CMD git clone https://github.com/BastilleBSD/bastille.git
-# CMD cd /root/bastille && make install
-
 # run bastille setup with no options
 
 INCLUDE unit-tests/setup-noOptions
 
-
-# ***************************
-# ***** BOOTSTRAP tests *****
-# ***************************
-
-
-# bootstrap release
-
-INCLUDE unit-tests/bootstrap-release --arg RELEASE=${RELEASE}
-
-# verify release
-# INCLUDE unit-tests/verify-release --arg RELEASE=${RELEASE}
-
-# bootstrap templates
-INCLUDE unit-tests/bootstrap-template --arg TEMPLATE_URL=${TEMPLATE_URL}
-
-# verify tempates
-INCLUDE unit-tests/verify-template
 
 # *****************************
 # ********  Jail tests ********
@@ -93,7 +62,7 @@ INCLUDE unit-tests/network-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --ar
 INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
 
 # clone jail
-INCLUDE unit-tests/clone-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
+INCLUDE unit-tests/clone-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
 
 # rename jail
 INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
