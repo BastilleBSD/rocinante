@@ -1,57 +1,111 @@
-ARG OPTIONS="-V"
+# tests   masterTest
+
 ARG JAIL=folsom
-ARG RELEASE-14.2-RELEASE
-ARG IP=DHCP
+ARG RELEASE=14.2-RELEASE
+ARG IP=192.168.69.233
 ARG INTERFACE=vtnet0
-ARG HOST_PATH
-ARG JAIL_PATH
+ARG BRIDGE=bastillebridge
+ARG NEW_NAME=attica
+ARG NEW_IP=192.168.69.234
+ARG TEMPLATE=www/nginx
+ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
+ARG NEW_INTERFACE=bastille0
+ARG TAGS="prod,dev"
+
+
+CMD pkg install git
+
+# clone rocinante repo
+# CMD cd /root
+# CMD rm -rf /root/rocinante
+# CMD git clone https://github.com/BastilleBSD/rocinante.git /root/rocinante
+# CMD cd /root/rocinante && make install
+
+
+# clone bastille repo
+# CMD /root
+# CMD rm -rf /root/bastille
+# CMD git clone https://github.com/BastilleBSD/bastille.git
+# CMD cd /root/bastille && make install
+
+# run bastille setup with no options
+
+INCLUDE unit-tests/setup-noOptions
+
+# cleanup routine
+
+CMD bastille destroy -ay ALL
 
 
 
+# ***************************
+# ***** BOOTSTRAP tests *****
+# ***************************
 
+
+# bootstrap release
+
+INCLUDE unit-tests/bootstrap-release --arg RELEASE=${RELEASE}
+
+# verify release
+# INCLUDE unit-tests/verify-release --arg RELEASE=${RELEASE}
+
+# bootstrap templates
+INCLUDE unit-tests/bootstrap-template --arg TEMPLATE_URL=${TEMPLATE_URL}
+
+# verify tempates
+INCLUDE unit-tests/verify-template
+
+# *****************************
+# ********  Jail tests ********
+# *****************************
+
+# ***** VNET JAIL *****
 
 # create vnet jail
-INCLUDE unit-tests/create-vnet
+INCLUDE unit-tests/create-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # restart the jail
-INCLUDE unit-tests/restart-vnet
+INCLUDE unit-tests/restart-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # stop the jail
-INCLUDE unit-tests/start_stop-vnet
+INCLUDE unit-tests/start_stop-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 
 # install pkg to jail
-INCLUDE unit-tests/pkg-vnet
+INCLUDE unit-tests/pkg-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # start service on jail
-INCLUDE unit-tests/services-vnet
+INCLUDE unit-tests/services-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # apply template to jail
-INCLUDE unit-tests/apply-templateVnet
+INCLUDE unit-tests/apply-templateVnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TEMPLATE=${TEMPLATE}
 
 # tag the jail
-INCLUDE unit-tests/tags-vnet
+INCLUDE unit-tests/tags-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # mount file into jail
-INCLUDE unit-tests/mount-vnet
+INCLUDE unit-tests/mount-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # mount directory into jail
-INCLUDE unit-tests/mount-vnet
+INCLUDE unit-tests/mount-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # add network interface
-INCLUDE unit-tests/network-vnet
+INCLUDE unit-tests/network-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # rename jail
-INCLUDE unit-tests/rename-vnet
+INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # clone jail
-INCLUDE unit-tests/clone-vnet
+INCLUDE unit-tests/clone-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # rename jail
-INCLUDE unit-tests/rename-vnet
+INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # export and import jail
-INCLUDE unit-tests/export_import-vnet
+INCLUDE unit-tests/export_import-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # convert to thick
-INCLUDE unit-tests/convert-thickVnet
+INCLUDE unit-tests/convert-thickVnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+
