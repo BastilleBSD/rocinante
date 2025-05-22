@@ -9,7 +9,7 @@ ARG NEW_NAME
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/rename --arg --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
+INCLUDE core/rename --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL} 
 
