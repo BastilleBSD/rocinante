@@ -15,7 +15,6 @@ ARG TAGS="prod,dev"
 
 CMD pkg install git
 
-CMD bastille destroy -ay ALL
 
 # clone rocinante repo
 # CMD cd /root
