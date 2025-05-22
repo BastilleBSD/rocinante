@@ -81,7 +81,7 @@ INCLUDE unit-tests/apply-templateVnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL
 INCLUDE unit-tests/tags-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TAGS=${TAGS}
 
 # mount file into jail
-INCLUDE unit-tests/mount_file-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/mount_file-vnet --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/etc/resolv.conf --arg JAIL_PATH=/mnt/etc/resolv.conf --arg ARGS="nullfs rw 0 0"
 
 # mount directory into jail
 INCLUDE unit-tests/mount_directory-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
