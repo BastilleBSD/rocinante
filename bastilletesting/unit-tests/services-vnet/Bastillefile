@@ -1,15 +1,14 @@
 # unit-tests/services-bridged
 
-ARG OPTIONS
+
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-
 INCLUDE core/create --arg OPTIONS="-V" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/pkg OPTIONS="-ay" JAIL=${JAIL} ARGS="install nginx"
+INCLUDE core/pkg --arg OPTIONS="-ay" --arg JAIL=${JAIL} --arg ARGS="install nginx"
 
 INCLUDE core/service --arg JAIL=${JAIL} --arg SERVICE="nginx" --arg ARGS="start"
 
