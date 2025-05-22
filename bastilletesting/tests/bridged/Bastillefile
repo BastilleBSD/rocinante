@@ -13,17 +13,9 @@ ARG NEW_INTERFACE=bastille0
 ARG TAGS="prod,dev"
 
 
-# run bastille setup with no options
-
-INCLUDE unit-tests/setup-bridge
-
-# cleanup routine
-
-
 # *****************************
 # ********  Jail tests ********
 # *****************************
-
 
 # ***** BRIDGED JAIL *****
 
