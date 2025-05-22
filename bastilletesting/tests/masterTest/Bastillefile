@@ -131,7 +131,7 @@ INCLUDE unit-tests/pkg-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RE
 INCLUDE unit-tests/services-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # apply template to jail
-INCLUDE unit-tests/apply-templateVnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/apply-templateVnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TEMPLATE=${TEMPLATE}
 
 # tag the jail
 INCLUDE unit-tests/tags-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
