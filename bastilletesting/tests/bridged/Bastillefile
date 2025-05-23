@@ -54,7 +54,7 @@ INCLUDE unit-tests/mount_directory-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=$
 INCLUDE unit-tests/network-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
 
 # rename jail
-INCLUDE unit-tests/rename-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/rename-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE} --arg NEW_NAME=${NEW_NAME}
 
 # clone jail
 INCLUDE unit-tests/clone-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
