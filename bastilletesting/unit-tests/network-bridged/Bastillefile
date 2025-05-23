@@ -15,3 +15,5 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${
 INCLUDE core/network --arg OPTIONS="-Ba" --arg JAIL=${JAIL} --arg ACTION="add" --arg NEW_INTERFACE=bridge1 --arg NEW_IP=${NEW_IP}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
+
+CMD ifconfig bridge1 destroy
