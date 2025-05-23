@@ -1,3 +1,4 @@
 ARG JAIL
+ARG OPTIONS
 
-CMD bastille convert ${JAIL}
+CMD bastille convert ${OPTIONS} ${JAIL}
