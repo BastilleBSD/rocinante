@@ -45,10 +45,10 @@ INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 INCLUDE unit-tests/tags-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
 
 # mount file into jail
-INCLUDE unit-tests/mount-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/mount_file-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
 
 # mount directory into jail
-INCLUDE unit-tests/mount-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/mount_directory-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
 
 # add network interface
 INCLUDE unit-tests/network-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
