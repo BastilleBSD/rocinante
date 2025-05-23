@@ -39,7 +39,7 @@ INCLUDE unit-tests/pkg-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg
 INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
 
 # apply template to jail
-INCLUDE unit-tests/apply-templetBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/apply-templateBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
 
 # tag the jail
 INCLUDE unit-tests/tags-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
