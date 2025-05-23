@@ -40,7 +40,6 @@ INCLUDE unit-tests/setup-noOptions
 
 # ***** STANDARD JAIL *****
 
-# setup for standard jails
 
 # create standard jail
 INCLUDE unit-tests/create-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
