@@ -1,0 +1,33 @@
+# tests thick
+
+ARG JAIL=folsom
+ARG RELEASE=14.2-RELEASE
+ARG IP=192.168.69.233
+ARG INTERFACE=vtnet0
+ARG BRIDGE=bastillebridge
+ARG NEW_NAME=attica
+ARG NEW_IP=192.168.69.234
+ARG TEMPLATE=www/nginx
+ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
+ARG NEW_INTERFACE=bastille0
+ARG TAGS="prod,dev"
+
+
+
+# create thick jail
+INCLUDE unit-tests/create-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# restart the jail
+INCLUDE unit-tests/restart-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# stop and start the jail
+INCLUDE unit-tests/start_stop-thick --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# mount file into jail
+INCLUDE unit-tests/mount-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# mount directory into jail
+INCLUDE unit-tests/mount-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# export and import jail
+INCLUDE unit-tests/export_import-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}

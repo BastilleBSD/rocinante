@@ -63,159 +63,17 @@ INCLUDE unit-tests/verify-template
 
 # ***** STANDARD JAIL *****
 
-# setup for standard jails
-
-# create standard jail
-INCLUDE unit-tests/create-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# restart jail
-INCLUDE unit-tests/restart-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# stop jail
-INCLUDE unit-tests/stop-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# start jail
-INCLUDE unit-tests/start-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# install/remove pkg
-INCLUDE unit-tests/pkg-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# start service on jail
-INCLUDE unit-tests/services-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# apply template to jail
-INCLUDE unit-tests/apply-templateStandard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TEMPLATE=${TEMPLATE}
-
-# tag the jail
-INCLUDE unit-tests/tags-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TAGS=${TAGS}
-
-# mount file into jail
-INCLUDE unit-tests/mount_file-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/etc/resolv.conf --arg JAIL_PATH=/mnt/etc/resolv.conf --arg ARGS="nullfs rw 0 0"
-
-# mount directory into jail
-INCLUDE unit-tests/mount_directory-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/usr/local --arg JAIL_PATH=/mnt/usr/local --arg ARGS="nullfs rw 0 0"
-
-# add network interface
-INCLUDE unit-tests/network-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_INTERFACE=${NEW_INTERFACE} --arg NEW_IP=${NEW_IP}
-
-# rename jail
-INCLUDE unit-tests/rename-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
-
-# clone jail
-INCLUDE unit-tests/clone-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_IP=${NEW_IP} --arg NEW_NAME=${NEW_NAME}
-
-# export jail
-INCLUDE unit-tests/export-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE={INTERFACE}
-
-# import jail
-INCLUDE unit-tests/import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE={INTERFACE}
-
-# rdr jail
-INCLUDE unit-tests/rdr --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# convert standard jail to thick
-INCLUDE unit-tests/convert-thickStandard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
+INCLUDE standard
 
 
 # ***** VNET JAIL *****
 
-# create vnet jail
-INCLUDE unit-tests/create-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# restart the jail
-INCLUDE unit-tests/restart-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# stop the jail
-INCLUDE unit-tests/start_stop-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-# install pkg to jail
-INCLUDE unit-tests/pkg-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# start service on jail
-INCLUDE unit-tests/services-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# apply template to jail
-INCLUDE unit-tests/apply-templateVnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg TEMPLATE=${TEMPLATE}
-
-# tag the jail
-INCLUDE unit-tests/tags-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount file into jail
-INCLUDE unit-tests/mount-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount directory into jail
-INCLUDE unit-tests/mount-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# add network interface
-INCLUDE unit-tests/network-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# rename jail
-INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# clone jail
-INCLUDE unit-tests/clone-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# rename jail
-INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# export and import jail
-INCLUDE unit-tests/export_import-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# convert to thick
-INCLUDE unit-tests/convert-thickVnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-
+INCLUDE vnet
 
 
 # ***** BRIDGED JAIL *****
 
-# setup bastille for a bridged setup
-INCLUDE unit-tests/setup-bridge --arg OPTIONS="-x" --arg ARGS="bridge" --arg ARGS=0 
-
-# create bridged jail
-INCLUDE unit-tests/create-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg BRIDGE=${BRIDGE}
-
-# restart the jail
-INCLUDE unit-tests/restart-bridged  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg BRIDGE=${BRIDGE} 
-
-# stop and start the jail
-INCLUDE unit-tests/start_stop-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg BRIDGE=${BRIDGE}
-
-# install pkg to jail
-INCLUDE unit-tests/pkg-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg BRIDGE=${BRIDGE}
-
-# start service on jail
-INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg BRIDGE=${BRIDGE}
-
-# apply template to jail
-INCLUDE unit-tests/apply-templetBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
-
-# tag the jail
-INCLUDE unit-tests/tags-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-# mount file into jail
-INCLUDE unit-tests/mount-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-
-# mount directory into jail
-INCLUDE unit-tests/mount-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-
-# add network interface
-INCLUDE unit-tests/network-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-
-# rename jail
-INCLUDE unit-tests/rename-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-
-# clone jail
-INCLUDE unit-tests/clone-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-
-# export and import jail
-INCLUDE unit-tests/export_import-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-
-# convert to thick
-INCLUDE unit-tests/convert-thickBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
-
+INCLUDE bridged
 
 
 # ***** CLONED JAIL *****
@@ -224,100 +82,24 @@ INCLUDE unit-tests/convert-thickBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JA
 INCLUDE unit-tests/create-cloned --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 
-
 # ***** DUAL JAIL *****
-# create dual jail
-INCLUDE unit-tests/create-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-# restart the jail
-INCLUDE unit-tests/restart-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# start the jail
-INCLUDE unit-tests/start_stop-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# install pkg to jail
-INCLUDE unit-tests/pkg-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# start service on jail
-INCLUDE unit-tests/services-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# apply template to jail
-INCLUDE unit-tests/apply-templateDual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# tag the jail
-INCLUDE unit-tests/tags-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount file into jail
-INCLUDE unit-tests/mount-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount directory into jail
-INCLUDE unit-tests/mount-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# add network interface
-INCLUDE unit-tests/network-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# rename jail
-INCLUDE unit-tests/rename-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# export and import jail
-INCLUDE unit-tests/export_import-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# clone jail
-INCLUDE unit-tests/clone-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# convert to thick
-INCLUDE unit-tests/convert-dual --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
+INCLUDE dual
 
 
 # ***** EMPTY JAIL *****
 
-# create empty jail
-INCLUDE unit-tests/create-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# rename jail
-INCLUDE unit-tests/rename-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-
+INCLUDE empty
 
 
 # ***** LINUX JAIL *****
 
-# create linux jail
-INCLUDE unit-tests/
-
-# restart the jail
-INCLUDE unit-tests/
-
-# rename jail
-INCLUDE unit-tests/
-
-
+INCLUDE linux
 
 
 # ***** THICK JAIL *****
 
-# create thick jail
-INCLUDE unit-tests/create-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# restart the jail
-INCLUDE unit-tests/restart-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# stop and start the jail
-INCLUDE unit-tests/start_stop-thick --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount file into jail
-INCLUDE unit-tests/mount-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# mount directory into jail
-INCLUDE unit-tests/mount-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# export and import jail
-INCLUDE unit-tests/export_import-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-
+INCLUDE thick
 
 
 # ***** BOOTOFF JAIL *****
