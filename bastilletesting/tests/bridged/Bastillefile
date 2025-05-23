@@ -33,7 +33,7 @@ INCLUDE unit-tests/restart-bridged  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 INCLUDE unit-tests/start_stop-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
 
 # install pkg to jail
-INCLUDE unit-tests/pkg-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/pkg-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE} --arg BRIDGE=${BRIDGE}
 
 # start service on jail
 INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
