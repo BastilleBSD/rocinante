@@ -1,12 +1,12 @@
 # unit-tests/pkg-bridged
 
 ARG OPTIONS="-B"
-ARG JAIL=bridged
+ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE}
 
 INCLUDE core/pkg --arg OPTIONS="-ya" --arg JAIL=${JAIL} --arg ARGS="install nginx"
 

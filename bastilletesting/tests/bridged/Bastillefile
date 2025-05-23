@@ -45,10 +45,10 @@ INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 INCLUDE unit-tests/tags-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
 
 # mount file into jail
-INCLUDE unit-tests/mount_file-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/mount_file-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE} HOST_PATH=/etc/resolv.conf --arg JAIL_PATH=/mnt/etc/resolv.conf --arg ARGS="nullfs rw 0 0"
 
 # mount directory into jail
-INCLUDE unit-tests/mount_directory-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/mount_directory-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE} --arg HOST_PATH=/usr/local --arg JAIL_PATH=/mnt/usr/local --arg ARGS="nullfs rw 0 0"
 
 # add network interface
 INCLUDE unit-tests/network-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
