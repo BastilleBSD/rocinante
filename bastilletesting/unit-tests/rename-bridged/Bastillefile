@@ -11,6 +11,6 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${
 
 INCLUDE core/rename --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
 
-INCLUDE core/start --arg JAIL=${JAIL}
+INCLUDE core/start --arg JAIL=${NEW_NAME}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL} 
