@@ -4,7 +4,7 @@ ARG OPTIONS="-B"
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233
-ARG INTERFACE=vtnet0
+ARG INTERFACE=vtnet0bridge
 ARG BRIDGE=vtnet0bridge
 ARG NEW_NAME=attica
 ARG NEW_IP=192.168.69.234
@@ -33,16 +33,17 @@ INCLUDE unit-tests/restart-bridged  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 INCLUDE unit-tests/start_stop-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
 
 # install pkg to jail
-INCLUDE unit-tests/pkg-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE} --arg BRIDGE=${BRIDGE}
-
-# start service on jail
-INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE} --arg BRIDGE=${BRIDGE}
+INCLUDE unit-tests/pkg-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE}
 
 # apply template to jail
-INCLUDE unit-tests/apply-templateBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${BRIDGE}
+INCLUDE unit-tests/apply-templateBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE}
+
+# start service on jail
+INCLUDE unit-tests/services-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE} 
 
 # tag the jail
 INCLUDE unit-tests/tags-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
+
 # mount file into jail
 INCLUDE unit-tests/mount-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${BRIDGE}
 
