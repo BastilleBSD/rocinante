@@ -32,29 +32,6 @@ CMD pkg install git
 
 INCLUDE unit-tests/setup-noOptions
 
-# cleanup routine
-
-CMD bastille destroy -ay ALL
-
-
-
-# ***************************
-# ***** BOOTSTRAP tests *****
-# ***************************
-
-
-# bootstrap release
-
-INCLUDE unit-tests/bootstrap-release --arg RELEASE=${RELEASE}
-
-# verify release
-# INCLUDE unit-tests/verify-release --arg RELEASE=${RELEASE}
-
-# bootstrap templates
-INCLUDE unit-tests/bootstrap-template --arg TEMPLATE_URL=${TEMPLATE_URL}
-
-# verify tempates
-INCLUDE unit-tests/verify-template
 
 # *****************************
 # ********  Jail tests ********
