@@ -9,6 +9,6 @@ ARG TEMPLATE
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/template --arg OPTIONS="" --arg JAIL=${JAIL} --arg TEMPLATE=${TEMPLATE}
+INCLUDE core/template --arg OPTIONS="-ay" --arg JAIL=${JAIL} --arg TEMPLATE=${TEMPLATE}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
