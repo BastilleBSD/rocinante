@@ -15,3 +15,10 @@ INCLUDE core/mount --arg JAIL=${JAIL} --arg HOST_PATH=${HOST_PATH} --arg JAIL_PA
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
 
+# mount file into jail
+INCLUDE unit-tests/mount_file-bridged 
+--arg OPTIONS=${OPTIONS} 
+--arg JAIL=${JAIL} 
+--arg RELEASE=${RELEASE} 
+--arg IP=${IP} -
+-arg INTERFACE=${BRIDGE}
