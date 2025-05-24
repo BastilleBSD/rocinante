@@ -20,8 +20,11 @@ INCLUDE unit-tests/create-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --a
 # restart the jail
 INCLUDE unit-tests/restart-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-# stop and start the jail
-INCLUDE unit-tests/start_stop-thick --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+# start the jail
+INCLUDE unit-tests/start-thick --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# stop the jail
+INCLUDE unit-tests/stop-thick --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # mount file into jail
 INCLUDE unit-tests/mount_file-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} HOST_PATH=/etc/resolv.conf --arg JAIL_PATH=/mnt/etc/resolv.conf --arg ARGS="nullfs rw 0 0"
