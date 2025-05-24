@@ -32,11 +32,6 @@ CMD pkg install git
 
 INCLUDE unit-tests/setup-noOptions
 
-# cleanup routine
-
-CMD bastille destroy -ay ALL
-
-
 
 # ***************************
 # ***** BOOTSTRAP tests *****
