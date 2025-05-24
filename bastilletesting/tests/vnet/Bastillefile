@@ -1,5 +1,6 @@
 # tests   vnet
 
+ARG OPTIONS="-V"
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233
@@ -11,9 +12,6 @@ ARG TEMPLATE=www/nginx
 ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
 ARG NEW_INTERFACE=bastille0
 ARG TAGS="prod,dev"
-
-
-CMD pkg install git
 
 
 # run bastille setup with no options

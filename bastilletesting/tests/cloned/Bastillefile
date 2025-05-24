@@ -1,3 +1,7 @@
 # cloned jail test
 
-INCLUDE unit-tests/create-cloned --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+ARG OPTIONS="-C"
+
+
+
+INCLUDE unit-tests/create-clone --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}

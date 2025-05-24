@@ -1,5 +1,6 @@
 # tests linux
 
+ARG OPTIONS="-L"
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233

@@ -67,17 +67,17 @@ INCLUDE tests/thick
 # ***** CLONED JAIL *****
 INCLUDE tests/cloned
 
-# ***** BRIDGED JAIL *****
-INCLUDE tests/bridged
-
-# ***** DUAL JAIL *****
-INCLUDE tests/dual
-
 # ***** EMPTY JAIL *****
 INCLUDE tests/empty
 
 # ***** LINUX JAIL *****
 INCLUDE tests/linux
+
+# ***** BRIDGED JAIL *****
+INCLUDE tests/bridged
+
+# ***** DUAL JAIL *****
+INCLUDE tests/dual
 
 # ***** BOOTOFF JAIL *****
 # create bootoff jail
