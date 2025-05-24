@@ -14,7 +14,7 @@ ARG TAGS="prod,dev"
 
 
 # create linux jail
-INCLUDE unit-tests/
+INCLUDE unit-tests/create-linux
 
 # restart the jail
 INCLUDE unit-tests/

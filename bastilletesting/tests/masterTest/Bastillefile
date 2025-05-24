@@ -55,52 +55,39 @@ INCLUDE unit-tests/verify-template
 # ********  Jail tests ********
 # *****************************
 
-
 # ***** STANDARD JAIL *****
 INCLUDE tests/standard
-
 
 # ***** VNET JAIL *****
 INCLUDE tests/vnet
 
-
-# ***** BRIDGED JAIL *****
-INCLUDE tests/bridged
-
 # ***** THICK JAIL *****
 INCLUDE tests/thick
-
 
 # ***** CLONED JAIL *****
 INCLUDE tests/cloned
 
+# ***** BRIDGED JAIL *****
+INCLUDE tests/bridged
 
 # ***** DUAL JAIL *****
 INCLUDE tests/dual
 
-
 # ***** EMPTY JAIL *****
 INCLUDE tests/empty
 
-
 # ***** LINUX JAIL *****
 INCLUDE tests/linux
-
 
 # ***** BOOTOFF JAIL *****
 # create bootoff jail
 INCLUDE unit-tests/create-bootOff --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} 
 
-
 # ***** PRIORITY JAIL *****
-
 # /create priority jail
 INCLUDE unit-tests/create-priority --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-
-
 # ***** STATIC MAC JAIL *****
-
 # create static mac jail
 INCLUDE unit-tests/create-staticMac --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
