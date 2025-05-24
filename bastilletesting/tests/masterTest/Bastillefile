@@ -57,34 +57,34 @@ INCLUDE unit-tests/verify-template
 
 
 # ***** STANDARD JAIL *****
-INCLUDE standard
+INCLUDE tests/standard
 
 
 # ***** VNET JAIL *****
-INCLUDE vnet
+INCLUDE tests/vnet
 
 
 # ***** BRIDGED JAIL *****
-INCLUDE bridged
+INCLUDE tests/bridged
 
 # ***** THICK JAIL *****
-INCLUDE thick
+INCLUDE tests/thick
 
 
 # ***** CLONED JAIL *****
-INCLUDE cloned
+INCLUDE tests/cloned
 
 
 # ***** DUAL JAIL *****
-INCLUDE dual
+INCLUDE tests/dual
 
 
 # ***** EMPTY JAIL *****
-INCLUDE empty
+INCLUDE tests/empty
 
 
 # ***** LINUX JAIL *****
-INCLUDE linux
+INCLUDE tests/linux
 
 
 # ***** BOOTOFF JAIL *****
