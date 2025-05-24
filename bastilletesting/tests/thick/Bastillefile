@@ -1,5 +1,6 @@
 # tests thick
 
+ARG OPTIONS="-T"
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233
@@ -31,7 +32,7 @@ INCLUDE unit-tests/stop-thick --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg 
 
 
 # mount file into jail
-INCLUDE unit-tests/mount_file-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} HOST_PATH=/etc/resolv.conf --arg JAIL_PATH=/mnt/etc/resolv.conf --arg ARGS="nullfs rw 0 0"
+INCLUDE unit-tests/mount_file-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/etc/resolv.conf --arg JAIL_PATH=/mnt/etc/resolv.conf --arg ARGS="nullfs rw 0 0"
 
 
 # mount directory into jail
