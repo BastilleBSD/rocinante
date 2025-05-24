@@ -1,6 +1,6 @@
 # unit-tests/services-vnet
 
-ARG OPTIONS-"-V"
+ARG OPTIONS="-V"
 ARG JAIL
 ARG RELEASE
 ARG IP
