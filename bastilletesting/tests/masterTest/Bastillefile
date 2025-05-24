@@ -62,50 +62,39 @@ INCLUDE unit-tests/verify-template
 
 
 # ***** STANDARD JAIL *****
-
 INCLUDE standard
 
 
 # ***** VNET JAIL *****
-
 INCLUDE vnet
 
 
 # ***** BRIDGED JAIL *****
-
 INCLUDE bridged
+
+# ***** THICK JAIL *****
+INCLUDE thick
 
 
 # ***** CLONED JAIL *****
-
-# create cloned jail
-INCLUDE unit-tests/create-cloned --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE cloned
 
 
 # ***** DUAL JAIL *****
-
 INCLUDE dual
 
 
 # ***** EMPTY JAIL *****
-
 INCLUDE empty
 
 
 # ***** LINUX JAIL *****
-
 INCLUDE linux
-
-
-# ***** THICK JAIL *****
-
-INCLUDE thick
 
 
 # ***** BOOTOFF JAIL *****
 # create bootoff jail
 INCLUDE unit-tests/create-bootOff --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} 
-
 
 
 # ***** PRIORITY JAIL *****
@@ -122,12 +111,9 @@ INCLUDE unit-tests/create-staticMac --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 
 
 
-
-
 # *********************************
 # ***** Jail operations tests *****
 # *********************************
-
 
 # rcp a file
 INCLUDE unit-tests/rcp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
@@ -171,11 +157,6 @@ INCLUDE unit-tests/setup-storage --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --a
 
 # setup vnet
 INCLUDE unit-tests/setup-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-
-
-
 
 
 # ***************************
