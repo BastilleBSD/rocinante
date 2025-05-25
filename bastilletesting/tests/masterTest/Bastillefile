@@ -13,7 +13,7 @@ ARG NEW_INTERFACE=bastille0
 ARG TAGS="prod,dev"
 
 
-CMD pkg install git
+# CMD pkg install git
 
 # clone rocinante repo
 # CMD cd /root
