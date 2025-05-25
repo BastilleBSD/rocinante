@@ -5,11 +5,11 @@ ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG NEW_INTERFACE=epair3a
+ARG NEW_INTERFACE=epair0a
 ARG NEW_IP=10.0.0.2
 ARG ACTION
 
-CMD ifconfig epair create epair0a
+CMD ifconfig epair create
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
