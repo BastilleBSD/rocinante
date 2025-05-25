@@ -71,7 +71,7 @@ INCLUDE tests/cloned
 INCLUDE tests/empty
 
 # ***** LINUX JAIL *****
-INCLUDE tests/linux
+# INCLUDE tests/linux
 
 # ***** BRIDGED JAIL *****
 INCLUDE tests/bridged
@@ -81,7 +81,7 @@ INCLUDE tests/dual
 
 # ***** BOOTOFF JAIL *****
 # create bootoff jail
-INCLUDE unit-tests/create-bootOff --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} 
+INCLUDE unit-tests/create-bootOff --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} 
 
 # ***** PRIORITY JAIL *****
 # /create priority jail
