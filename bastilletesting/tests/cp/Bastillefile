@@ -1,11 +1,12 @@
-# tests/rcp
+# tests/cp
 
 ARG OPTIONS
-ARG JAIL
-ARG RELEASE
-ARG IP
-ARG INTERFACE
-
+ARG JAIL=folsom
+ARG RELEASE=14.2-RELEASE
+ARG IP=10.0.0.4
+ARG INTERFACE=vtnet0
+ARG HOST_PATH=/etc/resolv.conf
+ARG JAIL_PATH=/tmp
 
 
 INCLUDE unit-tests/cp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
