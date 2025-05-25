@@ -83,7 +83,7 @@ INCLUDE tests/dual
 INCLUDE tests/noboot
 
 # ***** PRIORITY JAIL *****
-# /create priority jail
+
 
 
 # ***** STATIC MAC JAIL *****
