@@ -9,5 +9,3 @@ ARG JAIL_PATH=/etc/resolv.conf
 ARG HOST_PATH=/tmp/resolv.conf
 
 INCLUDE unit-tests/rcp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg JAIL_PATH=${JAIL_PATH} --arg HOST_PATH=${HOST_PATH}
-
-
