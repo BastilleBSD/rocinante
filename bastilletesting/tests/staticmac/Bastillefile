@@ -1,10 +1,10 @@
 # tests/staticmac
 
 ARG OPTIONS="-M"
-ARG JAIL
-ARG RELEASE
-ARG IP
-ARG INTERFACE
+ARG JAIL=folsom
+ARG RELEASE=14.2-RELEASE
+ARG IP=10.0.0.3
+ARG INTERFACE=vtnet0
 
 # create static mac jail
 
@@ -12,3 +12,4 @@ INCLUDE unit-tests/create-staticMac --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 
 # destroy static mac jail
 
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
