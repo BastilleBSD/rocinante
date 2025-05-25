@@ -9,4 +9,5 @@ ARG HOST_PATH="/etc/resolv.conf"
 ARG JAIL_PATH="/tmp"
 
 
-INCLUDE unit-tests/cp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/cp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=${HOST_PATH} --arg JAIL_PATH=${JAIL_PATH}
+
