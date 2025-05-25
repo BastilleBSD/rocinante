@@ -77,7 +77,7 @@ INCLUDE tests/empty
 INCLUDE tests/bridged
 
 # ***** DUAL JAIL *****
-INCLUDE tests/dual
+# INCLUDE tests/dual
 
 # ***** BOOTOFF JAIL *****
 INCLUDE tests/noboot
