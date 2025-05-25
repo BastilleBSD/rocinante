@@ -1,4 +1,4 @@
-# unit-tests/rename-dual
+# unit-tests/rename-empty
 
 ARG OPTIONS
 ARG JAIL
@@ -8,4 +8,4 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL}
 
 INCLUDE core/rename --arg --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL} 
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${NEW_NAME} 
