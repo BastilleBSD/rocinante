@@ -1,6 +1,6 @@
 # unit-tests/create-empty
 
-ARG JAIL=Empty
+ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
