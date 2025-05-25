@@ -11,5 +11,5 @@ ARG SOURCE_JAIL_PATH=/etc/resolv.conf
 ARG DEST_JAIL_PATH=/tmp/resolv.conf
 
 
-INCLUDE unit-tests/jcp --arg JAIL1=${JAIL1} --arg JAIL2=${JAIL2} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg SOURCE_JAIL_PATH=${SOURCE_JAIL_PATH} --arg DEST_JAIL_PATH=${DEST_JAIL_PATH}
+INCLUDE unit-tests/jcp --arg JAIL1=${JAIL1} --arg JAIL2=${JAIL2} --arg RELEASE=${RELEASE} --arg IP1=${IP1} --arg IP2=${IP2} --arg INTERFACE=${INTERFACE} --arg SOURCE_JAIL_PATH=${SOURCE_JAIL_PATH} --arg DEST_JAIL_PATH=${DEST_JAIL_PATH}
 
