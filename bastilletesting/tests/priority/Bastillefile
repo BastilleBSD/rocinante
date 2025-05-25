@@ -1,6 +1,6 @@
 # tests/priority
 
-ARG OPTIONS="--priority 80" 
+ARG OPTIONS="--priority" 
 ARG ARGS=80
 ARG JAIL=attica
 ARG RELEASE=14.2-RELEASE

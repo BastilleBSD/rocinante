@@ -10,6 +10,4 @@ ARG INTERFACE=vtnet0
 
 INCLUDE unit-tests/create-staticMac --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-# destroy static mac jail
 
-INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
