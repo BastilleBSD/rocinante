@@ -5,11 +5,11 @@ ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG NEW_INTERFACE=lo2
+ARG NEW_INTERFACE=epair3a
 ARG NEW_IP=10.0.0.2
 ARG ACTION
 
-CMD ifconfig lo2 create
+CMD ifconfig epair create epair3a
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
@@ -17,4 +17,4 @@ INCLUDE core/network --arg OPTIONS="-Ca" --arg JAIL=${JAIL} --arg ACTION="add" -
 
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
 
-CMD ifconfig lo2 destroy
+CMD ifconfig epair3a destroy
