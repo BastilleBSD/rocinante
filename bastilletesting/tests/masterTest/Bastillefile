@@ -80,12 +80,11 @@ INCLUDE tests/bridged
 INCLUDE tests/dual
 
 # ***** BOOTOFF JAIL *****
-# create bootoff jail
-INCLUDE unit-tests/create-bootOff --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} 
+INCLUDE tests/noboot
 
 # ***** PRIORITY JAIL *****
 # /create priority jail
-INCLUDE unit-tests/create-priority --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
 
 # ***** STATIC MAC JAIL *****
 # create static mac jail
