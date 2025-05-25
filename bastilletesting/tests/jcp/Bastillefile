@@ -1,6 +1,5 @@
 # tests/rcp
 
-
 ARG JAIL1=attica
 ARG JAIL2=alcatraz
 ARG RELEASE=14.2-RELEASE
