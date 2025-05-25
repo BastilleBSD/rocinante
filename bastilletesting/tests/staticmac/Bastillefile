@@ -1,0 +1,14 @@
+# tests/staticmac
+
+ARG OPTIONS="-M"
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+
+# create static mac jail
+
+INCLUDE unit-tests/create-staticMac --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# destroy static mac jail
+

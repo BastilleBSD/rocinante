@@ -1,0 +1,10 @@
+# tests/noboot
+
+ARG OPTIONS="--noboot"
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+
+# create bootoff jail
+INCLUDE unit-tests/create-bootOff --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} 
