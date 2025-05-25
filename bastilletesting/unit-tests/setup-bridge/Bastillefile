@@ -1,6 +1,6 @@
 # setup bridged configuration
 
-ARG ARGS="bridge vtnet0"
-ARG OPTIONS="`x"
+ARG ARGS="bridge,vtnet0"
+ARG OPTIONS=""
 
 INCLUDE core/setup --arg OPTIONS=${OPTIONS} --arg ARGS=${ARGS}
