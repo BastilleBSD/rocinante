@@ -141,15 +141,4 @@ INCLUDE unit-tests/setup-storage --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --a
 INCLUDE unit-tests/setup-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 
-# ***************************
-# ***** Cleanup routine *****
-# ***************************
-
-# destroy all jails
-
-# destroy the release
-
-# delete bastille config
-
-# remove bastille files
 
