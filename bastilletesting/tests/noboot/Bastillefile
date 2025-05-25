@@ -1,6 +1,6 @@
 # tests/noboot
 
-ARG OPTIONS="--noboot"
+ARG OPTIONS="--no-boot"
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=10.1.1.2
