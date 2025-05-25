@@ -1,7 +1,7 @@
 # unit-test/create-priority
 
 ARG OPTIONS
-ARG ARGS
+ARG ARGS="80"
 ARG JAIL
 ARG RELEASE
 ARG IP
