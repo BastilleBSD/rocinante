@@ -2,19 +2,11 @@
 
 ARG OPTIONS="-E"
 ARG JAIL=folsom
-ARG RELEASE=14.2-RELEASE
-ARG IP=192.168.69.233
-ARG INTERFACE=vtnet0
-ARG BRIDGE=bastillebridge
+ARG INTERFACE
 ARG NEW_NAME=attica
-ARG NEW_IP=192.168.69.234
-ARG TEMPLATE=www/nginx
-ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
-ARG NEW_INTERFACE=bastille0
-ARG TAGS="prod,dev"
 
 # create empty jail
-INCLUDE unit-tests/create-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/create-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 
 # rename jail
-INCLUDE unit-tests/rename-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/rename-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
