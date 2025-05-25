@@ -83,12 +83,10 @@ INCLUDE tests/dual
 INCLUDE tests/noboot
 
 # ***** PRIORITY JAIL *****
-
-
+INCLUDE tests/priority
 
 # ***** STATIC MAC JAIL *****
-# create static mac jail
-INCLUDE unit-tests/create-staticMac --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE tests/staticmac
 
 
 
@@ -97,47 +95,11 @@ INCLUDE unit-tests/create-staticMac --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 # *********************************
 
 # rcp a file
-INCLUDE unit-tests/rcp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE tests/rcp
 
 # cp a file
-INCLUDE unit-tests/cp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE tests/cp
 
 # jcp a file
-INCLUDE unit-tests/jcp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# *********************************
-# ***** Setup operation tests *****
-# *********************************
-
-# setup bridged
-INCLUDE unit-tests/setup-bridge --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-# setup filesystem
-INCLUDE unit-tests/setup-filesystem --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-# setup loopback
-INCLUDE unit-tests/setup-loopback --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-# setup netgraph
-INCLUDE unit-tests/setup-netgraph --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-# setup pf
-INCLUDE unit-tests/setup-pf --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-# setup shared
-INCLUDE unit-tests/setup-shared --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-# setup storage
-INCLUDE unit-tests/setup-storage --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
-# setup vnet
-INCLUDE unit-tests/setup-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
-
-
+INCLUDE tests/jcp
 

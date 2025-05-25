@@ -1,0 +1,11 @@
+# tests/rcp
+
+ARG OPTIONS
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+
+
+
+INCLUDE unit-tests/cp --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
