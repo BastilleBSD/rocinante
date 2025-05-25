@@ -1,11 +1,10 @@
 # unit-tests/create-clone
 
-ARG JAIL
+ARG OPTIONS="-C"
+ARG JAIL=cloner
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG NEW_NAME=clone
-ARG NEW_IP=10.10.10.2
 
 INCLUDE core/create --arg OPTIONS="-C" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
