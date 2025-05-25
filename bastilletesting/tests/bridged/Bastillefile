@@ -5,7 +5,7 @@ ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233
 ARG INTERFACE=bastillebridge
-ARG BRIDGE=bridge0
+ARG BRIDGE=vtnet0bridge
 ARG NEW_NAME=attica
 ARG NEW_IP=192.168.69.234
 ARG TEMPLATE=www/nginx
@@ -20,7 +20,7 @@ ARG TAGS="prod,dev"
  
 # ***** BRIDGED JAIL *****
 
-CMD ifconfig 
+CMD ifconfig bridge create
 
 
 # setup bastille for a bridged setup
