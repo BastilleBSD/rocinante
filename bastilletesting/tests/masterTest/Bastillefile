@@ -82,12 +82,11 @@ INCLUDE tests/dual
 # ***** BOOTOFF JAIL *****
 INCLUDE tests/noboot
 
-# ***** PRIORITY JAIL *****
-INCLUDE tests/priority
-
 # ***** STATIC MAC JAIL *****
 INCLUDE tests/staticmac
 
+# ***** PRIORITY JAIL *****
+INCLUDE tests/priority
 
 
 # *********************************
