@@ -1,0 +1,27 @@
+# unit-tests/start-standard
+
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+
+INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# -b
+INCLUDE core/stop --arg JAIL=${JAIL}
+INCLUDE core/start --arg OPTIONS="-b" --arg JAIL=${JAIL}
+
+# -d
+INCLUDE core/stop --arg JAIL=${JAIL}
+INCLUDE core/start --arg OPTIONS="-d 5" --arg JAIL=${JAIL}
+
+# -v
+INCLUDE core/stop --arg JAIL=${JAIL}
+INCLUDE core/start --arg OPTIONS="-v" --arg JAIL=${JAIL}
+
+# all
+INCLUDE core/stop --arg JAIL=${JAIL}
+INCLUDE core/start --arg OPTIONS="-bv -d 5" --arg JAIL=${JAIL}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
+

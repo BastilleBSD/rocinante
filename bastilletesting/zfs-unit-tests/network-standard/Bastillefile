@@ -1,0 +1,18 @@
+# unit-tests network-standard
+
+ARG OPTIONS
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG NEW_INTERFACE
+ARG NEW_IP
+ARG ACTION
+
+INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+INCLUDE core/network --arg OPTIONS="-Ca" --arg JAIL=${JAIL} --arg ACTION="add" --arg NEW_INTERFACE=${NEW_INTERFACE} --arg NEW_IP=${NEW_IP}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
+
+

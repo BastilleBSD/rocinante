@@ -1,0 +1,15 @@
+# cloned jail test
+
+ARG OPTIONS="-C"
+ARG JAIL=folsom
+ARG RELEASE=14.2-RELEASE
+ARG IP=192.168.69.233
+ARG INTERFACE=vtnet0
+ARG NEW_NAME=attica
+ARG NEW_IP=192.168.69.234
+ARG TEMPLATE=www/nginx
+ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
+ARG TAGS="prod,dev"
+
+
+INCLUDE unit-tests/create-clone --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}

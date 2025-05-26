@@ -1,0 +1,10 @@
+# tests/noboot
+
+ARG OPTIONS="--no-boot"
+ARG JAIL=folsom
+ARG RELEASE=14.2-RELEASE
+ARG IP=10.1.1.2
+ARG INTERFACE=vtnet0
+
+# create bootoff jail
+INCLUDE unit-tests/create-bootOff --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} 

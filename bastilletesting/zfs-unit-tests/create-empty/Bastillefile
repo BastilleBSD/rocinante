@@ -1,0 +1,8 @@
+# unit-tests/create-empty
+
+ARG OPTIONS
+ARG JAIL
+
+INCLUDE core/create --arg OPTIONS="-E" --arg JAIL=${JAIL} 
+
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

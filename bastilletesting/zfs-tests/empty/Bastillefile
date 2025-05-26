@@ -1,0 +1,12 @@
+# tests empty
+
+ARG OPTIONS="-E"
+ARG JAIL=folsom
+ARG INTERFACE
+ARG NEW_NAME=attica
+
+# create empty jail
+INCLUDE unit-tests/create-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
+
+# rename jail
+INCLUDE unit-tests/rename-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}

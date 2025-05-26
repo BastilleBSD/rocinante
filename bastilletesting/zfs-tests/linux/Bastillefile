@@ -1,0 +1,24 @@
+# tests linux
+
+ARG OPTIONS="-L"
+ARG JAIL=folsom
+ARG RELEASE=14.2-RELEASE
+ARG IP=192.168.69.233
+ARG INTERFACE=vtnet0
+ARG BRIDGE=bastillebridge
+ARG NEW_NAME=attica
+ARG NEW_IP=192.168.69.234
+ARG TEMPLATE=www/nginx
+ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
+ARG NEW_INTERFACE=bastille0
+ARG TAGS="prod,dev"
+
+
+# create linux jail
+INCLUDE unit-tests/create-linux
+
+# restart the jail
+INCLUDE unit-tests/
+
+# rename jail
+INCLUDE unit-tests/
