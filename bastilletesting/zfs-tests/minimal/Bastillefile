@@ -1,0 +1,29 @@
+# Bootstrap, create, start, stop, restart, cmd, destroy
+
+ARG JAIL=bastille-test
+ARG RELEASE=14.2-RELEASE
+ARG IP=10.1.1.2
+ARG INTERFACE=bastille0
+
+INCLUDE core/setup --arg OPTIONS="-y"
+
+INCLUDE core/bootstrap-release --arg RELEASE=${RELEASE}
+INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# Test start/stop/restart verbose mode
+INCLUDE core/stop --arg OPTIONS="-v" --arg JAIL=${JAIL}
+INCLUDE core/start --arg OPTIONS="-v" --arg JAIL=${JAIL}
+INCLUDE core/restart --arg OPTIONS="-v" --arg JAIL=${JAIL}
+
+# Test start/restart delay
+INCLUDE core/stop --arg JAIL=${JAIL}
+INCLUDE core/start --arg OPTIONS="-d 5" --arg JAIL=${JAIL}
+INCLUDE core/restart --arg OPTIONS="-d 5" --arg JAIL=${JAIL}
+
+# Test basic cmd
+INCLUDE core/cmd --arg JAIL=${JAIL} --arg ARGS="freebsd-version"
+INCLUDE core/cmd --arg JAIL=${JAIL} --arg ARGS="echo Successfully tested core/cmd"
+
+# Test destroy jail/release (--no-cache)
+INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
+INCLUDE core/destroy-release --arg OPTIONS="--no-cache" --arg RELEASE=${RELEASE}

@@ -1,0 +1,15 @@
+# unit-tests/apply-templateDual
+
+ARG OPTIONS="-D"
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG TEMPLATE
+
+
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+INCLUDE core/template --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg TEMPLATE=${TEMPLATE}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}

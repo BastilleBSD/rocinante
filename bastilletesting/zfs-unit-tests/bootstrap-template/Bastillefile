@@ -1,0 +1,7 @@
+# unit-tests/bootstrap-template
+
+# Use official templates repo as our TEMPLATE
+ARG TEMPLATE="https://github.com/bastillebsd/templates"
+
+
+INCLUDE core/bootstrap-template --arg TEMPLATE=${TEMPLATE}

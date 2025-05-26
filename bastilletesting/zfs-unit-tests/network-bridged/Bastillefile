@@ -1,0 +1,19 @@
+# unit-tests/network-bridged
+
+ARG OPTIONS="-B"
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+ARG NEW_IP=10.0.0.2
+ARG ACTION
+
+CMD ifconfig bridge1 create
+
+INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE}
+
+INCLUDE core/network --arg OPTIONS="-Ba" --arg JAIL=${JAIL} --arg ACTION="add" --arg NEW_INTERFACE=bridge1 --arg NEW_IP=${NEW_IP}
+
+INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
+
+CMD ifconfig bridge1 destroy
