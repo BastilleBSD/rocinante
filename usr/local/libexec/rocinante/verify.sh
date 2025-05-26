@@ -111,7 +111,7 @@ verify_template() {
     if [ "${_hook_validate}" -lt 1 ]; then
         rm -rf "${_template_path}"
         error_notify "[ERROR]: No valid template hooks found."
-        error_exit "Template discarded."
+        error_exit "Template discarded: ${ROCINANTE_TEMPLATE}"
     fi
 
     ## if validated; ready to use
