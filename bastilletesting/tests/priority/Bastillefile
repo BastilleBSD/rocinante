@@ -6,4 +6,4 @@ ARG RELEASE=14.2-RELEASE
 ARG IP=10.1.1.2
 ARG INTERFACE=vtnet0
 
-INCLUDE unit-tests/create-priority --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE unit-tests/create-priority --arg OPTIONS="${OPTIONS}" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
