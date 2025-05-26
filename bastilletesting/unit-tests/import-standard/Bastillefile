@@ -10,7 +10,7 @@ ARG PATH=/tmp
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/export --arg OPTIONS="--xz" --arg JAIL=${JAIL} --arg PATH=${PATH}
+INCLUDE core/export --arg OPTIONS="--txz" --arg JAIL=${JAIL} --arg PATH=${PATH}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
 
@@ -18,6 +18,6 @@ INCLUDE core/import --arg OPTIONS=${OPTIONS} --arg FILE=${FILE}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL="ALL"
 
-CMD rm -rf /tmp/*.xz
+CMD rm -rf /tmp/*.txz
 
 CMD rm -rf /tmp/*.sha256
