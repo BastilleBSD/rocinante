@@ -21,7 +21,7 @@ ARG TAGS="prod,dev"
 # ***** STANDARD JAIL *****
 
 # run bastille setup
-INCLUDE unit-tests/setupstandard
+INCLUDE unit-tests/setup-standard
 
 # create standard jail
 INCLUDE unit-tests/create-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
