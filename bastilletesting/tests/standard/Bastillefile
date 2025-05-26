@@ -17,6 +17,8 @@ ARG TAGS="prod,dev"
 # ********  Jail tests ********
 # *****************************
 
+# bootstrap bastille templates
+CMD bastille bootstrap https://github.com/bastillebsd/templates
 
 # ***** STANDARD JAIL *****
 
