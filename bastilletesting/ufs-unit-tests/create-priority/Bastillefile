@@ -1,0 +1,13 @@
+# unit-test/create-priority
+
+ARG OPTIONS
+ARG JAIL
+ARG RELEASE
+ARG IP
+ARG INTERFACE
+
+# create priority jail
+INCLUDE core/create --arg OPTIONS="${OPTIONS}" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+# destroy priority jail
+INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
