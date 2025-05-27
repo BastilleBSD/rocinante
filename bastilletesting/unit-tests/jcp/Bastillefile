@@ -1,7 +1,6 @@
 
 # unit-tests/jcp
 
-ARG OPTIONS=""
 ARG JAIL1
 ARG JAIL2
 ARG RELEASE
@@ -13,10 +12,11 @@ ARG DEST_JAIL_PATH
 
 
 # Create both jails
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL1=${JAIL1} --arg RELEASE=${RELEASE} --arg IP=${IP1} --arg INTERFACE=${INTERFACE}
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL2=${JAIL2} --arg RELEASE=${RELEASE} --arg IP=${IP2} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg JAIL=${JAIL1} --arg RELEASE=${RELEASE} --arg IP=${IP1} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg JAIL=${JAIL2} --arg RELEASE=${RELEASE} --arg IP=${IP2} --arg INTERFACE=${INTERFACE}
 
 INCLUDE core/jcp --arg OPTIONS=${OPTIONS} --arg SOURCE_JAIL=${JAIL1} --arg SOURCE_JAIL_PATH=${SOURCE_JAIL_PATH} --arg DEST_JAIL=${JAIL2} --arg DEST_JAIL_PATH=${DEST_JAIL_PATH}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL1=${JAIL1}
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL2=${JAIL2}
+
