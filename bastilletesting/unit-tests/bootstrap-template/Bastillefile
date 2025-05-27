@@ -5,3 +5,4 @@ ARG TEMPLATE="https://github.com/bastillebsd/templates"
 
 
 INCLUDE core/bootstrap-template --arg TEMPLATE=${TEMPLATE}
+
