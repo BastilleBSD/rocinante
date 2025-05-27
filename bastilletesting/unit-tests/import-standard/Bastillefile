@@ -21,3 +21,4 @@ INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL="ALL"
 CMD rm -rf /tmp/*.txz
 
 CMD rm -rf /tmp/*.sha256
+

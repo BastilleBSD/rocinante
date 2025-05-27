@@ -17,3 +17,4 @@ INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
 CMD rm -rf /tmp/*.xz
 
 CMD rm -rf /tmp/*.sha256
+
