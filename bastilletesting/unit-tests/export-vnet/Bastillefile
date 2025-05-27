@@ -9,7 +9,7 @@ ARG PATH=/tmp
 
 INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-INCLUDE core/stop-vnet --arg JAIL=${JAIL}
+INCLUDE core/stop --arg JAIL=${JAIL}
 
 INCLUDE core/export --arg OPTIONS="--txz" --arg JAIL=${JAIL} --arg PATH=${PATH}
 
