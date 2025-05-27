@@ -61,9 +61,6 @@ INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg
 # clone jail
 INCLUDE unit-tests/clone-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
 
-# rename jail
-INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
-
 # export jail
 INCLUDE unit-tests/export-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
