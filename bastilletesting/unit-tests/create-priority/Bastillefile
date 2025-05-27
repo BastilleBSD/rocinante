@@ -12,3 +12,4 @@ INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg ARGS=${ARGS} --arg JAIL=${JAI
 
 # destroy priority jail
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
+
