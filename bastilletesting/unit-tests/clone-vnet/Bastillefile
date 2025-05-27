@@ -1,7 +1,7 @@
 # unit-tests clone-vnet
 
 
-ARG OPTIONS="-V"
+ARG OPTIONS="-a"
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -9,7 +9,9 @@ ARG INTERFACE
 ARG NEW_NAME
 ARG NEW_IP
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS="-V" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+
+
 
 # -a
 INCLUDE core/clone --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME} --arg NEW_IP=${NEW_IP}
