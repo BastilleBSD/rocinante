@@ -17,13 +17,15 @@ ARG TAGS="prod,dev"
 # ********  Jail tests ********
 # *****************************
 
+# ******  Setup routines ******
+
+# run bastille setup
+INCLUDE unit-tests/setup-standard
+
 # bootstrap bastille templates
 CMD bastille bootstrap https://github.com/bastillebsd/templates
 
 # ***** STANDARD JAIL *****
-
-# run bastille setup
-INCLUDE unit-tests/setup-standard
 
 # create standard jail
 INCLUDE unit-tests/create-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
