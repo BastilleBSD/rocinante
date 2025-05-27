@@ -8,5 +8,8 @@ ARG NEW_NAME=attica
 # create empty jail
 INCLUDE unit-tests/create-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} 
 
+
 # rename jail
-INCLUDE unit-tests/rename-empty  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
+INCLUDE unit-tests/rename-empty  --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
+
+INCLUDE core/destroy --arg OPTIONS"-ayf" --arg JAIL=${JAIL}
