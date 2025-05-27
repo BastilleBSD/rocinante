@@ -1,6 +1,5 @@
 # unit-tests/export-bridged
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP

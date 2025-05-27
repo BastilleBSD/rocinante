@@ -1,11 +1,11 @@
 # unit-tests/restart-standard
-ARG OPTIONS
+
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS="-T" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # -b
 INCLUDE core/restart --arg OPTIONS="-b" --arg JAIL=${JAIL}

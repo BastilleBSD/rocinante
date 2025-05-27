@@ -1,6 +1,5 @@
 # unit-tests network-standard
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP

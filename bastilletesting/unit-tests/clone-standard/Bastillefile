@@ -1,6 +1,5 @@
 # unit-tests/clone-standard
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP

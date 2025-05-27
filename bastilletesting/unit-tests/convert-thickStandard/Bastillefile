@@ -1,6 +1,5 @@
-# unit-tests convert-thickBridged
+# unit-tests convert-thickStandard
 
-ARG OPTIONS="-a"
 ARG JAIL
 ARG RELEASE
 ARG IP

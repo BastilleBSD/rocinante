@@ -1,7 +1,7 @@
 
 # unit-tests/jcp
 
-ARG OPTIONS="-x"
+ARG OPTIONS=""
 ARG JAIL1
 ARG JAIL2
 ARG RELEASE

@@ -1,8 +1,6 @@
 # unit-tests/destroy-release
 
-ARG OPTIONS
 ARG RELEASE
-
 
 INCLUDE core/setup --arg OPTIONS="-y"
 
