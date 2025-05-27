@@ -1,7 +1,5 @@
 # unit-tests clone-vnet
 
-
-ARG OPTIONS="-a"
 ARG JAIL
 ARG RELEASE
 ARG IP

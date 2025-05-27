@@ -1,6 +1,5 @@
 # unit-tests mount_directory-standard
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP

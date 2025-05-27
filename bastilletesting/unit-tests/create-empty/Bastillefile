@@ -1,6 +1,5 @@
 # unit-tests/create-empty
 
-ARG OPTIONS
 ARG JAIL
 
 INCLUDE core/create --arg OPTIONS="-E" --arg JAIL=${JAIL} 

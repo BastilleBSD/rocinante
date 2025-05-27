@@ -1,13 +1,12 @@
 # unit-tests/rename-vnet
 
-ARG OPTIONS="-V"
 ARG JAIL=bridged
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 ARG NEW_NAME
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS="-V" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 INCLUDE core/rename --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
 

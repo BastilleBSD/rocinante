@@ -1,13 +1,12 @@
 # unit-tests/apply-templateBridged
 
-ARG OPTIONS="-B"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 ARG TEMPLATE
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS="-B" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=DHCP --arg INTERFACE=${INTERFACE}
 
 INCLUDE core/template --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg TEMPLATE=${TEMPLATE} --arg ARGS="y"
 

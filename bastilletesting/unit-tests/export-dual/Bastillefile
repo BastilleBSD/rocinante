@@ -1,13 +1,12 @@
 # unit-tests export-dual
 
-ARG OPTIONS="-D"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 ARG PATH=/tmp
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS="-D" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 INCLUDE core/export --arg OPTIONS="--xz" --arg JAIL=${JAIL} --arg PATH=${PATH}
 

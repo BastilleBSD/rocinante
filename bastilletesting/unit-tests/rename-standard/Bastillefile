@@ -1,6 +1,5 @@
 # unit-tests/rename-standard
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -12,3 +11,4 @@ INCLUDE core/create --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} -
 INCLUDE core/rename --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${NEW_NAME}
+

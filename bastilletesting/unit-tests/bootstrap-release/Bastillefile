@@ -1,8 +1,6 @@
 # unit-tests/bootstrap-release
 
-ARG OPTIONS
 ARG RELEASE
-
 
 INCLUDE core/setup --arg OPTIONS="-y"
 

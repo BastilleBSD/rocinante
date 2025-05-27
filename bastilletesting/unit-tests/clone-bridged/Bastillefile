@@ -1,6 +1,5 @@
 # clone a bridged jail
 
-ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP

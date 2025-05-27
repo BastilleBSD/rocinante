@@ -1,12 +1,11 @@
 # unit-tests/start-thick
 
-ARG OPTIONS="-T"
 ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
 
-INCLUDE core/create --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+INCLUDE core/create --arg OPTIONS="-T" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # -b
 INCLUDE core/stop --arg JAIL=${JAIL}
@@ -25,3 +24,4 @@ INCLUDE core/stop --arg JAIL=${JAIL}
 INCLUDE core/start --arg OPTIONS="-bv -d 5" --arg JAIL=${JAIL}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
+
