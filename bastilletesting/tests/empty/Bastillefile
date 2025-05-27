@@ -1,6 +1,6 @@
 # tests empty
 
-ARG JAIL=folsom
+ARG JAIL
 ARG INTERFACE
 ARG NEW_NAME=attica
 
@@ -10,5 +10,5 @@ INCLUDE unit-tests/create-empty  --arg OPTIONS="-E" --arg JAIL=${JAIL}
 # rename jail
 INCLUDE unit-tests/rename-empty  --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NAME}
 
-INCLUDE core/destroy-jail --arg OPTIONS"-ayf" --arg JAIL=${NEW_NAME}
+INCLUDE core/destroy-jail --arg OPTIONS="-ayf" --arg JAIL=${NEW_NAME}
 
