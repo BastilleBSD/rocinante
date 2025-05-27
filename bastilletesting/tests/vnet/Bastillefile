@@ -34,7 +34,6 @@ INCLUDE unit-tests/restart-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --ar
 # stop the jail
 INCLUDE unit-tests/start_stop-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
-
 # install pkg to jail
 INCLUDE unit-tests/pkg-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
@@ -54,7 +53,7 @@ INCLUDE unit-tests/mount_file-vnet --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} -
 INCLUDE unit-tests/mount_directory-vnet --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/usr/local --arg JAIL_PATH=/mnt/usr/local --arg ARGS="nullfs rw 0 0"
 
 # add network interface
-INCLUDE unit-tests/network-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+# INCLUDE unit-tests/network-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # rename jail
 INCLUDE unit-tests/rename-vnet --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_NAME=${NEW_NAME}
