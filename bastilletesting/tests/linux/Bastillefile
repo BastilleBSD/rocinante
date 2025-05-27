@@ -1,8 +1,6 @@
 # tests linux
 
-ARG OPTIONS="-L"
 ARG JAIL=folsom
-ARG RELEASE=14.2-RELEASE
 ARG IP=192.168.69.233
 ARG INTERFACE=vtnet0
 ARG BRIDGE=bastillebridge
@@ -22,3 +20,4 @@ INCLUDE unit-tests/create-linux
 
 # rename jail
 #INCLUDE unit-tests/
+
