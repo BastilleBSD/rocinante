@@ -1,7 +1,6 @@
 # tests empty
 
-ARG JAIL
-ARG INTERFACE
+ARG JAIL=folsom
 ARG NEW_NAME=attica
 
 # create empty jail
