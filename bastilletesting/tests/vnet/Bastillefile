@@ -16,7 +16,7 @@ ARG TAGS="prod,dev"
 
 # run bastille setup with no options
 
-INCLUDE unit-tests/setup-noOptions
+INCLUDE unit-tests/setup-standard
 
 
 # *****************************

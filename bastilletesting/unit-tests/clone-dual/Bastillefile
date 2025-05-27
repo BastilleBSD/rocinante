@@ -21,3 +21,4 @@ INCLUDE core/clone --arg OPTIONS="-a" --arg JAIL=${JAIL} --arg NEW_NAME=${NEW_NA
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${JAIL}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afy" --arg JAIL=${NEW_NAME}
+

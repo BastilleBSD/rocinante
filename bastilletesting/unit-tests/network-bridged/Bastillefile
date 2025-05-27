@@ -17,3 +17,4 @@ INCLUDE core/network --arg OPTIONS="-Ba" --arg JAIL=${JAIL} --arg ACTION="add" -
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL=${JAIL}
 
 CMD ifconfig bridge1 destroy
+
