@@ -1,1 +1,4 @@
-CP bastille.conf /usr/local/etc/bastille/bastille.conf
+# core setup
+
+INCLUDE core/setup
+
