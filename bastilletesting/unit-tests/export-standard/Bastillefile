@@ -1,5 +1,6 @@
 # unit-tests/export-standard
 
+ARG OPTIONS
 ARG JAIL
 ARG RELEASE
 ARG IP
@@ -14,7 +15,7 @@ INCLUDE core/export --arg OPTIONS="--txz" --arg JAIL=${JAIL} --arg PATH=${PATH}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-afxy" --arg JAIL=${JAIL}
 
-CMD rm -rf /tmp/*.xz
+CMD rm -rf /tmp/*.txz
 
 CMD rm -rf /tmp/*.sha256
 

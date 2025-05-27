@@ -67,10 +67,10 @@ INCLUDE unit-tests/rename-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} -
 INCLUDE unit-tests/clone-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg NEW_IP=${NEW_IP} --arg NEW_NAME=${NEW_NAME}
 
 # export jail
-INCLUDE unit-tests/export-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE={INTERFACE}
+INCLUDE unit-tests/export-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE=${INTERFACE}
 
 # import jail
-INCLUDE unit-tests/import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE={INTERFACE}
+INCLUDE unit-tests/import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE=${INTERFACE}
 
 # rdr jail
 INCLUDE unit-tests/rdr --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
