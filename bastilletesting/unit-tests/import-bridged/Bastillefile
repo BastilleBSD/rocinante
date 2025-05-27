@@ -5,7 +5,7 @@ ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG FILE=/tmp/*.xz
+ARG FILE=/tmp/*.txz
 ARG PATH=/tmp
 
 
