@@ -12,6 +12,7 @@ ARG TEMPLATE_URL=https://github.com/BastilleBSD/templates.git
 ARG NEW_INTERFACE=bastille0
 ARG TAGS="prod,dev"
 
+CMD sysrc -f /usr/local/etc/rocinante.conf rocinante_zfs_enable=NO
 
 # CMD pkg install git
 
