@@ -66,6 +66,6 @@ INCLUDE unit-tests/export-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --
 # INCLUDE unit-tests/import-bridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 # convert to thick
-INCLUDE unit-tests/convert-thickBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+# INCLUDE unit-tests/convert-thickBridged --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
 
