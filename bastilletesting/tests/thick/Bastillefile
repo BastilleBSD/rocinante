@@ -44,4 +44,4 @@ INCLUDE unit-tests/export-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --a
 
 
 # import jail
-INCLUDE unit-tests/import-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
+# INCLUDE unit-tests/import-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}

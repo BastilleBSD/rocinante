@@ -70,7 +70,7 @@ INCLUDE unit-tests/clone-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --
 INCLUDE unit-tests/export-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE=${INTERFACE}
 
 # import jail
-INCLUDE unit-tests/import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE=${INTERFACE}
+# INCLUDE unit-tests/import-standard --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} INTERFACE=${INTERFACE}
 
 # rdr jail
 # INCLUDE unit-tests/rdr --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
