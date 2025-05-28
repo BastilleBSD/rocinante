@@ -36,7 +36,7 @@ INCLUDE unit-tests/mount_file-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL}
 
 
 # mount directory into jail
-INCLUDE unit-tests/mount_directory-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/usr/local --arg JAIL_PATH=/mnt/usr/local --arg ARGS="nullfs rw 0 0"
+# INCLUDE unit-tests/mount_directory-thick  --arg OPTIONS=${OPTIONS} --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE} --arg HOST_PATH=/usr/local --arg JAIL_PATH=/mnt/usr/local --arg ARGS="nullfs rw 0 0"
 
 
 # export jail
