@@ -4,8 +4,8 @@ ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG FILE=/tmp/*.txz
-ARG PATH=/tmp
+ARG FILE=/*.txz
+ARG PATH=/
 
 
 INCLUDE core/create --arg OPTIONS="-V" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
@@ -20,7 +20,7 @@ INCLUDE core/import --arg OPTIONS=${OPTIONS} --arg FILE=${FILE}
 
 INCLUDE core/destroy-jail --arg OPTIONS="-ay" --arg JAIL="ALL"
 
-CMD rm -rf /tmp/*.txz
+CMD rm -rf /*.txz
 
-CMD rm -rf /tmp/*.sha256
+CMD rm -rf /*.sha256
 
