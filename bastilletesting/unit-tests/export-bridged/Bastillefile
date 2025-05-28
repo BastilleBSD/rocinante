@@ -4,7 +4,7 @@ ARG JAIL
 ARG RELEASE
 ARG IP
 ARG INTERFACE
-ARG PATH=/work/tmp
+ARG PATH=/work
 
 INCLUDE core/create --arg OPTIONS="-B" --arg JAIL=${JAIL} --arg RELEASE=${RELEASE} --arg IP=${IP} --arg INTERFACE=${INTERFACE}
 
