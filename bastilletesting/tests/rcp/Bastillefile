@@ -4,7 +4,7 @@ ARG OPTIONS="-x"
 ARG JAIL=folsom
 ARG RELEASE=14.2-RELEASE
 ARG IP=10.0.0.3
-ARG INTERFACE=vtnet0
+ARG INTERFACE=em0
 ARG JAIL_PATH=/etc/resolv.conf
 ARG HOST_PATH=/tmp/resolv.conf
 
