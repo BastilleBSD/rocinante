@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Rocinante'
-copyright = '2025, Christer Edwards'
+copyright = '2021-2025, Christer Edwards'
 author = 'Christer Edwards'
 release = '0.1.20220714'
 
