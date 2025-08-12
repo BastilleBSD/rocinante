@@ -40,13 +40,9 @@ while [ "$#" -gt 0 ]; do
         -h|--help|help)
             sysrc_usage
             ;;
-        -*)
-            error_exit "[ERROR]: Unknown option: \"${1}\""
-            ;;
         *)
             break
             ;;
-
     esac
 done
 
