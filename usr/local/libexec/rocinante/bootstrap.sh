@@ -38,7 +38,7 @@ bootstrap_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            cmd_usage
+            bootstrap_usage
             ;;
         -x|--debug)
             enable_debug
