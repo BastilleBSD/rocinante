@@ -124,7 +124,7 @@ verify_template() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            usage
+            verify_usage
             ;;
         -x|--debug)
             enable_debug
