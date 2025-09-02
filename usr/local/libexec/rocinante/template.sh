@@ -130,7 +130,7 @@ line_in_file() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            usage
+            template_usage
             ;;
         -x|--debug)
             enable_debug
