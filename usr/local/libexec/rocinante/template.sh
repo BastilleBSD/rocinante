@@ -105,8 +105,8 @@ render() {
 
 line_in_file() {
 
-    local file_path="${1}"
-    local line="${2}"
+    local line="${1%% *}"
+    local file_path="${1#* }"
     
     if [ -f "${file_path}" ]; then
         if ! grep -qxF "${line}" "${file_path}"; then
@@ -245,7 +245,6 @@ echo "Applying template: ${TEMPLATE}..."
 
 # Build a list of sed commands like this: -e 's/${username}/root/g' -e 's/${domain}/example.com/g'
 # Values provided by default (without being defined by the user) are listed here. -- cwells
-ARG_REPLACEMENTS="-e 's/\${JAIL_IP}/${_jail_ip}/g' -e 's/\${JAIL_NAME}/${_jail}/g'"
 # This is parsed outside the HOOKS loop so an ARG file can be used with a Bastillefile. -- cwells
 if [ -s "${rocinante_template}/ARG" ]; then
     while read _line; do
