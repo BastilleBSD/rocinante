@@ -118,19 +118,19 @@ case "${CMD}" in
     help|-h|--help)
         usage
         ;;
-    bootstrap \
-	cmd \
-    cp \
-	limits \
-	list \
-    pkg \
-    service \
-    sysctl \
-    sysrc \
-    template \
-	update \
-	upgrade \
-	verify \
+    bootstrap| \
+    cmd| \
+    cp| \
+    limits| \
+    list| \
+    pkg| \
+    service| \
+    sysctl| \
+    sysrc| \
+    template| \
+    update| \
+    upgrade| \
+    verify| \
     zfs)
         ;;
     *)
