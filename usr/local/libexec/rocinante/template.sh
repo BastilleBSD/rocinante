@@ -105,8 +105,8 @@ render() {
 
 line_in_file() {
 
-    local file_path="${1%% *}"
-    local line="${1#* }"
+    local line="${1%% *}"
+    local file_path="${1#* }"
     
     if [ -f "${file_path}" ]; then
         if ! grep -qxF "${line}" "${file_path}"; then
