@@ -71,7 +71,7 @@ rocinante_root_check
 #bastille_perms_check
 
 ## version
-ROCINANTE_VERSION="1.0.20250714"
+ROCINANTE_VERSION="1.0.1.20251120"
 
 usage() {
     cat << EOF
@@ -90,12 +90,12 @@ Available Commands:
   pkg         Manipulate binary packages. See pkg(8).
   service     Manage services. See service(8).
   sysctl      Manage sysctl values. See sysctl(8).
-  sysrc       Safely edit rc files. See syscrc(8).
+  sysrc       Safely edit rc files. See sysrc(8).
   template    Apply templates.
   update      Update release to latest -pX. See freebsd-update(8).
   upgrade     Upgrade release to X.Y-RELEASE. See freebsd-update(8).
   verify      Compare release against a "known good" index.
-  zfs         Manage (get|set) ZFS attributes on targeted container(s).
+  zfs         Manage (get|set) ZFS attributes.
 
 Use "rocinante -v|--version" for version information.
 Use "rocinante command -h|--help" for more information about a command.
@@ -111,23 +111,31 @@ shift
 
 # Handle special-case commands first.
 case "${CMD}" in
-version|-v|--version)
-    info "${ROCINANTE_VERSION}"
-    exit 0
-    ;;
-help|-h|--help)
-    usage
-    ;;
-bootstrap|cmd|cp|limits|list|update|upgrade|verify)
-    # Filter for valid commands
-    ;;
-pkg|service|sysctl|sysrc|template|zfs)
-    # Filter for valid commands
-    ;;
-*)
-    # Filter out invalid commands
-    usage
-    ;;
+    version|-v|--version)
+        info "${ROCINANTE_VERSION}"
+        exit 0
+        ;;
+    help|-h|--help)
+        usage
+        ;;
+    bootstrap \
+	cmd \
+    cp \
+	limits \
+	list \
+    pkg \
+    service \
+    sysctl \
+    sysrc \
+    template \
+	update \
+	upgrade \
+	verify \
+    zfs)
+        ;;
+    *)
+        usage
+        ;;
 esac
 
 SCRIPTPATH="${rocinante_libdir}/${CMD}.sh"

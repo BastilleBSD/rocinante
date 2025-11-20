@@ -1,5 +1,0 @@
-ARG OPTIONS
-ARG JAIL
-
-CMD bastille restart ${OPTIONS} ${JAIL}
-

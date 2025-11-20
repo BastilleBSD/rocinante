@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-verify_usage() {
+usage() {
     error_exit "Usage: rocinante verify [option(s)] TEMPLATE"
 }
 
@@ -124,7 +124,7 @@ verify_template() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            verify_usage
+            usage
             ;;
         -x|--debug)
             enable_debug
@@ -140,18 +140,18 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -ne 1 ]; then
-    verify_usage
+    usage
 fi
 
 case "${1}" in
     http?*)
-        verify_usage
+        usage
         ;;
     */*)
         ROCINANTE_TEMPLATE=$1
         verify_template
         ;;
     *)
-        verify_usage
+        usage
         ;;
 esac

@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-upgrade_usage() {
+usage() {
     error_exit "Usage: rocinante upgrade release"
 }
 
@@ -38,7 +38,7 @@ upgrade_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            upgrade_usage
+            usage
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -51,7 +51,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -gt 1 ]; then
-    upgrade_usage
+    usage
 fi
 
 if [ -f "/bin/midnightbsd-version" ]; then
@@ -64,8 +64,6 @@ fi
 
 # Execute UPGRADE
 
-info "[UPGRADE]:"
+info "\n[UPGRADE]:"
 
 PAGER="/bin/cat" freebsd-update upgrade -r "$@"
-
-echo

@@ -1,7 +1,0 @@
-ARG OPTIONS
-ARG JAIL
-ARG NEW_NAME
-
-
-CMD bastille rename ${OPTIONS} ${JAIL} ${NEW_NAME}
-

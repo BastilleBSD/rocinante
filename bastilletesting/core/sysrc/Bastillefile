@@ -1,5 +1,0 @@
-ARG OPTIONS
-ARG JAIL
-ARG ARGS
-
-CMD bastille sysrc ${OPTIONS} ${JAIL} ${ARGS}

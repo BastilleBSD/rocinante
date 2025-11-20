@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-pkg_usage() {
+usage() {
     error_exit "Usage: rocinante pkg ARGS"
 }
 
@@ -38,7 +38,7 @@ pkg_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            pkg_usage
+            usage
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -51,13 +51,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -lt 1 ]; then
-    pkg_usage
+    usage
 fi
 
 # Execute PKG
 
-info "[PKG]:"
+info "\n[PKG]:"
 
 /usr/sbin/pkg "$@"
-
-echo

@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-list_usage() {
+usage() {
     error_exit "Usage: rocinante list [option(s)]"
 }
 
@@ -38,7 +38,7 @@ list_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            list_usage
+            usage
             ;;
         -x|--debug)
             enable_debug
@@ -55,7 +55,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -ne 0 ]; then
-    list_usage
+    usage
 fi
 
 # List templates

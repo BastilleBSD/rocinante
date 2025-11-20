@@ -1,6 +1,0 @@
-ARG OPTIONS
-ARG JAIL
-ARG ARGS
-
-CMD bastille limits ${OPTIONS} ${JAIL} ${ARGS}
-
