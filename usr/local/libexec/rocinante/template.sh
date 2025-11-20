@@ -89,29 +89,31 @@ get_arg_value() {
 
 render() {
 
-    _file_path="${1}/${2}"
-    if [ -d "${_file_path}" ]; then # Recursively render every file in this directory. -- cwells
-        echo "Rendering Directory: ${_file_path}"
-        find "${_file_path}" \( -type d -name .git -prune \) -o -type f
-        find "${_file_path}" \( -type d -name .git -prune \) -o -type f -print0 | $(eval "xargs -0 sed -i '' ${ARG_REPLACEMENTS}")
-    elif [ -f "${_file_path}" ]; then
-        echo "Rendering File: ${_file_path}"
-        eval "sed -i '' ${ARG_REPLACEMENTS} '${_file_path}'"
+    local file_path="${1}"
+
+    if [ -d "${file_path}" ]; then # Recursively render every file in this directory. -- cwells
+        echo "Rendering Directory: ${file_path}"
+        find "${file_path}" \( -type d -name .git -prune \) -o -type f
+        find "${file_path}" \( -type d -name .git -prune \) -o -type f -print0 | $(eval "xargs -0 sed -i '' ${ARG_REPLACEMENTS}")
+    elif [ -f "${file_path}" ]; then
+        echo "Rendering File: ${file_path}"
+        eval "sed -i '' ${ARG_REPLACEMENTS} '${file_path}'"
     else
-        warn "[WARNING]: Path not found for render: ${2}"
+        warn "[WARNING]: Path not found for render: ${file_path}"
     fi
 }
 
 line_in_file() {
 
-    _filepath="$(echo ${1} | awk '{print $1}')"
-    _line="$(echo ${2} | awk '{print $1}')"
-    if [ -f "${_jailpath}/${_filepath}" ]; then
-        if ! grep -qxF "${_line}" "${_jailpath}/${_filepath}"; then
-            echo "${_line}" >> "${_jailpath}/${_filepath}"
-	fi
+    local file_path="${1}"
+    local line="${2}"
+    
+    if [ -f "${file_path}" ]; then
+        if ! grep -qxF "${line}" "${file_path}"; then
+            echo "${line}" >> "${file_path}"
+        fi
     else
-        warn "[WARNING]: Path not found for line_in_file: ${_filepath}"
+        warn "[WARNING]: Path not found for line_in_file: ${file_path}"
     fi
 }
 
@@ -308,11 +310,11 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
             pkg)
                 _args="install -y ${_args}" ;;
             render) # This is a path to one or more files needing arguments replaced by values. -- cwells
-                render "${rocinante_jail_path}" "${_args}"
+                render ${_args}
                 continue
                 ;;
             lif|lineinfile|line_in_file)
-                line_in_file "${_args}"
+                line_in_file ${_args}
                 continue
                 ;;
         esac
