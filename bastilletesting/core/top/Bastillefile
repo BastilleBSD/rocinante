@@ -1,6 +1,0 @@
-ARG OPTIONS
-ARG JAIL
-
-CMD bastille top ${OPTIONS} ${JAIL}
-
-

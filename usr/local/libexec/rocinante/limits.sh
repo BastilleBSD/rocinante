@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-limits_usage() {
+usage() {
     error_exit "Usage: rocinante limits LIMITS [ARGS]"
 }
 
@@ -43,7 +43,7 @@ fi
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            limits_usage
+            usage
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -56,13 +56,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -lt 1 ]; then
-    limits_usage
+    usage
 fi
 
 # Execute RCTL
 
-info "[LIMITS]:"
+info "\n[LIMITS]:"
 
 /usr/bin/rctl "$@"
-
-echo

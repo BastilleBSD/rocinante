@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-sysctl_usage() {
+usage() {
     error_exit "Usage: rocinante sysctl KEY=VALUE"
 }
 
@@ -38,7 +38,7 @@ sysctl_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            sysctl_usage
+            usage
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -51,13 +51,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -lt 1 ]; then
-    sysctl_usage
+    usage
 fi
 
 # Execute SYSRC
 
-info "[SYSCTL]:"
+info "\n[SYSCTL]:"
 
 /sbin/sysctl "$@"
-
-echo

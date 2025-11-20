@@ -1,6 +1,0 @@
-ARG OPTIONS
-ARG JAIL
-ARG DEST
-
-CMD bastille migrate ${OPTIONS} ${JAIL} ${DEST}
-

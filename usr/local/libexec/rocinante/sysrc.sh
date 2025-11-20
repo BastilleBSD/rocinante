@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-sysrc_usage() {
+usage() {
     error_exit "Usage: rocinante sysrc ARGS"
 }
 
@@ -38,7 +38,7 @@ sysrc_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            sysrc_usage
+            usage
             ;;
         *)
             break
@@ -47,13 +47,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -lt 1 ]; then
-    sysrc_usage
+    usage
 fi
 
 # Execute SYSRC
 
-info "[SYSRC]:"
+info "\n[SYSRC]:"
 
 /usr/sbin/sysrc "$@"
-
-echo

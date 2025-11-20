@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-cp_usage() {
+usage() {
     error_exit "Usage: rocinante cp [option(s)] TEMPLATE_PATH HOST_PATH"
 }
 
@@ -39,7 +39,7 @@ OPTION="-av"
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            cp_usage
+            usage
             ;;
         -q|--quiet)
             OPTION="-a"
@@ -56,7 +56,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -ne 2 ]; then
-    cp_usage
+    usage
 fi
 
 CP_SOURCE="${1}"
@@ -64,12 +64,10 @@ CP_DEST="${2}"
 
 # Execute CP
 
-info "[CP]:"
+info "\n[CP]:"
 
 cp "${OPTION}" "${CP_SOURCE}" "${CP_DEST}"
 
 RETURN="$?"
 
 return "${RETURN}"
-
-echo

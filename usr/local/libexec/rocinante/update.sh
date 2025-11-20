@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-update_usage() {
+usage() {
     error_exit "Usage: rocinante update [ARGS]"
 }
 
@@ -38,7 +38,7 @@ update_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            update_usage
+            usage
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -60,8 +60,6 @@ fi
 
 # Execute UPDATE
 
-info "[UPDATE]:"
+info "\n[UPDATE]:"
 
 PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron "$@"
-
-echo

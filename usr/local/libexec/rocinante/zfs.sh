@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-zfs_usage() {
+usage() {
     error_notify "Usage: rocinante zfs command [args]" 
 }
 
@@ -38,7 +38,7 @@ zfs_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            zfs_usage
+            usage
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -51,13 +51,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -lt 1 ]; then
-    zfs_usage
+    usage
 fi
 
 # Execute ZFS
 
-info "[ZFS]:"
+info "\n[ZFS]:"
 
 /sbin/zfs "$@"
-
-echo

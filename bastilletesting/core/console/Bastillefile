@@ -1,6 +1,0 @@
-ARG OPTIONS
-ARG JAIL
-ARG USER
-
-CMD bastille console ${OPTIONS} ${JAIL} ${USER}
-

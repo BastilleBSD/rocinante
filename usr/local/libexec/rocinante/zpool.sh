@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-zpool_usage() {
+usage() {
     error_notify "Usage: rocinante zpool ARGS" 
 }
 
@@ -38,7 +38,7 @@ zpool_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            zpool_usage
+            usage
             ;;
         -*)
             error_exit "[ERROR]: Unknown option: \"${1}\""
@@ -51,13 +51,11 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -lt 1 ]; then
-    zpool_usage
+    usage
 fi
 
 # Execute ZPOOL
 
-info "[ZPOOL]"
+info "\n[ZPOOL]"
 
 /sbin/zpool "$@"
-
-echo

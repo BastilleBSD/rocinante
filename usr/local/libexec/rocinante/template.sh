@@ -30,20 +30,8 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-template_usage() {
+usage() {
     error_exit "Usage: rocinante template [option(s)] [--convert] PROJECT/TEMPLATE"
-}
-
-post_command_hook() {
-
-    _jail=$1
-    _cmd=$2
-    _args=$3
-
-    case $_cmd in
-        rdr)
-            echo -e ${_args}
-    esac
 }
 
 get_arg_name() {
@@ -100,6 +88,7 @@ get_arg_value() {
 }
 
 render() {
+
     _file_path="${1}/${2}"
     if [ -d "${_file_path}" ]; then # Recursively render every file in this directory. -- cwells
         echo "Rendering Directory: ${_file_path}"
@@ -130,7 +119,7 @@ line_in_file() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            template_usage
+            usage
             ;;
         -x|--debug)
             enable_debug
@@ -146,7 +135,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -lt 1 ]; then
-    template_usage
+    usage
 fi
 
 TEMPLATE="${1}"
@@ -334,61 +323,9 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
             error_exit "Failed to execute command: ${_cmd}"
         fi
 
-        post_command_hook "${_jail}" "${_cmd}" "${_args}"
     done
     set +f
     unset IFS
 fi
-
-for _hook in ${HOOKS}; do
-    if [ -s "${rocinante_template}/${_hook}" ]; then
-        # Default command is the lowercase hook name and default args are the line from the file. -- cwells
-        _cmd=$(echo "${_hook}" | awk '{print tolower($1);}')
-        _args_template='${_line}'
-
-        # Override default command/args for some hooks. -- cwells
-        case ${_hook} in
-            CONFIG)
-                warn "CONFIG deprecated; rename to OVERLAY."
-                _args_template='${rocinante_template}/${_line} /'
-                _cmd='cp' ;;
-            FSTAB)
-                _cmd='mount' ;;
-            INCLUDE)
-                _cmd='template' ;;
-            OVERLAY)
-                _args_template='${rocinante_template}/${_line} /'
-                _cmd='cp' ;;
-            PF)
-                info "NOT YET IMPLEMENTED."
-                continue ;;
-            PRE)
-                _cmd='cmd' ;;
-            RENDER) # This is a path to one or more files needing arguments replaced by values. -- cwells
-                render "${rocinante_jail_path}" "${_line}"
-                continue
-                ;;
-        esac
-
-        info "[${_jail}]:${_hook} -- START"
-        if [ "${_hook}" = 'CMD' ] || [ "${_hook}" = 'PRE' ]; then
-            rocinante cmd /bin/sh < "${rocinante_template}/${_hook}" || exit 1
-        elif [ "${_hook}" = 'PKG' ]; then
-            rocinante pkg install -y $(cat "${rocinante_template}/PKG") || exit 1
-            rocinante pkg audit -F
-        else
-            while read _line; do
-                if [ -z "${_line}" ]; then
-                    continue
-                fi
-                # Replace "arg" variables in this line with the provided values. -- cwells
-                _line=$(echo "${_line}" | eval "sed ${ARG_REPLACEMENTS}")
-                eval "_args=\"${_args_template}\""
-                rocinante "${_cmd}" "${_jail}" ${_args} || exit 1
-            done < "${rocinante_template}/${_hook}"
-        fi
-        info "[${_jail}]:${_hook} -- END"
-    fi
-done
 
 info "\nTemplate applied: ${TEMPLATE}\n"

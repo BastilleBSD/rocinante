@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-cmd_usage() {
+usage() {
     error_exit "Usage: rocinante cmd [option(s)] ARGS"
 }
 
@@ -39,7 +39,7 @@ OPTION="-xc"
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            cmd_usage
+            usage
             ;;
         -q|--quiet)
             OPTION="-c"
@@ -56,7 +56,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -eq 0 ]; then
-    cmd_usage
+    usage
 fi
 
 # Execute CMD
@@ -70,5 +70,3 @@ ERROR_CODE="$?"
 info "${ERROR_CODE}"
 
 return "${ERROR_CODE}"
-
-echo

@@ -1,4 +1,0 @@
-ARG JAIL
-ARG RELEASE
-
-CMD bastille convert ${JAIL} ${RELEASE}

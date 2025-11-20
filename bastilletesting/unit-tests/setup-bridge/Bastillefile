@@ -1,8 +1,0 @@
-# setup bridged configuration
-
-ARG ARG1="bridge"
-ARG ARG2="vtnet0"
-ARG OPTIONS=""
-
-INCLUDE core/setup --arg OPTIONS=${OPTIONS} --arg ARG1=${ARG1} --arg ARG2=${ARG2}
-

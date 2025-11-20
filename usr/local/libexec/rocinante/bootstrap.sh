@@ -30,7 +30,7 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-bootstrap_usage() {
+usage() {
     error_exit "Usage: rocinante bootstrap [option(s)] URL"
 }
 
@@ -38,7 +38,7 @@ bootstrap_usage() {
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
-            bootstrap_usage
+            usage
             ;;
         -x|--debug)
             enable_debug
@@ -55,7 +55,7 @@ while [ "$#" -gt 0 ]; do
 done
 
 if [ "$#" -eq 0 ]; then
-    bootstrap_usage
+    usage
 fi
 
 fetch_template() {
