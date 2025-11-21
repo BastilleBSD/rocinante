@@ -3,21 +3,21 @@
 project = 'Rocinante'
 copyright = '2021-2025, Christer Edwards'
 author = 'Christer Edwards'
-release = '1.0.20250714'
+release = '1.0.1.20251120'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = ['sphinx_rtd_theme','sphinx_rtd_dark_mode']
 
-templates_path = ['_templates']
+templates_path = ['templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 html_theme = 'sphinx_rtd_theme'
-html_static_path = ['_static']
-html_logo = '_static/rocinante.jpeg'
+html_static_path = ['static']
+html_logo = 'static/rocinante.jpeg'
 html_theme_options = {
     'collapse_navigation': True,
     'flyout_display': 'hidden',

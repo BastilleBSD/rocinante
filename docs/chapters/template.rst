@@ -25,31 +25,31 @@ Template Automation Hooks
 +---------------+---------------------+-----------------------------------------+
 | CMD           | /bin/sh command     | /usr/bin/chsh -s /usr/local/bin/zsh     |
 +---------------+---------------------+-----------------------------------------+
-| CONFIG        | set property value  | set allow.mlock 1                       |
+| CP            | path(s)             | etc root usr (one per line)             |
 +---------------+---------------------+-----------------------------------------+
-| CP/OVERLAY    | path(s)             | etc root usr (one per line)             |
-+---------------+---------------------+-----------------------------------------+
-| INCLUDE       | template path/URL   | http?://TEMPLATE_URL or project/path    |
+| INCLUDE       | template / URL      | http?://TEMPLATE_URL or project/path    |
 +---------------+---------------------+-----------------------------------------+
 | LIMITS        | resource value      | memoryuse 1G                            |
 +---------------+---------------------+-----------------------------------------+
 | LINE_IN_FILE  | line file_path      | word /usr/local/word/word.conf          |
 +---------------+---------------------+-----------------------------------------+
-| MOUNT         | fstab syntax        | /host/path container/path nullfs ro 0 0 |
-+---------------+---------------------+-----------------------------------------+
-| OVERLAY       | path(s)             | etc root usr (one per line)             |
-+---------------+---------------------+-----------------------------------------+
 | PKG           | port/pkg name(s)    | vim-console zsh git-lite tree htop      |
-+---------------+---------------------+-----------------------------------------+
-| RDR           | tcp port port       | tcp 2200 22 (hostport jailport)         |
 +---------------+---------------------+-----------------------------------------+
 | RENDER        | /path/file.txt      | /usr/local/etc/gitea/conf/app.ini       |
 +---------------+---------------------+-----------------------------------------+
-| RESTART       |                     | (restart jail)                          |
-+---------------+---------------------+-----------------------------------------+
 | SERVICE       | service command     | 'nginx start' OR 'postfix reload'       |
 +---------------+---------------------+-----------------------------------------+
-| SYSRC         | sysrc command(s)    | nginx_enable=YES                        |
+| SYSCTL        | sysctl command(s)   |                                         |
++---------------+---------------------+-----------------------------------------+
+| SYSRC         | sysrc command(s)    |                                         |
++---------------+---------------------+-----------------------------------------+
+| UPDATE        | update arg(s)       |                                         |
++---------------+---------------------+-----------------------------------------+
+| UPGRADE       | RELEASE_NAME        | 14.3-RELEASE                            |
++---------------+---------------------+-----------------------------------------+
+| ZFS           | zfs command(s)      | zfs create zroot/tank                   |
++---------------+---------------------+-----------------------------------------+
+| ZPOOL         | zpool command(s)    |                                         |
 +---------------+---------------------+-----------------------------------------+
 
 Template Hook Descriptions
@@ -72,47 +72,44 @@ to any templates called with the ``INCLUDE`` hook. See the following example...
 
 .. code-block:: shell
 
-  ARG JAIL
-  ARG IP
+  ARG VALUE1
+  ARG VALUE2
 
-  INCLUDE other/template --arg JAIL=${JAIL} --arg IP=${IP}
+  INCLUDE other/template --arg VALUE1=${VALUE1} --arg VALUE2=${VALUE2}
 
-If the above template is called with ``--arg JAIL=myjail --arg IP=10.3.3.3``, these values will
-be passed along to ``other/template`` as well, with the matching variable. So ``${JAIL}`` will be
-``myjail`` and ``${IP}`` will be ``10.3.3.3``.
-
-The ARG hook has three values that are built in, and will differ for every jail. The values
-are ``JAIL_NAME``, ``JAIL_IP``, and ``JAIL_IP6``. These can be used inside any template without
-setting the values at the top of the Bastillefile. The values are automatically retrieved from
-the targeted jails configuration.
+If the above template is called with ``--arg VALUE1=VALUE1 --arg VALUE2=VALUE2``, these values will
+be passed along to ``other/template`` as well, with the matching variable. So ``${VALUE1}`` will be
+``VALUE1`` and ``${VALUE2}`` will be ``VALUE2``.
 
 ``CMD``           - run the specified command
 
-``CONFIG``        - set the specified property and value
-
-``CP/OVERLAY``    - copy specified files from template directory to specified path inside jail
+``CP``            - copy/overlay specified files from template directory to specified path
 
 ``INCLUDE``       - specify a template to include. Make sure the template is
 bootstrapped, or you are using the template url
 
-``LIMITS``        - set the specified resource value for the jail
+``LIMITS``        - set the specified resource value
 
 ``LINE_IN_FILE``  - add specified word to specified file if not present
 
-``MOUNT``         - mount specified files/directories inside the jail
+``PKG``           - install specified packages
 
-``PKG``           - install specified packages inside jail
-
-``RDR``           - redirect specified ports to the jail
-
-``RENDER``        - replace ARG values inside specified files inside the jail. If a
+``RENDER``        - replace ARG values inside specified files. If a
 directory is specified, ARGS will be replaced in all files underneath
 
-``RESTART``       - restart the jail
+``SERVICE``       - run ``service`` with the specified arguments
 
-``SERVICE``       - run `service` command inside the jail with specified arguments
+``SYSCTL``        - run ``sysrc`` with the specified args
 
-``SYSRC``         - run `sysrc` inside the jail with specified arguments
+``SYSRC``         - run ``sysrc`` with the specified args
+
+``UPDATE``        - run ``freebsd-update`` with the specified args
+
+``UPGRADE``       - upgrade the system to the specified release
+
+``ZFS``           - run ``zfs`` with the specified args
+
+``ZPOOL``         - run ``zpool`` with the specified args
 
 Special Hook Cases
 ------------------
@@ -154,23 +151,23 @@ Template Examples
 -----------------
 
 Place these uppercase template hook commands into a ``Bastillefile`` in any
-order and automate container setup as needed.
+order and to automate setup.
 
 In addition to supporting template hooks, Rocinante supports overlaying files
-into the container. This is done by placing the files in their full path, using
+from the template to the host. This is done by placing the files in their full path, using
 the template directory as "/".
 
 An example here may help. Think of ``rocinante/templates/username/template``, our
 example template, as the root of our filesystem overlay. If you create an
 ``/etc/hosts`` or ``/etc/resolv.conf`` *inside* the template directory, these
-can be overlayed into your container.
+can be overlayed/copied to the host system.
 
 Note: due to the way FreeBSD segregates user-space, the majority of your
 overlayed template files will be in ``/usr/local``. The few general exceptions
 are the ``/etc/hosts``, ``/etc/resolv.conf``, and ``/etc/rc.conf.local``.
 
-After populating ``/usr/local`` with custom config files that your container
-will use, be sure to include ``/usr`` in the template OVERLAY definition. eg;
+After populating ``/usr/local`` with custom config files that your host
+will use, be sure to include ``/usr`` in the template ``CP`` definition. eg;
 
 .. code-block:: shell
 
@@ -184,9 +181,7 @@ name. List these top-level directories one per line.
 Applying Templates
 ------------------
 
-Containers must be running to apply templates.
-
-Rocinante includes a ``template`` command. This command requires a target and a
+Rocinante includes a ``template`` command. This command requires a
 template name. As covered in the previous section, template names correspond to
 directory names in the ``rocinante/templates`` directory.
 
@@ -220,21 +215,14 @@ Sometimes when you make a template you need special options for a package, or
 you need a newer version than what is in the pkgs.  The solution for these
 cases, or a case like minecraft server that has NO compiled option, is to use
 the ports.  A working example of this is the minecraft server template in the
-template repo.  The main lines needed to use this is first to mount the ports
-directory, then compile the port.  Below is an example of the minecraft template
-where this was used.
+template repo. Below is an example of the minecraft template where this was used.
 
 .. code-block:: shell
 
   ARG MINECRAFT_MEMX="1024M"
   ARG MINECRAFT_MEMS="1024M"
   ARG MINECRAFT_ARGS=""
-  CONFIG set enforce_statfs=1;
-  CONFIG set allow.mount.fdescfs;
-  CONFIG set allow.mount.procfs;
-  RESTART
   PKG dialog4ports tmux openjdk17
-  MOUNT /usr/ports usr/ports nullfs ro 0 0
   CP etc /
   CP var /
   CMD make -C /usr/ports/games/minecraft-server install clean
@@ -244,7 +232,6 @@ where this was used.
   SYSRC minecraft_mems=${MINECRAFT_MEMS}
   SYSRC minecraft_args=${MINECRAFT_ARGS}
   SERVICE minecraft restart
-  RDR tcp 25565 25565
 
-The MOUNT line mounts the ports directory, then the CMD make line makes the
-port.  This can be modified to use any port in the port tree.
+The CMD make line makes the
+port. This can be modified to use any port in the port tree.
