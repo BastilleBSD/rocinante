@@ -1,3 +1,20 @@
+<p align="center">
+    <img src="docs/static/rocinante.jpeg" width="60%" height="auto" />
+</p>
+
+----
+
+Table of Contents
+=================
+
+* [Table of Contents](#table-of-contents)
+* [Rocinante](#rocinante)
+   * [Installation](#installation)
+   * [Configuration](#configuration)
+   * [Examples](#examples)
+   * [Documentation](#documentation)
+   * [Support](#support)
+
 # Rocinante
 
 Work Horse.
@@ -5,13 +22,6 @@ Work Horse.
 Something to do the heavy lifting.
 
 Configuration management from the team that brought you BastilleBSD.
-
-## Configuration Management
-
-Rocinante makes Bastille templates compatible with a host system. This means
-you can automate host configuration the same way you configure containers.
-
-Same files. Same format.
 
 ## Installation
 
@@ -26,7 +36,14 @@ then cd rocinante
 make install
 ```
 
-### Examples
+## Configuration
+
+Rocinante makes Bastille templates compatible with a host system. This means
+you can automate host configuration the same way you configure containers.
+
+Same files. Same format.
+
+## Examples
 
 This example demonstrates applying a `Bastillefile` template to a host system.
 
@@ -73,3 +90,12 @@ kern.randompid: 658 -> 713
 Template applied: cedwards/base
 
 ```
+
+## Documentation
+
+See [Documentation](https://docs.rocinante.sh/en/latest/)
+
+## Support
+
+If you've found a bug in Bastille, please submit it to the [Rocinante Issue
+Tracker](https://github.com/bastillebsd/rocinante/issues/new)
