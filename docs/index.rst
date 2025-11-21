@@ -12,11 +12,6 @@ https://docs.rocinante.sh.
    :caption: Contents:
 
    chapters/installation
-   chapters/gettingstarted
-   chapters/configuration
-   chapters/usage
-   chapters/upgrading
-   chapters/subcommands/index
    chapters/template
 
    copyright
