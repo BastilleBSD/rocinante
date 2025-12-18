@@ -31,7 +31,7 @@
 . /usr/local/libexec/rocinante/common.sh
 
 usage() {
-    error_exit "Usage: rocinante template [option(s)] [--convert] PROJECT/TEMPLATE"
+    error_exit "Usage: rocinante template [option(s)] [convert] PROJECT/TEMPLATE"
 }
 
 get_arg_name() {
@@ -52,21 +52,21 @@ parse_arg_value() {
 
 get_arg_value() {
 
-    _name_value_pair="${1}"
+    name_value_pair="${1}"
     shift
-    _arg_name="$(get_arg_name "${_name_value_pair}")"
+    arg_name="$(get_arg_name "${name_value_pair}")"
 
     # Remaining arguments in $@ are the script arguments, which take precedence. -- cwells
-    for _script_arg in "$@"; do
-        case ${_script_arg} in
+    for script_arg in "$@"; do
+        case ${script_arg} in
             --arg)
                 # Parse whatever is next. -- cwells
-                _next_arg='true' ;;
+                next_arg='true' ;;
             *)
-                if [ "${_next_arg}" = 'true' ]; then # This is the parameter after --arg. -- cwells
-                    _next_arg=''
-                    if [ "$(get_arg_name "${_script_arg}")" = "${_arg_name}" ]; then
-                        parse_arg_value "${_script_arg}"
+                if [ "${next_arg}" = 'true' ]; then # This is the parameter after --arg. -- cwells
+                    next_arg=''
+                    if [ "$(get_arg_name "${script_arg}")" = "${arg_name}" ]; then
+                        parse_arg_value "${script_arg}"
                         return
                     fi
                 fi
@@ -77,14 +77,14 @@ get_arg_value() {
     # Check the ARG_FILE if one was provided. --cwells
     if [ -n "${ARG_FILE}" ]; then
         # To prevent a false empty value, only parse the value if this argument exists in the file. -- cwells
-        if grep "^${_arg_name}=" "${ARG_FILE}" > /dev/null 2>&1; then
-            parse_arg_value "$(grep "^${_arg_name}=" "${ARG_FILE}")"
+        if grep "^${arg_name}=" "${ARG_FILE}" > /dev/null 2>&1; then
+            parse_arg_value "$(grep "^${arg_name}=" "${ARG_FILE}")"
             return
         fi
     fi
 
     # Return the default value, which may be empty, from the name=value pair. -- cwells
-    parse_arg_value "${_name_value_pair}"
+    parse_arg_value "${name_value_pair}"
 }
 
 render() {
@@ -148,7 +148,7 @@ if [ -z "${HOOKS}" ]; then
 fi
 
 # Special case conversion of hook-style template files into a Bastillefile. -- cwells
-if [ "${TARGET}" = '--convert' ]; then
+if [ "${TARGET}" = 'convert' ]; then
     if [ -d "${TEMPLATE}" ]; then # A relative path was provided. -- cwells
         cd "${TEMPLATE}" || error_exit "[ERROR]: Failed to change to directory: ${TEMPLATE}"
     elif [ -d "${rocinante_template}" ]; then
@@ -160,35 +160,35 @@ if [ "${TARGET}" = '--convert' ]; then
     echo "Converting template: ${TEMPLATE}"
 
     HOOKS="ARG ${HOOKS}"
-    for _hook in ${HOOKS}; do
-        if [ -s "${_hook}" ]; then
+    for hook in ${HOOKS}; do
+        if [ -s "${hook}" ]; then
             # Default command is the hook name and default args are the line from the file. -- cwells
-            _cmd="${_hook}"
-            _args_template='${_line}'
+            cmd="${_hook}"
+            args_template='${line}'
 
             # Replace old hook names with Bastille command names. -- cwells
-            case ${_hook} in
+            case ${hook} in
                 CONFIG|OVERLAY)
-                    _cmd='CP'
-                    _args_template='${_line} /'
+                    cmd='CP'
+                    args_template='${line} /'
                     ;;
                 FSTAB)
-                    _cmd='MOUNT' ;;
+                    cmd='MOUNT' ;;
                 PF)
-                    _cmd='RDR' ;;
+                    cmd='RDR' ;;
                 PRE)
-                    _cmd='CMD' ;;
+                    cmd='CMD' ;;
             esac
 
-            while read _line; do
-                if [ -z "${_line}" ]; then
+            while read line; do
+                if [ -z "${line}" ]; then
                     continue
                 fi
-                eval "_args=\"${_args_template}\""
-                echo "${_cmd} ${_args}" >> Bastillefile
-            done < "${_hook}"
+                eval "args=\"${args_template}\""
+                echo "${cmd} ${args}" >> Bastillefile
+            done < "${hook}"
             echo '' >> Bastillefile
-            rm "${_hook}"
+            rm "${hook}"
         fi
     done
 
@@ -222,15 +222,15 @@ case ${TEMPLATE} in
 esac
 
 # Check for an --arg-file parameter. -- cwells
-for _script_arg in "$@"; do
-    case ${_script_arg} in
+for script_arg in "$@"; do
+    case ${script_arg} in
         --arg-file)
             # Parse whatever is next. -- cwells
-            _next_arg='true' ;;
+            next_arg='true' ;;
         *)
-            if [ "${_next_arg}" = 'true' ]; then # This is the parameter after --arg-file. -- cwells
-                _next_arg=''
-                ARG_FILE="${_script_arg}"
+            if [ "${next_arg}" = 'true' ]; then # This is the parameter after --arg-file. -- cwells
+                next_arg=''
+                ARG_FILE="${script_arg}"
                 break
             fi
             ;;
@@ -244,23 +244,6 @@ fi
 info "\n[TEMPLATE]:"
 echo "Applying template: ${TEMPLATE}..."
 
-# Build a list of sed commands like this: -e 's/${username}/root/g' -e 's/${domain}/example.com/g'
-# Values provided by default (without being defined by the user) are listed here. -- cwells
-# This is parsed outside the HOOKS loop so an ARG file can be used with a Bastillefile. -- cwells
-if [ -s "${rocinante_template}/ARG" ]; then
-    while read _line; do
-        if [ -z "${_line}" ]; then
-            continue
-        fi
-        _arg_name=$(get_arg_name "${_line}")
-        _arg_value=$(get_arg_value "${_line}" "$@")
-        if [ -z "${_arg_value}" ]; then
-            warn "[WARNING]: No value provided for arg: ${_arg_name}"
-        fi
-        ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${_arg_name}}/${_arg_value}/g'"
-    done < "${rocinante_template}/ARG"
-fi
-
 if [ -s "${rocinante_template}/Bastillefile" ]; then
     # Ignore blank lines and comments. -- cwells
     SCRIPT=$(awk '{ if (substr($0, length, 1) == "\\") { printf "%s", substr($0, 1, length-1); } else { print $0; } }' "${rocinante_template}/Bastillefile" | grep -v '^[[:blank:]]*$' | grep -v '^[[:blank:]]*#')
@@ -268,61 +251,61 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
     IFS='
 '
     set -f
-    for _line in ${SCRIPT}; do
+    for line in ${SCRIPT}; do
         # First word converted to lowercase is the Bastille command. -- cwells
-        _cmd=$(echo "${_line}" | awk '{print tolower($1);}')
+        cmd=$(echo "${line}" | awk '{print tolower($1);}')
         # Rest of the line with "arg" variables replaced will be the arguments. -- cwells
-        _args=$(echo "${_line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
+        args=$(echo "${line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
 
         # Apply overrides for commands/aliases and arguments. -- cwells
-        case $_cmd in
+        case ${cmd} in
             arg) # This is a template argument definition. -- cwells
-                _arg_name=$(get_arg_name "${_args}")
-                _arg_value=$(get_arg_value "${_args}" "$@")
-                if [ -z "${_arg_value}" ]; then
-                    warn "[WARNING]: No value provided for arg: ${_arg_name}"
+                arg_name=$(get_arg_name "${args}")
+                arg_value=$(get_arg_value "${args}" "$@")
+                if [ -z "${arg_value}" ]; then
+                    warn "[WARNING]: No value provided for arg: ${arg_name}"
                 fi
                 # Build a list of sed commands like this: -e 's/${username}/root/g' -e 's/${domain}/example.com/g'
-                ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${_arg_name}}/${_arg_value}/g'"
+                ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${arg_name}}/${arg_value}/g'"
                 continue
                 ;;
             cmd)
                 # Escape single-quotes in the command being executed. -- cwells
-                _args=$(echo "${_args}" | sed "s/'/'\\\\''/g")
+                args=$(echo "${args}" | sed "s/'/'\\\\''/g")
                 # Allow redirection within the jail. -- cwells
-                _args="'${_args}'"
+                args="'${args}'"
                 ;;
             cp|copy)
-                _cmd='cp'
+                cmd='cp'
                 # Convert relative "from" path into absolute path inside the template directory. -- cwells
-                if [ "${_args%${_args#?}}" != '/' ] && [ "${_args%${_args#??}}" != '"/' ]; then
-                    _args="${rocinante_template}/${_args}"
+                if [ "${args%${args#?}}" != '/' ] && [ "${args%${args#??}}" != '"/' ]; then
+                    args="${rocinante_template}/${args}"
                 fi
                 ;;
             fstab|mount)
-                _cmd='mount' ;;
+                cmd='mount' ;;
             include)
-                _cmd='template' ;;
+                cmd='template' ;;
             overlay)
-                _cmd='cp'
-                _args="${rocinante_template}/${_args} /"
+                cmd='cp'
+                args="${rocinante_template}/${args} /"
                 ;;
             pkg)
-                _args="install -y ${_args}" ;;
+                args="install -y ${args}" ;;
             render) # This is a path to one or more files needing arguments replaced by values. -- cwells
-                render ${_args}
+                render ${args}
                 continue
                 ;;
             lif|lineinfile|line_in_file)
-                line_in_file ${_args}
+                line_in_file ${args}
                 continue
                 ;;
         esac
 
-        if ! eval "rocinante ${_cmd} ${_args}"; then
+        if ! eval "rocinante ${cmd} ${args}"; then
             set +f
             unset IFS
-            error_exit "Failed to execute command: ${_cmd}"
+            error_exit "Failed to execute command: ${cmd}"
         fi
 
     done

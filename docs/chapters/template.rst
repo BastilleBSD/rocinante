@@ -1,11 +1,9 @@
 Template
 ========
+
 Rocinante supports a templating system allowing you to apply files, pkgs and
 execute commands inside the containers automatically.
 
-Currently supported template hooks are: ``ARG``, ``CMD``, ``CONFIG``, ``CP``,
-``INCLUDE``, ``LIMITS``, ``MOUNT``, ``OVERLAY``, ``PKG``, ``RDR``, ``RENDER``,
-``RESTART``, ``SERVICE``, ``SYSRC``.
 
 Rocinante
 ---------
@@ -114,9 +112,6 @@ directory is specified, ARGS will be replaced in all files underneath
 Special Hook Cases
 ------------------
 
-SYSRC requires that NO quotes be used or that quotes (``"``) be escaped ie;
-(``\\"``)
-
 ARG will always treat an ampersand "\``&``" literally, without the need to
 escape it. Escaping it will cause errors.
 
@@ -146,9 +141,6 @@ Creating Templates
 Templates can be created and placed inside the templates directory in the
 ``project/template`` format. Alternatively you can run the ``rocinante template``
 command from a relative path, making sure it is still in the above format.
- 
-Template Examples
------------------
 
 Place these uppercase template hook commands into a ``Bastillefile`` in any
 order and to automate setup.
