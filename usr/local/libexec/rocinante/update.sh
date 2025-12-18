@@ -30,26 +30,6 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-usage() {
-    error_exit "Usage: rocinante update [ARGS]"
-}
-
-# Handle options.
-while [ "$#" -gt 0 ]; do
-    case "${1}" in
-        -h|--help|help)
-            usage
-            ;;
-        -*)
-            error_exit "[ERROR]: Unknown option: \"${1}\""
-            ;;
-        *)
-            break
-            ;;
-
-    esac
-done
-
 if [ -f "/bin/midnightbsd-version" ]; then
     error_exit "[ERROR]: Not yet supported on MidnightBSD."
 fi

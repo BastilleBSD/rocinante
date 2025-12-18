@@ -30,33 +30,9 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-usage() {
-    error_exit "Usage: rocinante limits LIMITS [ARGS]"
-}
-
 RACCT_ENABLE=$(sysctl -n kern.racct.enable)
 if [ "${RACCT_ENABLE}" != '1' ]; then
-    echo "Racct not enabled. Append 'kern.racct.enable=1' to /boot/loader.conf and reboot"
-fi
-
-# Handle options.
-while [ "$#" -gt 0 ]; do
-    case "${1}" in
-        -h|--help|help)
-            usage
-            ;;
-        -*)
-            error_exit "[ERROR]: Unknown option: \"${1}\""
-            ;;
-        *)
-            break
-            ;;
-
-    esac
-done
-
-if [ "$#" -lt 1 ]; then
-    usage
+    error_exit "[ERROR]: Racct not enabled. Append 'kern.racct.enable=1' to /boot/loader.conf and reboot"
 fi
 
 # Execute RCTL

@@ -30,35 +30,6 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-usage() {
-    error_exit "Usage: rocinante cmd [option(s)] ARGS"
-}
-
-# Handle options.
-OPTION="-xc"
-while [ "$#" -gt 0 ]; do
-    case "${1}" in
-        -h|--help|help)
-            usage
-            ;;
-        -q|--quiet)
-            OPTION="-c"
-            shift
-            ;;
-        -*)
-            error_exit "[ERROR]: Unknown option: \"${1}\""
-            ;;
-        *)
-            break
-            ;;
-
-    esac
-done
-
-if [ "$#" -eq 0 ]; then
-    usage
-fi
-
 # Execute CMD
 
 info "\n[CMD]:"

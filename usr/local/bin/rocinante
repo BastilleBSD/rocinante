@@ -111,9 +111,17 @@ if [ -f "${SCRIPTPATH}" ]; then
 
     if [ -n "${PARAMS}" ]; then
         exec "${SH}" "${SCRIPTPATH}" "${PARAMS}"
+        error="$?"
     else
         exec "${SH}" "${SCRIPTPATH}" "$@"
+        error="$?"
     fi
+
+    # Exit on errors
+    if [ "${error}" -ne 0 ]; then
+        error_exit "\n[ERROR]: Failed to execute hook: ${CMD}"
+    fi
+
 else
     error_exit "${SCRIPTPATH} not found."
 fi

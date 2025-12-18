@@ -30,30 +30,6 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-usage() {
-    error_notify "Usage: rocinante zpool ARGS" 
-}
-
-# Handle options.
-while [ "$#" -gt 0 ]; do
-    case "${1}" in
-        -h|--help|help)
-            usage
-            ;;
-        -*)
-            error_exit "[ERROR]: Unknown option: \"${1}\""
-            ;;
-        *)
-            break
-            ;;
-
-    esac
-done
-
-if [ "$#" -lt 1 ]; then
-    usage
-fi
-
 # Execute ZPOOL
 
 info "\n[ZPOOL]"

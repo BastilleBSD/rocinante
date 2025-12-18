@@ -30,30 +30,6 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-usage() {
-    error_exit "Usage: rocinante service SERVICE_NAME ACTION"
-}
-
-# Handle options.
-while [ "$#" -gt 0 ]; do
-    case "${1}" in
-        -h|--help|help)
-            usage
-            ;;
-        -*)
-            error_exit "[ERROR]: Unknown option: \"${1}\""
-            ;;
-        *)
-            break
-            ;;
-
-    esac
-done
-
-if [ "$#" -lt 1 ] || [ "$#" -gt 2 ]; then
-    usage
-fi
-
 # Execute SERVICE
 
 info "\n[SERVICE]:"
