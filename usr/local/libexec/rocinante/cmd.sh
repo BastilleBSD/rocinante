@@ -34,7 +34,7 @@
 
 info "\n[CMD]:"
 
-sh "${OPTION}" "$@"
+sh "$@"
 
 ERROR_CODE="$?"
 

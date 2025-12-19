@@ -30,16 +30,18 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-if [ -f "/bin/midnightbsd-version" ]; then
-    error_exit "[ERROR]: Not yet supported on MidnightBSD."
-fi
-
-if freebsd-version | grep -qi HBSD; then
-    error_exit "[ERROR]: Not yet supported on HardenedBSD."
-fi
-
 # Execute UPDATE
 
 info "\n[UPDATE]:"
 
-PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron "$@"
+case "${PLATFORM_OS}" in
+    FreeBSD)
+        PAGER="/bin/cat" freebsd-update fetch install --not-running-from-cron "$@"
+        ;;
+    HardenedBSD)
+        hbsd-update
+        ;;
+    *)
+        error_exit "[ERROR]: Unsupported Platform: ${PLATFORM_OS}"
+        ;;
+esac

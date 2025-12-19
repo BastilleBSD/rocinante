@@ -68,6 +68,15 @@ EOF
     exit 1
 }
 
+# Set PLATFORM_OS
+if [ -f /bin/midnightbsd-version ]; then
+    PLATFORM_OS="MidnightBSD"
+elif freebsd-version | grep -qi HBSD; then
+    PLATFORM_OS="HardenedBSD"
+else
+    PLATFORM_OS="FreeBSD"
+fi
+
 [ $# -lt 1 ] && usage
 
 CMD=$1

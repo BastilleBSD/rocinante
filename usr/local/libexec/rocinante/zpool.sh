@@ -32,6 +32,6 @@
 
 # Execute ZPOOL
 
-info "\n[ZPOOL]"
+info "\n[ZPOOL]:"
 
 /sbin/zpool "$@"

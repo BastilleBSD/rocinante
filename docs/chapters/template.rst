@@ -4,14 +4,17 @@ Template
 Rocinante supports a templating system allowing you to apply files, pkgs and
 execute commands inside the containers automatically.
 
-
 Rocinante
 ---------
-Rocinante introduces a template syntax that is more flexible and allows
+
+Rocinante introduces a template syntax that is flexible and allows
 any-order scripting. Previous versions had a hard template execution order and
 instructions were spread across multiple files. The new syntax is done in a
 ``Bastillefile`` and the template hook (see below) files are replaced with
 template hook commands.
+
+Note: Old stlyle templates are no longer supported. Please convert any templates
+you may have with ``rocinante convert TEMPLATE``.
 
 Template Automation Hooks
 -------------------------
