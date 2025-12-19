@@ -94,7 +94,7 @@ fetch_template() {
     ## define basic variables
     url=${ROCINANTE_TEMPLATE_URL}
     user=${ROCINANTE_TEMPLATE_USER}
-    repo=${ROCINANTE_TEMPLATE_REPO}
+    repo=${ROCINANTE_TEMPLATE_REPO%.*}
     raw_template_dir=${rocinante_templatesdir}/${user}/${repo}
 
     ## support for non-git
