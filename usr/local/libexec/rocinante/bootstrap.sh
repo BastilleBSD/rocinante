@@ -92,10 +92,10 @@ fetch_template() {
     fi
 
     ## define basic variables
-    _url=${ROCINANTE_TEMPLATE_URL}
-    _user=${ROCINANTE_TEMPLATE_USER}
-    _repo=${ROCINANTE_TEMPLATE_REPO}
-    _raw_template_dir=${rocinante_templatesdir}/${_user}/${_repo}
+    url=${ROCINANTE_TEMPLATE_URL}
+    user=${ROCINANTE_TEMPLATE_USER}
+    repo=${ROCINANTE_TEMPLATE_REPO}
+    raw_template_dir=${rocinante_templatesdir}/${user}/${repo}
 
     ## support for non-git
     if ! which -s git; then
@@ -103,37 +103,37 @@ fetch_template() {
         error_exit "Not yet implemented."
     else
         if [ ! -d "${rocinante_templatesdir}/.git" ]; then
-            if ! git clone "${_url}" "${_raw_template_dir}"; then
+            if ! git clone "${url}" "${raw_template_dir}"; then
                 error_notify "Clone unsuccessful."
             fi
         elif [ -d "${rocinante_templatesdir}/.git" ]; then
-            if ! git -C "${_raw_template_dir}" pull; then
+            if ! git -C "${raw_template_dir}" pull; then
                 error_notify "Template update unsuccessful."
             fi
         fi
     fi
 
     # Extract templates in project/template format
-    if [ ! -f ${_raw_template_dir}/Bastillefile ]; then
+    if [ ! -f ${raw_template_dir}/Bastillefile ]; then
         # Extract template in project/template format
-        find "${_raw_template_dir}" -type f -name Bastillefile | sort | while read -r _file; do
-            _template_dir="$(dirname ${_file})"
-            _project_dir="$(dirname ${_template_dir})"
-            _template_name="$(basename ${_template_dir})"
-            _project_name="$(basename ${_project_dir})"
-            _complete_template="${_project_name}/${_template_name}"
-            cp -fR "${_project_dir}" "${rocinante_templatesdir}"
-            rocinante verify "${_complete_template}"
+        find "${raw_template_dir}" -type f -name Bastillefile | sort | while read -r file; do
+            template_dir="$(dirname ${file})"
+            project_dir="$(dirname ${template_dir})"
+            template_name="$(basename ${template_dir})"
+            project_name="$(basename ${project_dir})"
+            complete_template="${project_name}/${template_name}"
+            cp -fR "${project_dir}" "${rocinante_templatesdir}"
+            rocinante verify "${complete_template}"
         done
         
         # Remove the cloned repo
-        if [ -n "${_user}" ]; then
-            rm -r "${rocinante_templatesdir:?}/${_user:?}"
+        if [ -n "${user}" ]; then
+            rm -r "${rocinante_templatesdir:?}/${user:?}"
         fi
         
     else
         # Verify a single template
-        rocinante verify "${_user}/${_repo}"
+        rocinante verify "${user}/${repo}"
     fi
 }
 

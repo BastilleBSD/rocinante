@@ -30,26 +30,6 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-usage() {
-    error_exit "Usage: rocinante sysrc ARGS"
-}
-
-# Handle options.
-while [ "$#" -gt 0 ]; do
-    case "${1}" in
-        -h|--help|help)
-            usage
-            ;;
-        *)
-            break
-            ;;
-    esac
-done
-
-if [ "$#" -lt 1 ]; then
-    usage
-fi
-
 # Execute SYSRC
 
 info "\n[SYSRC]:"

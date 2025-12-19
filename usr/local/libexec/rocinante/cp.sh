@@ -30,35 +30,6 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-usage() {
-    error_exit "Usage: rocinante cp [option(s)] TEMPLATE_PATH HOST_PATH"
-}
-
-# Handle options.
-OPTION="-av"
-while [ "$#" -gt 0 ]; do
-    case "${1}" in
-        -h|--help|help)
-            usage
-            ;;
-        -q|--quiet)
-            OPTION="-a"
-            shift
-            ;;
-        -*)
-            error_exit "[ERROR]: Unknown option: \"${1}\""
-            ;;
-        *)
-            break
-            ;;
-
-    esac
-done
-
-if [ "$#" -ne 2 ]; then
-    usage
-fi
-
 CP_SOURCE="${1}"
 CP_DEST="${2}"
 
@@ -66,7 +37,7 @@ CP_DEST="${2}"
 
 info "\n[CP]:"
 
-cp "${OPTION}" "${CP_SOURCE}" "${CP_DEST}"
+cp "${CP_SOURCE}" "${CP_DEST}"
 
 RETURN="$?"
 
