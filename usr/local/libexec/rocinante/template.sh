@@ -41,7 +41,7 @@ get_arg_name() {
 parse_arg_value() {
     # Parses the value after = and then escapes back/forward slashes and single quotes in it. -- cwells
     # Enclose ARG value inside ""
-    echo "${1}" | \
+    eval echo "${1}" | \
     sed -E 's/[^=]+=?//' | \
     sed -e 's/\\/\\\\/g' \
     -e 's/\//\\\//g' \
@@ -93,7 +93,6 @@ render() {
 
     if [ -d "${file_path}" ]; then # Recursively render every file in this directory. -- cwells
         echo "Rendering Directory: ${file_path}"
-        find "${file_path}" \( -type d -name .git -prune \) -o -type f
         find "${file_path}" \( -type d -name .git -prune \) -o -type f -print0 | $(eval "xargs -0 sed -i '' ${ARG_REPLACEMENTS}")
     elif [ -f "${file_path}" ]; then
         echo "Rendering File: ${file_path}"
