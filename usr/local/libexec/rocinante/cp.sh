@@ -37,7 +37,7 @@ CP_DEST="${2}"
 
 info "\n[CP]:"
 
-cp "${CP_SOURCE}" "${CP_DEST}"
+cp -a "${CP_SOURCE}" "${CP_DEST}"
 
 RETURN="$?"
 
