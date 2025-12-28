@@ -31,7 +31,7 @@
 . /usr/local/libexec/rocinante/common.sh
 
 CP_SOURCE="${1}"
-CP_DEST="${2}"
+CP_DEST="/"
 
 # Execute CP
 
