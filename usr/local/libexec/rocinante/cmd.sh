@@ -34,7 +34,7 @@
 
 info "\n[CMD]:"
 
-sh "$@"
+sh -c "$@"
 
 ERROR_CODE="$?"
 
