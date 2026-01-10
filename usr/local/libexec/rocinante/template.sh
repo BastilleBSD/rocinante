@@ -246,7 +246,8 @@ echo "Applying template: ${TEMPLATE}..."
 if [ -s "${rocinante_template}/Bastillefile" ]; then
     # Ignore blank lines and comments. -- cwells
     SCRIPT=$(awk '{ if (substr($0, length, 1) == "\\") { printf "%s", substr($0, 1, length-1); } else { print $0; } }' "${rocinante_template}/Bastillefile" | grep -v '^[[:blank:]]*$' | grep -v '^[[:blank:]]*#')
-    # Use a newline as the separator. -- cwells
+    SKIP_ARGS=""
+
     IFS='
 '
     set -f
@@ -256,16 +257,39 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
         # Rest of the line with "arg" variables replaced will be the arguments. -- cwells
         args=$(echo "${line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
 
+        # Skip any args that don't have a value
+        SKIP_ARG=0
+        for arg in ${SKIP_ARGS}; do
+            if echo "${line}" | grep -qo "\${${arg}}"; then
+                SKIP_ARG=1
+            fi
+        done
+        if [ "${SKIP_ARG}" -eq 1 ]; then
+            continue
+        fi
+
         # Apply overrides for commands/aliases and arguments. -- cwells
         case ${cmd} in
+            arg+)
+                arg_name=$(get_arg_name "${args}")
+                arg_value=$(get_arg_value "${args}" "$@")
+                if [ -z "${arg_value}" ]; then
+                    error_exit "[ERROR]: No value provided for mandatory arg: ${arg_name}"
+                else
+                    ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${arg_name}}/${arg_value}/g'"
+                fi
+                continue
+                ;;
             arg) # This is a template argument definition. -- cwells
                 arg_name=$(get_arg_name "${args}")
                 arg_value=$(get_arg_value "${args}" "$@")
                 if [ -z "${arg_value}" ]; then
                     warn "[WARNING]: No value provided for arg: ${arg_name}"
+                    SKIP_ARGS=$(printf '%s\n%s' "${SKIP_ARGS}" "${arg_name}")
+                else
+                    # Build a list of sed commands like this: -e 's/${username}/root/g' -e 's/${domain}/example.com/g'
+                    ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${arg_name}}/${arg_value}/g'"
                 fi
-                # Build a list of sed commands like this: -e 's/${username}/root/g' -e 's/${domain}/example.com/g'
-                ARG_REPLACEMENTS="${ARG_REPLACEMENTS} -e 's/\${${arg_name}}/${arg_value}/g'"
                 continue
                 ;;
             cmd)
