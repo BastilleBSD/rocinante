@@ -91,6 +91,10 @@ render() {
 
     local file_path="${1}"
 
+    if [ -z "${ARG_REPLACEMENTS}" ]; then
+        error_exit "[ERROR]: Cannot execute RENDER hook. ARGS appears empty."
+    fi
+
     if [ -d "${file_path}" ]; then # Recursively render every file in this directory. -- cwells
         echo "Rendering Directory: ${file_path}"
         find "${file_path}" \( -type d -name .git -prune \) -o -type f -print0 | $(eval "xargs -0 sed -i '' ${ARG_REPLACEMENTS}")
