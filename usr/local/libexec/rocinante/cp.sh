@@ -36,7 +36,8 @@ DESTINATION="${2}"
 if [ -z "${DESTINATION}" ]; then
     DESTINATION="/"
 elif [ ! -d "${DESTINATION}" ]; then
-    mkdir -p "${DESTINATION}"
+    mkdir -p "${DESTINATION}" || \
+        error_exit "[ERROR]: Failed to create directory: ${DESTINATION}"
 fi
 
 # Execute CP
