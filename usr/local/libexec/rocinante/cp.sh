@@ -31,7 +31,11 @@
 . /usr/local/libexec/rocinante/common.sh
 
 CP_SOURCE="${1}"
-CP_DEST="/"
+CP_DEST="${2}"
+
+if [ -z "${CP_DEST}" ]; then
+    CP_DEST="/"
+fi
 
 # Execute CP
 
