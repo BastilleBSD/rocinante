@@ -30,18 +30,20 @@
 
 . /usr/local/libexec/rocinante/common.sh
 
-CP_SOURCE="${1}"
-CP_DEST="${2}"
+SOURCE="${1}"
+DESTINATION="${2}"
 
-if [ -z "${CP_DEST}" ]; then
-    CP_DEST="/"
+if [ -z "${DESTINATION}" ]; then
+    DESTINATION="/"
+elif [ ! -d "${DESTINATION}" ]; then
+    mkdir -p "${DESTINATION}"
 fi
 
 # Execute CP
 
 info "\n[CP]:"
 
-cp -a "${CP_SOURCE}" "${CP_DEST}"
+cp -a "${SOURCE}" "${DESTINATION}"
 
 RETURN="$?"
 
