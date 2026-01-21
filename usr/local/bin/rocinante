@@ -49,7 +49,7 @@ ROCINANTE_VERSION="1.1.0.251222"
 
 usage() {
     cat << EOF
-Rocinate is lightweight configuration management software for FreeBSD.
+Rocinante is lightweight configuration management software for FreeBSD.
 
 Usage:
   rocinante command [ARGS]
