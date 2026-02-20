@@ -269,7 +269,8 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
                 continue
             fi
         done
-        if [ "${SKIP_ARG}" -eq 1 ]; then
+        # Skip lines including missing ARG except for INCLUDE
+        if [ "${SKIP_ARG}" -eq 1 ] && [ "${cmd}" != "include" ]; then
             continue
         fi
 
