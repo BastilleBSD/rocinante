@@ -36,7 +36,6 @@ usage() {
 
     Options:
 
-    -f | --force     Do not skip ARGS if no value is given.
     -x | --debug     Enable debug mode.
 
 EOF
@@ -136,10 +135,6 @@ while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
             usage
-            ;;
-        -f|--force)
-            FORCE=1
-            shift
             ;;
         -x|--debug)
             enable_debug
@@ -274,21 +269,6 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
         cmd=$(echo "${line}" | awk '{print tolower($1);}')
         # Rest of the line with "arg" variables replaced will be the arguments. -- cwells
         args=$(echo "${line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
-
-        # Skip any args that don't have a value
-        if [ "${FORCE}" -eq 0 ]; then
-            SKIP_ARG=0
-            for arg in ${SKIP_ARGS}; do
-                if echo "${line}" | grep -qo "\${${arg}}"; then
-                    SKIP_ARG=1
-                    continue
-                fi
-            done
-            # Skip lines including missing ARG except for INCLUDE
-            if [ "${SKIP_ARG}" -eq 1 ]; then
-                continue
-            fi
-        fi
 
         # Apply overrides for commands/aliases and arguments. -- cwells
         case ${cmd} in
