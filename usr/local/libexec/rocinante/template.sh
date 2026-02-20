@@ -32,6 +32,15 @@
 
 usage() {
     error_exit "Usage: rocinante template [option(s)] [convert] PROJECT/TEMPLATE"
+    cat << EOF
+
+    Options:
+
+    -f | --force     Do not skip ARGS if no value is given.
+    -x | --debug     Enable debug mode.
+
+EOF
+    exit 1
 }
 
 get_arg_name() {
@@ -122,10 +131,15 @@ line_in_file() {
 }
 
 # Handle options.
+FORCE=0
 while [ "$#" -gt 0 ]; do
     case "${1}" in
         -h|--help|help)
             usage
+            ;;
+        -f|--force)
+            FORCE=1
+            shift
             ;;
         -x|--debug)
             enable_debug
@@ -262,16 +276,18 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
         args=$(echo "${line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
 
         # Skip any args that don't have a value
-        SKIP_ARG=0
-        for arg in ${SKIP_ARGS}; do
-            if echo "${line}" | grep -qo "\${${arg}}"; then
-                SKIP_ARG=1
+        if [ "${FORCE}" -eq 0 ]; then
+            SKIP_ARG=0
+            for arg in ${SKIP_ARGS}; do
+                if echo "${line}" | grep -qo "\${${arg}}"; then
+                    SKIP_ARG=1
+                    continue
+                fi
+            done
+            # Skip lines including missing ARG except for INCLUDE
+            if [ "${SKIP_ARG}" -eq 1 ]; then
                 continue
             fi
-        done
-        # Skip lines including missing ARG except for INCLUDE
-        if [ "${SKIP_ARG}" -eq 1 ] && [ "${cmd}" != "include" ]; then
-            continue
         fi
 
         # Apply overrides for commands/aliases and arguments. -- cwells
