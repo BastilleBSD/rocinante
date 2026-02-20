@@ -45,7 +45,7 @@ rocinante_root_check() {
 rocinante_root_check
 
 ## version
-ROCINANTE_VERSION="1.1.0.251222"
+ROCINANTE_VERSION="1.1.1.260219"
 
 usage() {
     cat << EOF
