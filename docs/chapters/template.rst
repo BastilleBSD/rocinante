@@ -22,7 +22,7 @@ Template Automation Hooks
 +---------------+---------------------+-----------------------------------------+
 | HOOK          | format              | example                                 |
 +===============+=====================+=========================================+
-| ARG           | ARG=VALUE           | MINECRAFT_MEMX="1024M"                  |
+| ARG[+]        | ARG=VALUE           | MINECRAFT_MEMX="1024M"                  |
 +---------------+---------------------+-----------------------------------------+
 | CMD           | /bin/sh command     | /usr/bin/chsh -s /usr/local/bin/zsh     |
 +---------------+---------------------+-----------------------------------------+
@@ -61,26 +61,29 @@ Template Hook Descriptions
 ARGS will default to the value set inside the template, but can be changed by
 including ``--arg ARG=VALUE`` when running the template.
 
-Multiple ARGS can also be specified as seen below. If no ARG value is given, Rocinante
-will show a warning, but continue on with the rest of the template.
+Multiple ARGS can also be specified as seen below. If no ARG value is given,
+Rocinante will show a warning, but continue on with the rest of the template.
 
 .. code-block:: shell
 
   ishmael ~ # rocinante template sample/template --arg ARG=VALUE --arg ARG1=VALUE
 
-The ``ARG`` hook has a wide range of functionality, including passing KEY=VALUE pairs
-to any templates called with the ``INCLUDE`` hook. See the following example...
+The ``ARG`` hook has a wide range of functionality, including passing KEY=VALUE
+pairs to any templates called with the ``INCLUDE`` hook. See the following example...
 
 .. code-block:: shell
 
-  ARG VALUE1
-  ARG VALUE2
+  ARG ARG1
+  ARG ARG2
 
-  INCLUDE other/template --arg VALUE1=${VALUE1} --arg VALUE2=${VALUE2}
+  INCLUDE other/template --arg ARG1=${ARG1} --arg ARG2=${ARG2}
 
-If the above template is called with ``--arg VALUE1=VALUE1 --arg VALUE2=VALUE2``, these values will
-be passed along to ``other/template`` as well, with the matching variable. So ``${VALUE1}`` will be
-``VALUE1`` and ``${VALUE2}`` will be ``VALUE2``.
+If the above template is called with ``--arg ARG1=VALUE1 --arg ARG2=VALUE2``,
+these values will be passed along to ``other/template`` as well, with the
+matching variable. So ``${ARG1}`` will be ``VALUE1`` and ``${ARG2}`` will be
+``VALUE2``.
+
+``ARG+``          - the ``+`` makes the ``ARG`` mandatory
 
 ``CMD``           - run the specified command
 
