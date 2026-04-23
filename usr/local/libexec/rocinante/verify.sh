@@ -115,7 +115,7 @@ verify_template() {
     fi
 
     ## if validated; ready to use
-    if [ "${_hook_validate}" -gt 0 ]; then
+    if [ "${hook_validate}" -gt 0 ]; then
         info "\nTemplate ready to use.\n"
     fi
 }
