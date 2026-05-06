@@ -32,7 +32,7 @@ pkg install rocinante
 or
 ```
 git clone https://github.com/BastilleBSD/rocinante.git
-then cd rocinante
+cd rocinante
 make install
 ```
 
@@ -93,9 +93,9 @@ Template applied: cedwards/base
 
 ## Documentation
 
-See [Documentation](https://docs.rocinante.sh/en/latest/)
+See [Documentation](https://bastillebsd.org/rocinante/)
 
 ## Support
 
-If you've found a bug in Bastille, please submit it to the [Rocinante Issue
-Tracker](https://github.com/bastillebsd/rocinante/issues/new)
+If you've found a bug in Rocinante, please submit it to the [Rocinante Issue
+Tracker](https://github.com/BastilleBSD/rocinante/issues/new)
