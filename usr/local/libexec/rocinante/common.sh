@@ -52,8 +52,10 @@ enable_debug() {
     local level="${1}"
     # Enable debug mode.
     warn "***DEBUG MODE***"
-    set -x
-    if [ "${level}" -eq 2 ]; then
+    if [ "${level}" -eq 1 ]; then
+        set -x
+    elif [ "${level}" -eq 2 ]; then
+        set -x
         export ROCINANTE_DEBUG="-x"
     fi
 }
