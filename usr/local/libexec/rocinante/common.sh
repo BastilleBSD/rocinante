@@ -49,9 +49,15 @@ if [ -z "${NO_COLOR}" ]; then
 fi
 
 enable_debug() {
-    # Enable debug mode.
+    local debug="${1}"
     warn "***DEBUG MODE***"
-    set -x
+    if [ "${debug}" -eq 1 ]; then
+        set -x
+        ROCINANTE_DEBUG="-x"
+    elif [ "${debug}" -eq 2 ]; then
+        set -x
+        export ROCINANTE_DEBUG="-x"
+    fi
 }
 
 # Notify message on error, but do not exit

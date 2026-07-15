@@ -45,14 +45,14 @@ rocinante_root_check() {
 rocinante_root_check
 
 ## version
-ROCINANTE_VERSION="1.1.1.260219"
+ROCINANTE_VERSION="1.1.2"
 
 usage() {
     cat << EOF
 Rocinante is lightweight configuration management software for FreeBSD.
 
 Usage:
-  rocinante command [ARGS]
+  rocinante [option(s)] COMMAND [ARGS]
 
 Available Commands:
   bootstrap   Bootstrap template(s) from an http(s) endpoint.
@@ -62,7 +62,8 @@ Available Commands:
   verify      Verify template syntax/structure.
 
 Use "rocinante -v|--version" for version information.
-Use "rocinante command -h|--help" for more information about a command.
+Use "rocinante -x|--debug" to enable debug mode.
+Use "rocinante COMMAND -h|--help" for more information about a command.
 
 EOF
     exit 1
@@ -77,20 +78,40 @@ else
     PLATFORM_OS="FreeBSD"
 fi
 
+# Handle options
+while [ "$#" -gt 0 ]; do
+    case "${1}" in
+        -h|--help|help)
+            usage
+            ;;
+        version|-v|--version)
+            info 1 "${ROCINANTE_VERSION}"
+            exit 0
+            ;;
+        -x|--debug)
+            enable_debug 1
+            shift
+            ;;
+        -xx)
+            enable_debug 2
+            shift
+            ;;
+        -*)
+            error_exit "Unknown Option: \"${1}\""
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
 [ $# -lt 1 ] && usage
 
-CMD=$1
+CMD="${1}"
 shift
 
 # Handle special-case commands first.
 case "${CMD}" in
-    version|-v|--version)
-        info "${ROCINANTE_VERSION}"
-        exit 0
-        ;;
-    help|-h|--help)
-        usage
-        ;;
     bootstrap) ;;
     cmd) ;;
     cp) ;;
@@ -112,25 +133,17 @@ case "${CMD}" in
 esac
 
 SCRIPTPATH="${rocinante_libdir}/${CMD}.sh"
+
 if [ -f "${SCRIPTPATH}" ]; then
     : "${UMASK:=022}"
     umask "${UMASK}"
-
     : "${SH:=sh}"
-
-    if [ -n "${PARAMS}" ]; then
-        exec "${SH}" "${SCRIPTPATH}" "${PARAMS}"
-        error="$?"
-    else
-        exec "${SH}" "${SCRIPTPATH}" "$@"
-        error="$?"
-    fi
-
+    exec ${SH} ${ROCINANTE_DEBUG} "${SCRIPTPATH}" "$@"
+    error="$?"
     # Exit on errors
     if [ "${error}" -ne 0 ]; then
         error_exit "\n[ERROR]: Failed to execute hook: ${CMD}"
     fi
-
 else
     error_exit "${SCRIPTPATH} not found."
 fi

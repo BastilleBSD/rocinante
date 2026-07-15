@@ -136,10 +136,6 @@ while [ "$#" -gt 0 ]; do
         -h|--help|help)
             usage
             ;;
-        -x|--debug)
-            enable_debug
-            shift
-            ;;
         -*) 
             error_exit "[ERROR]: Unknown Option: \"${1}\""
             ;;
@@ -259,7 +255,6 @@ echo "Applying template: ${TEMPLATE}..."
 if [ -s "${rocinante_template}/Bastillefile" ]; then
     # Ignore blank lines and comments. -- cwells
     SCRIPT=$(awk '{ if (substr($0, length, 1) == "\\") { printf "%s", substr($0, 1, length-1); } else { print $0; } }' "${rocinante_template}/Bastillefile" | grep -v '^[[:blank:]]*$' | grep -v '^[[:blank:]]*#')
-    SKIP_ARGS=""
 
     IFS='
 '
@@ -267,6 +262,7 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
     for line in ${SCRIPT}; do
         # First word converted to lowercase is the Bastille command. -- cwells
         cmd=$(echo "${line}" | awk '{print tolower($1);}')
+
         # Rest of the line with "arg" variables replaced will be the arguments. -- cwells
         args=$(echo "${line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
 
