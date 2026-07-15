@@ -246,7 +246,6 @@ echo "Applying template: ${TEMPLATE}..."
 if [ -s "${rocinante_template}/Bastillefile" ]; then
     # Ignore blank lines and comments. -- cwells
     SCRIPT=$(awk '{ if (substr($0, length, 1) == "\\") { printf "%s", substr($0, 1, length-1); } else { print $0; } }' "${rocinante_template}/Bastillefile" | grep -v '^[[:blank:]]*$' | grep -v '^[[:blank:]]*#')
-    SKIP_ARGS=""
 
     IFS='
 '
@@ -254,20 +253,9 @@ if [ -s "${rocinante_template}/Bastillefile" ]; then
     for line in ${SCRIPT}; do
         # First word converted to lowercase is the Bastille command. -- cwells
         cmd=$(echo "${line}" | awk '{print tolower($1);}')
+
         # Rest of the line with "arg" variables replaced will be the arguments. -- cwells
         args=$(echo "${line}" | awk -F '[ ]' '{$1=""; sub(/^ */, ""); print;}' | eval "sed ${ARG_REPLACEMENTS}")
-
-        # Skip any args that don't have a value
-        SKIP_ARG=0
-        for arg in ${SKIP_ARGS}; do
-            if echo "${line}" | grep -qo "\${${arg}}"; then
-                SKIP_ARG=1
-                continue
-            fi
-        done
-        if [ "${SKIP_ARG}" -eq 1 ]; then
-            continue
-        fi
 
         # Apply overrides for commands/aliases and arguments. -- cwells
         case ${cmd} in

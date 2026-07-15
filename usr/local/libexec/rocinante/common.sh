@@ -49,13 +49,12 @@ if [ -z "${NO_COLOR}" ]; then
 fi
 
 enable_debug() {
-    local level="${1}"
-    # Enable debug mode.
+    local debug="${1}"
     warn "***DEBUG MODE***"
-    if [ "${level}" -eq 1 ]; then
+    if [ "${debug}" -eq 1 ]; then
         set -x
         ROCINANTE_DEBUG="-x"
-    elif [ "${level}" -eq 2 ]; then
+    elif [ "${debug}" -eq 2 ]; then
         set -x
         export ROCINANTE_DEBUG="-x"
     fi
