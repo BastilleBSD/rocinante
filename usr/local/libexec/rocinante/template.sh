@@ -127,10 +127,6 @@ while [ "$#" -gt 0 ]; do
         -h|--help|help)
             usage
             ;;
-        -x|--debug)
-            enable_debug
-            shift
-            ;;
         -*) 
             error_exit "[ERROR]: Unknown Option: \"${1}\""
             ;;

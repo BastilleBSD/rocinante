@@ -49,9 +49,13 @@ if [ -z "${NO_COLOR}" ]; then
 fi
 
 enable_debug() {
+    local level="${1}"
     # Enable debug mode.
     warn "***DEBUG MODE***"
     set -x
+    if [ "${level}" -eq 2 ]; then
+        export ROCINANTE_DEBUG="-x"
+    fi
 }
 
 # Notify message on error, but do not exit
