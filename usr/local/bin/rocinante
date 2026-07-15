@@ -88,12 +88,12 @@ while [ "$#" -gt 0 ]; do
             info 1 "${ROCINANTE_VERSION}"
             exit 0
             ;;
-        -x|--debug)
-            enable_debug 1
-            shift
-            ;;
         -xx)
             enable_debug 2
+            shift
+            ;;
+        -x|--debug)
+            enable_debug 1
             shift
             ;;
         -*)

@@ -54,6 +54,7 @@ enable_debug() {
     warn "***DEBUG MODE***"
     if [ "${level}" -eq 1 ]; then
         set -x
+        ROCINANTE_DEBUG="-x"
     elif [ "${level}" -eq 2 ]; then
         set -x
         export ROCINANTE_DEBUG="-x"
