@@ -1,13 +1,8 @@
 Template
 ========
 
-Rocinante supports a templating system allowing you to apply files, pkgs and
-execute commands inside the containers automatically.
-
-Rocinante
----------
-
-Rocinante introduces a template syntax that is flexible and allows
+Rocinante is built around a templating system, allowing you to apply files, pkgs and
+execute commands on your host automatically. It is flexible and allows
 any-order scripting. Previous versions had a hard template execution order and
 instructions were spread across multiple files. The new syntax is done in a
 ``Bastillefile`` and the template hook (see below) files are replaced with
@@ -26,7 +21,7 @@ Template Automation Hooks
 +---------------+---------------------+-----------------------------------------+
 | CMD           | /bin/sh command     | /usr/bin/chsh -s /usr/local/bin/zsh     |
 +---------------+---------------------+-----------------------------------------+
-| CP            | path(s)             | etc root usr (one per line)             |
+| CP            | path(s)             | /etc /root /usr (one per line)          |
 +---------------+---------------------+-----------------------------------------+
 | INCLUDE       | template / URL      | http?://TEMPLATE_URL or project/path    |
 +---------------+---------------------+-----------------------------------------+
@@ -48,7 +43,7 @@ Template Automation Hooks
 +---------------+---------------------+-----------------------------------------+
 | UPGRADE       | RELEASE_NAME        | 14.3-RELEASE                            |
 +---------------+---------------------+-----------------------------------------+
-| ZFS           | zfs command(s)      | zfs create zroot/tank                   |
+| ZFS           | zfs command(s)      | create zroot/tank                       |
 +---------------+---------------------+-----------------------------------------+
 | ZPOOL         | zpool command(s)    |                                         |
 +---------------+---------------------+-----------------------------------------+
@@ -103,7 +98,7 @@ directory is specified, ARGS will be replaced in all files underneath
 
 ``SERVICE``       - run ``service`` with the specified arguments
 
-``SYSCTL``        - run ``sysrc`` with the specified args
+``SYSCTL``        - run ``sysctl`` with the specified args
 
 ``SYSRC``         - run ``sysrc`` with the specified args
 
