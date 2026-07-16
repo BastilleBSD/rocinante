@@ -93,7 +93,7 @@ Template applied: cedwards/base
 
 ## Documentation
 
-See [Documentation](https://bastillebsd.org/rocinante/)
+See [Documentation](https://bastille.readthedocs.io/projects/rocinante/en/latest/)
 
 ## Support
 

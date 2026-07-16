@@ -5,7 +5,7 @@ Welcome to the official Rocinante documentation. This collection of documents
 will outline installation and usage of Rocinante.
 
 The latest version of this documentation can always be found at
-https://docs.rocinante.sh.
+https://bastille.readthedocs.io/projects/rocinante/en/latest/.
 
 .. toctree::
    :maxdepth: 2
