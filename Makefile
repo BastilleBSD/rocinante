@@ -14,10 +14,10 @@ uninstall:
 	@echo "Removing Rocinante command"
 	@rm -vf /usr/local/bin/rocinante
 	@echo
-	@echo "Removing Bastille sub-commands"
+	@echo "Removing Rocinante sub-commands"
 	@rm -rvf /usr/local/libexec/rocinante
 	@echo
-	@echo "removing configuration file"
+	@echo "Removing configuration file"
 	@rm -rvf /usr/local/etc/rocinante.conf.sample
 	@echo
 	@echo "You may need to manually remove /usr/local/etc/rocinante.conf if it is no longer needed."
